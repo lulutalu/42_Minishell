@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 18:21:59 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/05/17 16:29:01 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/05/18 19:18:59 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
  * Authorized Functions Library
 */
 
-# include <stdio.h>		/* printf, strerror, perror */
+# include <stdio.h>		/* printf, strerror, perror, readline */
 # include <stdlib.h>	/* malloc, free, exit, getenv */
 # include <unistd.h>	/* access, getcwd, chdir, unlink, pipe's, tty's*/
 # include <fcntl.h>		/* open */
@@ -38,3 +38,10 @@
 # include <termios.h>	/* tcsetattr, tcgetattr */
 # include <curses.h>	/* tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs */
 # include <term.h>		/* tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs */
+
+/*
+ * Readline library
+*/
+
+# include <readline/readline.h>
+# include <readline/history.h>

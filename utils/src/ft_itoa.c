@@ -6,11 +6,11 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:58:47 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/11/29 15:54:17 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/05/19 17:43:10 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/utils.h"
 
 //nbrlen voluntarily send the number of the last value inside the string
 

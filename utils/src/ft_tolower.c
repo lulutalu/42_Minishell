@@ -6,11 +6,11 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 17:10:03 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/10/17 17:14:22 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/05/19 17:57:12 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/utils.h"
 
 int	ft_tolower(int c)
 {

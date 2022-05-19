@@ -6,11 +6,11 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 14:21:08 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/10/22 23:43:34 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/05/19 17:46:03 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/utils.h"
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {

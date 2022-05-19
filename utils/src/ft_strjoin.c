@@ -6,11 +6,11 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 17:38:24 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/10/25 17:48:02 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/05/19 17:57:00 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/utils.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {

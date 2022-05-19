@@ -6,11 +6,11 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:38:57 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/10 20:17:52 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/05/19 17:43:08 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/utils.h"
 
 int	ft_isdigit(int c)
 {

@@ -6,7 +6,7 @@
 #    By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/27 18:29:51 by lduboulo          #+#    #+#              #
-#    Updated: 2022/05/16 18:23:28 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/05/19 18:22:54 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ RESET	= \033[0m
 
 
 SRCS_DIR		= ./src/
-SRCS_FILES		= 
+SRCS_FILES		= main.c
 
 SRCS			:= ${patsubst %, ${SRCS_DIR}%, ${SRCS_FILES}}
 
@@ -48,7 +48,7 @@ AR				= ar rcs
 MKDIR			= mkdir
 RM				= rm -rf
 
-CFLAGS			= -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS			= -Wall -Wextra -Werror -g3 -fsanitize=address -I~/.brew/opt/readline/include
 
 TSEP			= ${SEP}=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=${RESET}
 
@@ -61,7 +61,7 @@ ${NAME}:		${O_DIR} ${OBJS}
 				@${MAKELIB} ${LIBUTILS}
 				@printf "${TSEP}\n"
 				@printf "${GREEN} 💻 Successfully compiled ${NAME} .o's${RESET} ✅\n"
-				@${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBUTILS}/libutils.a
+				@${CC} ${CFLAGS} -L ~/.brew/opt/readline/lib -lreadline -o ${NAME} ${OBJS} ${LIBUTILS}/libutils.a
 				@printf "${GREEN} 💻 Successfully created ${NAME} executable${RESET} ✅\n"
 				@printf "${TSEP}\n"
 

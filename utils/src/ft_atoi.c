@@ -6,12 +6,11 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 12:06:12 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/28 15:03:20 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/05/19 17:39:17 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <limits.h>
+#include "../../includes/utils.h"
 
 int	ft_atoi(const char *str)
 {

@@ -6,7 +6,7 @@
 #    By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/29 00:27:49 by lduboulo          #+#    #+#              #
-#    Updated: 2022/05/16 18:19:00 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/05/19 18:00:43 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,21 +25,19 @@ RESET	= \033[0m
 
 
 SRCS_DIR	= ./src/
-SRCS_FILES	= core_process.c ft_atoi.c ft_atol.c ft_bzero.c ft_calloc.c \
+SRCS_FILES	= ft_atoi.c ft_atol.c ft_bzero.c ft_calloc.c \
               ft_dyn_substr.c ft_isalnum.c ft_isascii.c ft_isdigit.c \
               ft_isprint.c ft_itoa.c ft_itoa_base.c ft_lstadd_back.c \
               ft_lstclear.c ft_lstdelone.c ft_lstiter.c ft_lstlast.c \
               ft_lstmap.c ft_lstnew.c ft_mem_alloc_check.c \
               ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c \
-              ft_putchar_fd.c ft_putchar_fd_count.c ft_putendl_fd.c ft_putnbr_fd.c \
-              ft_putnbr_fd_count.c ft_putstr_fd_count.c ft_split.c ft_strchr.c \
-              ft_strdup.c ft_striteri.c ft_strjoin.c ft_strlcpy.c ft_strlen.c \
-              ft_strmapi.c ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_substr.c \
-              ft_tolower.c ft_toupper.c get_next_line.c get_next_line_utils.c \
-              if_forest.c pointer_address_process.c string_process.c \
-              struct_init.c variable_counter.c ft_isalpha.c ft_lstadd_front.c \
-              ft_lstsize.c ft_printf.c ft_putstr_fd.c ft_strlcat.c \
-              ft_strtrim.c hexa_process.c ft_dyn_strjoin.c \
+              ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_split.c \
+			  ft_strchr.c ft_strdup.c ft_striteri.c ft_strjoin.c ft_strlcpy.c \
+			  ft_strlen.c ft_strmapi.c ft_strncmp.c ft_strnstr.c ft_strrchr.c \
+			  ft_substr.c ft_tolower.c ft_toupper.c get_next_line.c \
+			  get_next_line_utils.c ft_isalpha.c ft_lstadd_front.c \
+              ft_lstsize.c ft_putstr_fd.c ft_strlcat.c ft_strtrim.c \
+			  ft_dyn_strjoin.c
 
 SRCS		:= ${patsubst %, ${SRCS_DIR}%, ${SRCS_FILES}}
 

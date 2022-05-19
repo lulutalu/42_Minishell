@@ -6,11 +6,11 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 17:16:05 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/11/23 13:31:39 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/05/19 17:56:57 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/utils.h"
 
 char	*ft_strchr(const char *s, int c)
 {

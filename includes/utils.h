@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 18:20:00 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/05/16 18:21:44 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/05/19 18:00:10 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 # include <string.h>
 # include <ctype.h>
 # include <unistd.h>
+
+/*
+ * Libft Functions
+*/
 
 typedef struct s_list
 {
@@ -78,5 +82,21 @@ void	ft_lstclear(t_list **lst, void (*del) (void *));
 void	ft_lstiter(t_list *lst, void (*f) (void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f) (void *), void (*del) (void *));
 void	ft_mem_alloc_check(void *ptr);
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 5
+# endif
+
+char	*gnl_line_return(char **str, int i);
+char	*gnl_no_read(char **str);
+char	*gnl_buffer_not_empty(char **str, int i);
+char	*gnl_read_loop(int fd, char **str);
+char	*get_next_line(int fd);
+
+void	*gnl_bzero(void *s, size_t n);
+size_t	gnl_strlen(const char *str);
+char	*gnl_strjoin(char **s1, char const *s2);
+char	*gnl_strdup(char **s1, int istr);
+char	**gnl_substr(char **substr, char **s, unsigned int start, size_t len);
 
 #endif

@@ -6,11 +6,11 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 14:30:34 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/10/27 11:49:24 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/05/19 17:42:55 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/utils.h"
 
 void	*ft_bzero(void *s, size_t n)
 {

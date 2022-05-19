@@ -6,11 +6,11 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:02:09 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/28 15:05:04 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/05/19 17:42:52 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/utils.h"
 
 long	ft_atol(const char *str)
 {

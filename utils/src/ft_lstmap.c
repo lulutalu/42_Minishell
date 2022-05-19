@@ -6,11 +6,11 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 15:04:26 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/10/31 16:16:18 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/05/19 17:43:20 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/utils.h"
 
 t_list	*ft_lstmap(t_list *lst, void *(*f) (void *), void (*del) (void *))
 {

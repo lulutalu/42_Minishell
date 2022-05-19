@@ -6,11 +6,11 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:58:47 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/12/03 14:38:59 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/05/19 17:43:11 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/utils.h"
 
 // Itoa base only works for base different than 10
 // For base 10 use the regular Itoa

@@ -6,11 +6,11 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 22:42:56 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/01/13 22:47:17 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/05/19 17:43:00 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/utils.h"
 
 char	*ft_dyn_substr(char **s, unsigned int start, size_t len)
 {

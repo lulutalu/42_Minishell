@@ -6,11 +6,11 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 16:55:42 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/10/17 17:07:51 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/05/19 17:57:14 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/utils.h"
 
 int	ft_toupper(int c)
 {

@@ -6,11 +6,11 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 14:50:49 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/10/15 16:28:33 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/05/19 17:46:05 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/utils.h"
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {

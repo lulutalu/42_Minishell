@@ -6,11 +6,11 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 22:57:33 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/02/24 15:22:25 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/05/19 17:56:47 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../../includes/utils.h"
 
 void	*gnl_bzero(void *s, size_t n)
 {

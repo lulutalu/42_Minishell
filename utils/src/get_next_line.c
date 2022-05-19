@@ -6,11 +6,11 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 16:04:32 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/02/24 15:24:53 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/05/19 17:54:41 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../../includes/utils.h"
 
 char	*gnl_line_return(char **str, int i)
 {

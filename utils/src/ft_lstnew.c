@@ -6,11 +6,11 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 17:57:53 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/07 19:12:41 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/05/19 17:43:21 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/utils.h"
 
 t_list	*ft_lstnew(void *content)
 {

@@ -1,34 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/28 14:39:00 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/12/01 22:41:59 by lduboulo         ###   ########.fr       */
+/*   Created: 2022/05/19 17:33:38 by lduboulo          #+#    #+#             */
+/*   Updated: 2022/05/19 18:20:42 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/minishell.h"
 
-int	ft_putstr_fd_count(char *s, int fd)
+int	main()
 {
-	int	idx;
-
-	idx = 0;
-	if (s == NULL)
-	{
-		write(fd, "(null)", 6);
-		return (6);
-	}
-	else
-	{
-		while (s[idx] != '\0')
-		{
-			write(fd, s + idx, 1);
-			idx++;
-		}
-		return (idx);
-	}
+	printf("%s\n", readline("test > "));
+	return (0);
 }

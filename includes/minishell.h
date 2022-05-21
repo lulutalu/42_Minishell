@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 18:21:59 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/05/19 18:04:37 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/05/21 21:43:48 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,26 @@
 
 # include <readline/readline.h>
 # include <readline/history.h>
+
+/*
+ * Error And Messages Handling
+*/
+
+# define N_ARGS "\e[1;31mError, this binary doesn't accept arguments\n\e[0m"
+
+/*
+ * Structures
+*/
+
+typedef struct s_main
+{
+	char	*prompt;
+}				t_main;
+
+/*
+ * Functions Declaration
+*/
+
+void	prompt_creation(t_main *main);
 
 #endif

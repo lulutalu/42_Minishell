@@ -6,7 +6,7 @@
 #    By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/27 18:29:51 by lduboulo          #+#    #+#              #
-#    Updated: 2022/05/21 21:43:16 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/05/22 19:51:20 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,17 +22,23 @@ RESET	= \033[0m
 
 # COLORS
 
+##############################  FOLDER  ########################################
+O_DIR			:= ./objs/
+SRCS_DIR		:= ./src/
+READLINE_FOLDER	:= readline/
+################################################################################
 
-SRCS_DIR		= ./src/
-SRCS_FILES		= main.c prompt.c
 
-SRCS			:= ${patsubst %, ${SRCS_DIR}%, ${SRCS_FILES}}
+##############################   FILES  ########################################
+MAIN_FILES		= minishell.c
+READLINE_FILES	= prompt.c
+################################################################################
 
-O_DIR			= ./objs/
+OBJS_MAIN		= $(addprefix ${O_DIR}, ${MAIN_FILES:.c=.o})
+OBJS_READLINE	= $(addprefix ${O_DIR}${READLINE_FOLDER}, ${READLINE_FILES:.c=.o})
 
-OBJS_FILES		:= ${SRCS_FILES:.c=.o}
 
-OBJS			:= ${patsubst %, ${O_DIR}%, ${OBJS_FILES}}
+OBJS			:= ${OBJS_MAIN} ${OBJS_READLINE}
 
 HEADS_DIR		= ./includes/
 
@@ -56,7 +62,7 @@ TSEP			= ${SEP}=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=${RE
 
 all:			${NAME}
 
-${NAME}:		${O_DIR} ${OBJS}
+${NAME}:		${OBJS}
 				@printf "\n"
 				@${MAKELIB} ${LIBUTILS}
 				@printf "${TSEP}\n"
@@ -65,11 +71,8 @@ ${NAME}:		${O_DIR} ${OBJS}
 				@printf "${GREEN} 💻 Successfully created ${NAME} executable${RESET} ✅\n"
 				@printf "${TSEP}\n"
 
-${O_DIR}:
-				@${MKDIR} ${O_DIR}
-				@printf "\n${BUILD}${O_DIR} Directory Created 📎${RESET}\n\n"
-
-${O_DIR}%.o:${SRCS_DIR}%.c
+${O_DIR}%.o : ${SRCS_DIR}%.c
+				@${MKDIR} $(dir $@)
 				@${CC} ${CFLAGS} -I${HEADS_DIR} -o $@ -c $<
 				@printf "\e[1K\r${BUILD} 🚧 $@ from $<${RESET}"
 
@@ -90,7 +93,7 @@ re : 			fclean all
 norm :
 				@${MAKELIB} ${LIBUTILS} norm
 				@printf "${DUCK} 🐥 Checking Norm for ${NAME}${RESET}\n"
-				@norminette ${SRCS}
+				@norminette ${SRCS_DIR}
 				@norminette ${HEADS_DIR}
 
 .PHONY : all clean fclean re norm

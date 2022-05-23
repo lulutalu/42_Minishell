@@ -6,7 +6,7 @@
 #    By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/29 00:27:49 by lduboulo          #+#    #+#              #
-#    Updated: 2022/05/19 18:00:43 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/05/23 23:14:10 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ SRCS_FILES	= ft_atoi.c ft_atol.c ft_bzero.c ft_calloc.c \
 			  ft_substr.c ft_tolower.c ft_toupper.c get_next_line.c \
 			  get_next_line_utils.c ft_isalpha.c ft_lstadd_front.c \
               ft_lstsize.c ft_putstr_fd.c ft_strlcat.c ft_strtrim.c \
-			  ft_dyn_strjoin.c
+			  ft_dyn_strjoin.c ft_tab_free.c
 
 SRCS		:= ${patsubst %, ${SRCS_DIR}%, ${SRCS_FILES}}
 
@@ -72,6 +72,7 @@ ${NAME}:	${O_DIR} ${OBJS}
 
 ${O_DIR}:
 			@${MKDIR} ${O_DIR}
+			@printf "${BUILD}\t\e[4mutils.o files📎${RESET}\n"
 
 ${O_DIR}%.o:${SRCS_DIR}%.c
 			@${CC} ${CFLAGS} -I${HEADS_DIR} -o $@ -c $<
@@ -79,10 +80,14 @@ ${O_DIR}%.o:${SRCS_DIR}%.c
 
 clean :
 			@${RM} ${O_DIR}
+			@printf "${RED}=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-${RESET}\n"
 			@printf "${RED} 🧹 Deleted ${NAME} .o's${RESET} ❌\n"
 			@printf "${RED}=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-${RESET}\n"
 
-fclean : clean
+fclean :
+			@${RM} ${O_DIR}
+			@printf "${RED} 🧹 Deleted ${NAME} .o's${RESET} ❌\n"
+			@printf "${RED}=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-${RESET}\n"
 			@${RM} ${NAME}
 			@printf "${RED} 💥 Deleted ${NAME} files${RESET} ❌\n"
 

@@ -6,7 +6,7 @@
 #    By: lduboulo && lzima				            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/27 18:29:51 by lduboulo          #+#    #+#              #
-#    Updated: 2022/05/23 19:59:07 by lzima            ###   ########.fr        #
+#    Updated: 2022/05/23 23:14:11 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,19 +26,28 @@ RESET	= \033[0m
 O_DIR			:= ./objs/
 SRCS_DIR		:= ./src/
 READLINE_FOLDER	:= readline/
+MEMORY_FOLDER	:= memory/
+ERROR_FOLDER	:= error/
+BUILTS_FOLDER	:= built-ins/
 ################################################################################
 
 
 ##############################   FILES  ########################################
 MAIN_FILES		= minishell.c
 READLINE_FILES	= prompt.c
+MEMORY_FILES	= 
+ERROR_FILES		=
+BUILTS_FILES	=
 ################################################################################
 
 OBJS_MAIN		= $(addprefix ${O_DIR}, ${MAIN_FILES:.c=.o})
 OBJS_READLINE	= $(addprefix ${O_DIR}${READLINE_FOLDER}, ${READLINE_FILES:.c=.o})
+OBJS_MEMORY		= $(addprefix ${O_DIR}${MEMORY_FOLDER}, ${MEMORY_FILES:.c=.o})
+OBJS_ERROR		= $(addprefix ${O_DIR}${ERROR_FOLDER}, ${ERROR_FILES:.c=.o})
+OBJS_BUILTS		= $(addprefix ${O_DIR}${BUILTS_FOLDER}, ${BUILTS_FILES:.c=.o})
 
-
-OBJS			:= ${OBJS_MAIN} ${OBJS_READLINE}
+OBJS			:= ${OBJS_MAIN} ${OBJS_READLINE} ${OBJS_MEMORY} ${OBJS_ERROR} \
+				   ${OBJS_BUILTS}
 
 HEADS_DIR		= ./includes/
 
@@ -73,20 +82,25 @@ ${NAME}:		${OBJS}
 
 ${O_DIR}%.o : ${SRCS_DIR}%.c
 				@${MKDIR} $(dir $@)
+				@printf "\n${BUILD}\t\e[4m$(dir $@) Directory Created 📎${RESET}\n"
 				@${CC} ${CFLAGS} -I${HEADS_DIR} -o $@ -c $<
 				@printf "\e[1K\r${BUILD} 🚧 $@ from $<${RESET}"
+				@printf "\n"
 
 clean :
 				@${RM} ${O_DIR}
 				@${MAKELIB} ${LIBUTILS} clean
 				@printf "${RED} 🧹 Deleted ${NAME} .o's${RESET} ❌\n"
+				@printf "${RED}=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-${RESET}\n"
 
 fclean :
 				@${RM} ${O_DIR}
+				@printf "${RED}=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-${RESET}\n"
 				@printf "${RED} 🧹 Deleted ${NAME} .o's${RESET} ❌\n"
 				@${RM} ${NAME} ${NAME}.dSYM
 				@${MAKELIB} ${LIBUTILS} fclean
 				@printf "${RED} 💥 Deleted ${NAME} files${RESET} ❌\n"
+				@printf "${RED}=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-${RESET}\n"
 
 re : 			fclean all
 

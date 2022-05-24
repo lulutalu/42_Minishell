@@ -6,7 +6,7 @@
 /*   By: lduboulo && lzima				            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 18:21:59 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/05/23 23:36:48 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/05/24 16:49:37 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,15 @@
  * Structures
 */
 
+typedef struct s_echo
+{
+	char	*cmd;
+}				t_echo;
+
 typedef struct s_main
 {
 	char	*prompt;
+	char	*input;
 }				t_main;
 
 /*
@@ -71,7 +77,7 @@ void	prompt_creation(t_main *main);
  * Builts-Ins
 */
 
-void	built_ins_echo();
+void	built_ins_echo(t_main *main, char **input);
 void	built_ins_exit();
 void	built_ins_pwd();
 void	built_ins_unset();

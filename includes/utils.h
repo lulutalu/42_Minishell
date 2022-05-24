@@ -6,7 +6,7 @@
 /*   By: lduboulo && lzima				            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 18:20:00 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/05/23 23:00:46 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/05/24 18:06:13 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	ft_lstiter(t_list *lst, void (*f) (void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f) (void *), void (*del) (void *));
 void	ft_mem_alloc_check(void *ptr);
 void	ft_tab_free(void **ptr);
+int		ft_strcmp_case(const char *s1, const char *s2);
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 5

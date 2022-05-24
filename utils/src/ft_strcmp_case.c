@@ -1,42 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_strcmp_case.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/17 18:07:14 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/05/24 18:06:26 by lduboulo         ###   ########.fr       */
+/*   Created: 2022/05/24 18:02:17 by lduboulo          #+#    #+#             */
+/*   Updated: 2022/05/24 18:10:02 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/utils.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_strcmp_case(const char *s1, const char *s2)
 {
 	int	idx;
 
 	idx = 0;
-	if (n == 0)
-		return (0);
-	while (n > 0 && s1[idx] != '\0' && s2[idx] != '\0')
+	while (s1[idx] != '\0' && s2[idx] != '\0')
 	{
 		if (s1[idx] != s2[idx])
-			return ((unsigned char)s1[idx] - (unsigned char)s2[idx]);
+		{
+			if (!(s1[idx] - s2[idx] == 32 || s2[idx] - s1[idx] == 32))
+				return ((unsigned char)s1[idx] - (unsigned char)s2[idx]);
+		}
 		idx++;
-		n--;
 	}
-	if ((s1[idx] == '\0' || s2[idx] == '\0') && n > 0)
+	if (s1[idx] == '\0' || s2[idx] == '\0')
 		return ((unsigned char)s1[idx] - (unsigned char)s2[idx]);
 	return (0);
 }
-
-/*int	main()
-{
-	char	*big = "abcdef";
-	char	*little = "abcdefghijklmnop";
-	size_t	size = 6;
-
-	printf("Fonction C = %d\n", strncmp(big, little, size));
-	printf("Fonction Mano = %d\n", ft_strncmp(big, little, size));
-}*/

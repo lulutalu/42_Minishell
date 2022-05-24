@@ -6,7 +6,7 @@
 #    By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/29 00:27:49 by lduboulo          #+#    #+#              #
-#    Updated: 2022/05/24 16:10:44 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/05/24 18:06:25 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ SRCS_FILES	= ft_atoi.c ft_atol.c ft_bzero.c ft_calloc.c \
 			  ft_substr.c ft_tolower.c ft_toupper.c get_next_line.c \
 			  get_next_line_utils.c ft_isalpha.c ft_lstadd_front.c \
               ft_lstsize.c ft_putstr_fd.c ft_strlcat.c ft_strtrim.c \
-			  ft_dyn_strjoin.c ft_tab_free.c
+			  ft_dyn_strjoin.c ft_tab_free.c ft_strcmp_case.c
 
 SRCS		:= ${patsubst %, ${SRCS_DIR}%, ${SRCS_FILES}}
 

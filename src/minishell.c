@@ -6,7 +6,7 @@
 /*   By: lduboulo && lzima				            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 17:33:38 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/05/24 16:49:35 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/05/24 18:09:37 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int argc, char **argv)
 		{
 			add_history(main.input);
 			split = ft_split(main.input, ' ');
-			if (ft_strncmp(split[0], "echo", 4) == 0)
+			if (ft_strcmp_case(split[0], "echo") == 0)
 				built_ins_echo(&main, split);
 			ft_tab_free((void **)split);
 			free(main.input);

@@ -6,7 +6,7 @@
 #    By: lduboulo && lzima				            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/27 18:29:51 by lduboulo          #+#    #+#              #
-#    Updated: 2022/05/23 23:14:11 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/05/24 16:10:45 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,12 +23,12 @@ RESET	= \033[0m
 # COLORS
 
 ##############################  FOLDER  ########################################
-O_DIR			:= ./objs/
-SRCS_DIR		:= ./src/
-READLINE_FOLDER	:= readline/
-MEMORY_FOLDER	:= memory/
-ERROR_FOLDER	:= error/
-BUILTS_FOLDER	:= built-ins/
+O_DIR			:= ./objs
+SRCS_DIR		:= ./src
+READLINE_FOLDER	= readline
+MEMORY_FOLDER	= memory
+ERROR_FOLDER	= error
+BUILTS_FOLDER	= built-ins
 ################################################################################
 
 
@@ -37,17 +37,17 @@ MAIN_FILES		= minishell.c
 READLINE_FILES	= prompt.c
 MEMORY_FILES	= 
 ERROR_FILES		=
-BUILTS_FILES	=
+BUILTS_FILES	= echo.c exit.c unset.c pwd.c
 ################################################################################
 
-OBJS_MAIN		= $(addprefix ${O_DIR}, ${MAIN_FILES:.c=.o})
-OBJS_READLINE	= $(addprefix ${O_DIR}${READLINE_FOLDER}, ${READLINE_FILES:.c=.o})
-OBJS_MEMORY		= $(addprefix ${O_DIR}${MEMORY_FOLDER}, ${MEMORY_FILES:.c=.o})
-OBJS_ERROR		= $(addprefix ${O_DIR}${ERROR_FOLDER}, ${ERROR_FILES:.c=.o})
-OBJS_BUILTS		= $(addprefix ${O_DIR}${BUILTS_FOLDER}, ${BUILTS_FILES:.c=.o})
+OBJS_MAIN		= $(addprefix $(O_DIR)/, $(MAIN_FILES:.c=.o))
+OBJS_READLINE	= $(addprefix $(O_DIR)/$(READLINE_FOLDER)/, $(READLINE_FILES:.c=.o))
+OBJS_MEMORY		= $(addprefix $(O_DIR)/$(MEMORY_FOLDER)/, $(MEMORY_FILES:.c=.o))
+OBJS_ERROR		= $(addprefix $(O_DIR)/$(ERROR_FOLDER)/, $(ERROR_FILES:.c=.o))
+OBJS_BUILTS		= $(addprefix $(O_DIR)/$(BUILTS_FOLDER)/, $(BUILTS_FILES:.c=.o))
 
-OBJS			:= ${OBJS_MAIN} ${OBJS_READLINE} ${OBJS_MEMORY} ${OBJS_ERROR} \
-				   ${OBJS_BUILTS}
+OBJS			:= $(OBJS_MAIN) $(OBJS_READLINE) $(OBJS_MEMORY) $(OBJS_ERROR) \
+				   $(OBJS_BUILTS)
 
 HEADS_DIR		= ./includes/
 
@@ -60,7 +60,7 @@ LIBUTILS		= ./utils/
 MAKELIB			= ${MAKE} -C
 CC				= gcc
 AR				= ar rcs
-MKDIR			= mkdir
+MKDIR			= mkdir -p
 RM				= rm -rf
 
 CFLAGS			= -Wall -Wextra -Werror -g3 -fsanitize=address -I~/.brew/opt/readline/include
@@ -80,12 +80,10 @@ ${NAME}:		${OBJS}
 				@printf "${GREEN} 💻 Successfully created ${NAME} executable${RESET} ✅\n"
 				@printf "${TSEP}\n"
 
-${O_DIR}%.o : ${SRCS_DIR}%.c
+$(O_DIR)/%.o : $(SRCS_DIR)/%.c
 				@${MKDIR} $(dir $@)
-				@printf "\n${BUILD}\t\e[4m$(dir $@) Directory Created 📎${RESET}\n"
 				@${CC} ${CFLAGS} -I${HEADS_DIR} -o $@ -c $<
 				@printf "\e[1K\r${BUILD} 🚧 $@ from $<${RESET}"
-				@printf "\n"
 
 clean :
 				@${RM} ${O_DIR}

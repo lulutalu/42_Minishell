@@ -6,7 +6,7 @@
 /*   By: lduboulo && lzima				            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 18:21:59 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/05/23 20:03:14 by lzima            ###   ########.fr       */
+/*   Updated: 2022/05/23 23:36:48 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,14 @@ typedef struct s_main
 */
 
 void	prompt_creation(t_main *main);
+
+/*
+ * Builts-Ins
+*/
+
+void	built_ins_echo();
+void	built_ins_exit();
+void	built_ins_pwd();
+void	built_ins_unset();
 
 #endif

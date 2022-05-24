@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lduboulo && lzima				            +#+  +:+       +#+        */
+/*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/19 17:33:38 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/05/23 23:26:34 by lduboulo         ###   ########.fr       */
+/*   Created: 2022/05/23 23:20:31 by lduboulo          #+#    #+#             */
+/*   Updated: 2022/05/24 00:04:20 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "./../../includes/minishell.h"
 
-int	main(int argc, char **argv)
+void	built_ins_echo()
 {
-	t_main	main;
-	(void)argv;
-
-	if (argc > 1)
-	{
-		printf(N_ARGS);
-		exit(1);
-	}
-	prompt_creation(&main);
-	while (1)
-		readline(main.prompt);
-	return (0);
+	printf("I'm the echo function");
 }

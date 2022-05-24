@@ -6,7 +6,7 @@
 #    By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/29 00:27:49 by lduboulo          #+#    #+#              #
-#    Updated: 2022/05/23 23:14:10 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/05/24 16:10:44 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,7 +72,6 @@ ${NAME}:	${O_DIR} ${OBJS}
 
 ${O_DIR}:
 			@${MKDIR} ${O_DIR}
-			@printf "${BUILD}\t\e[4mutils.o files📎${RESET}\n"
 
 ${O_DIR}%.o:${SRCS_DIR}%.c
 			@${CC} ${CFLAGS} -I${HEADS_DIR} -o $@ -c $<

@@ -6,7 +6,7 @@
 /*   By: lduboulo && lzima				            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 18:21:59 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/05/24 18:00:44 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/05/25 11:39:51 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,12 @@
 */
 
 # define N_ARGS "\e[1;31mError, this binary doesn't accept arguments\n\e[0m"
+
+/*
+ * Global Variables
+*/
+
+extern int	g_exit_status;
 
 /*
  * Structures

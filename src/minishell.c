@@ -6,11 +6,13 @@
 /*   By: lduboulo && lzima				            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 17:33:38 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/05/24 18:09:37 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/05/25 11:39:49 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int	g_exit_status = 0;
 
 int	main(int argc, char **argv)
 {

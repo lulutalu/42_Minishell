@@ -6,7 +6,7 @@
 /*   By: lduboulo && lzima				            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 17:33:38 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/05/25 11:39:49 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/05/27 19:07:03 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ int	main(int argc, char **argv)
 	while (1)
 	{
 		main.input = readline(main.prompt);
-		if (main.input)
+		if (main.input != NULL)
 		{
+			simple_quote(&main);
 			add_history(main.input);
 			split = ft_split(main.input, ' ');
 			if (ft_strcmp_case(split[0], "echo") == 0)

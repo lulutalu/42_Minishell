@@ -6,7 +6,7 @@
 #    By: lduboulo && lzima				            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/27 18:29:51 by lduboulo          #+#    #+#              #
-#    Updated: 2022/05/24 16:10:45 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/05/27 18:31:56 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,28 +26,28 @@ RESET	= \033[0m
 O_DIR			:= ./objs
 SRCS_DIR		:= ./src
 READLINE_FOLDER	= readline
-MEMORY_FOLDER	= memory
-ERROR_FOLDER	= error
 BUILTS_FOLDER	= built-ins
+PARSING_FOLDER	= parsing
+MEMORY_FOLDER	= memory
 ################################################################################
 
 
 ##############################   FILES  ########################################
 MAIN_FILES		= minishell.c
 READLINE_FILES	= prompt.c
-MEMORY_FILES	= 
-ERROR_FILES		=
 BUILTS_FILES	= echo.c exit.c unset.c pwd.c
+PARSING_FILES	= simple_quote.c
+MEMORY_FILES	= mem_check.c
 ################################################################################
 
 OBJS_MAIN		= $(addprefix $(O_DIR)/, $(MAIN_FILES:.c=.o))
 OBJS_READLINE	= $(addprefix $(O_DIR)/$(READLINE_FOLDER)/, $(READLINE_FILES:.c=.o))
-OBJS_MEMORY		= $(addprefix $(O_DIR)/$(MEMORY_FOLDER)/, $(MEMORY_FILES:.c=.o))
-OBJS_ERROR		= $(addprefix $(O_DIR)/$(ERROR_FOLDER)/, $(ERROR_FILES:.c=.o))
 OBJS_BUILTS		= $(addprefix $(O_DIR)/$(BUILTS_FOLDER)/, $(BUILTS_FILES:.c=.o))
+OBJS_PARSING	= $(addprefix $(O_DIR)/$(PARSING_FOLDER)/, $(PARSING_FILES:.c=.o))
+OBJS_MEMORY		= $(addprefix $(O_DIR)/$(MEMORY_FOLDER)/, $(MEMORY_FILES:.c=.o))
 
-OBJS			:= $(OBJS_MAIN) $(OBJS_READLINE) $(OBJS_MEMORY) $(OBJS_ERROR) \
-				   $(OBJS_BUILTS)
+OBJS			:= $(OBJS_MAIN) $(OBJS_READLINE) $(OBJS_BUILTS) \
+				   $(OBJS_PARSING) $(OBJS_MEMORY)
 
 HEADS_DIR		= ./includes/
 

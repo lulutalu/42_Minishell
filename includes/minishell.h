@@ -6,7 +6,7 @@
 /*   By: lduboulo && lzima				            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 18:21:59 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/05/25 11:46:24 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/05/27 19:07:04 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@
 */
 
 # define N_ARGS "\e[1;31mError, this binary doesn't accept arguments\n\e[0m"
+# define ALLOC "\e[1;31mError, dynamic memory allocation failed\n\e[0m"
+# define Q_ERROR "\e[1;31mQuote not closed\n\e[0m"
 
 /*
  * Global Variables
@@ -71,6 +73,7 @@ typedef struct s_main
 {
 	char	*prompt;
 	char	*input;
+	char	*res;
 }				t_main;
 
 /*
@@ -84,8 +87,23 @@ void	prompt_creation(t_main *main);
 */
 
 void	built_ins_echo(t_main *main, char **input);
+int		dollar_character_process(char **input, int arg);
 void	built_ins_exit();
 void	built_ins_pwd();
 void	built_ins_unset();
+
+/*
+ * Parsing
+*/
+
+void	simple_quote(t_main *main);
+int		n_quote(t_main *main);
+void	memory_flush(char **tmp, char ***split);
+
+/*
+ * Memory Functions
+*/
+
+void	alloc_check(void *ptr);
 
 #endif

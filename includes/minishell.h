@@ -25,18 +25,20 @@
 */
 
 # include <stdio.h>		/* printf, strerror, perror, readline */
-# include <stdlib.h>	/* malloc, free, exit, getenv */
-# include <unistd.h>	/* access, getcwd, chdir, unlink, pipe's, tty's*/
+# include <stdlib.h>		/* malloc, free, exit, getenv */
+# include <unistd.h>		/* access, getcwd, chdir, unlink, pipe's, tty's*/
 # include <fcntl.h>		/* open */
-# include <sys/types.h>	/* read */
-# include <sys/uio.h>	/* read */
-# include <sys/wait.h>	/* wait, waitpid, wait3, wait4 */
-# include <signal.h>	/* signal, sigaction, sigemptyset, sigaddset, kill */
-# include <sys/stat.h>	/* stat, lstat, fstat */
-# include <dirent.h>	/* opendir, readdir, closedir */
-# include <sys/ioctl.h>	/* ioctl */
-# include <termios.h>	/* tcsetattr, tcgetattr */
-# include <curses.h>	/* tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs */
+# include <sys/types.h>		/* read | wait, waitpid, wait3, wait4 */
+# include <sys/uio.h>		/* read */
+# include <sys/wait.h>		/* wait, waitpid, wait3, wait4 */
+# include <sys/time.h>		/* wait, waitpid, wait3, wait4 */
+# include <sys/resource.h>	/* wait, waitpid, wait3, wait4 */
+# include <signal.h>		/* signal, sigaction, sigemptyset, sigaddset, kill */
+# include <sys/stat.h>		/* stat, lstat, fstat */
+# include <dirent.h>		/* opendir, readdir, closedir */
+# include <sys/ioctl.h>		/* ioctl */
+# include <termios.h>		/* tcsetattr, tcgetattr */
+# include <curses.h>		/* tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs */
 # include <term.h>		/* tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs */
 
 /*

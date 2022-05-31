@@ -12,7 +12,7 @@
 
 #include "./../../includes/minishell.h"
 
-void	built_ins_echo(t_main *main, char **input)
+void	b_echo(t_main *main, char **input)
 {
 	char	*output;
 

@@ -88,11 +88,10 @@ void	prompt_creation(t_main *main);
  * Builts-Ins
 */
 
-void	built_ins_echo(t_main *main, char **input);
-int		dollar_character_process(char **input, int arg);
-void	built_ins_exit();
-void	built_ins_pwd();
-void	built_ins_unset();
+void	b_echo(t_main *main, char **input);
+void	b_exit();
+void	b_pwd();
+void	b_unset();
 
 /*
  * Parsing

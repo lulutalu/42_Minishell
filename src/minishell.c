@@ -35,7 +35,7 @@ int	main(int argc, char **argv)
 			add_history(main.input);
 			split = ft_split(main.input, ' ');
 			if (ft_strcmp_case(split[0], "echo") == 0)
-				built_ins_echo(&main, split);
+				b_echo(&main, split);
 			ft_tab_free((void **)split);
 			free(main.input);
 		}

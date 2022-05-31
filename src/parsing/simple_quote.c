@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:26:15 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/05/27 19:07:03 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/05/31 19:04:11 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	simple_quote(t_main *main)
 		tmp = ft_substr(main->input, ft_strlen(main->res) + n, \
 				ft_strlen(main->input));
 		main->res = ft_dyn_strjoin(main->res, tmp);
+		//main->res : The string to use when using built-ins or other function
+		//might be void for some cases WIP
 		memory_flush(&tmp, &split);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 12:37:05 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/06/01 15:21:07 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/06/01 16:37:31 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	lst_add(t_node **head_env, t_node **tail, char *str)
 	cur = ft_calloc(1, sizeof(t_node));	//dynamic allocation of new cell
 	alloc_check((void *)cur);			//check correct allocation
 	split = ft_split(str, '=');			//separating with '=' to obtain two parts
-	cur->var = split[0];				//name of the variable ex : PATH
-	cur->value = split[1];				//value of the variable ex : /Users/lduboulo/.brew/bin
+	cur->var = ft_strdup(split[0]);		//name of the variable ex : PATH
+	cur->value = ft_strdup(split[1]);	//value of the variable ex : /Users/lduboulo/.brew/bin
 	cur->next = NULL;
 	if (*head_env == NULL)				//in case we're at the beginning of the list
 	{
@@ -51,4 +51,5 @@ void	lst_add(t_node **head_env, t_node **tail, char *str)
 		(*tail)->next = cur;
 		*tail = cur;
 	}
+	ft_tab_free((void **)split);
 }

@@ -6,7 +6,7 @@
 /*   By: lduboulo && lzima				            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 17:33:38 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/05/31 18:39:38 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/06/01 15:21:09 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	g_exit_status = 0;
 
-int	main(int argc, char **argv)
+int	main(int argc, char **argv, char **envp)
 {
 	t_main	main;
 	char	**split;
@@ -25,6 +25,7 @@ int	main(int argc, char **argv)
 		printf(N_ARGS);
 		exit(1);
 	}
+	env_dup(&main, envp);
 	prompt_creation(&main);
 	while (1)
 	{

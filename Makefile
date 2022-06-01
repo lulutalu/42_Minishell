@@ -6,7 +6,7 @@
 #    By: lduboulo && lzima				            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/27 18:29:51 by lduboulo          #+#    #+#              #
-#    Updated: 2022/05/30 19:20:41 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/06/01 12:38:15 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ READLINE_FOLDER	= readline
 BUILTS_FOLDER	= built-ins
 PARSING_FOLDER	= parsing
 MEMORY_FOLDER	= memory
+ENV_FOLDER		= env
 ################################################################################
 
 
@@ -38,6 +39,7 @@ READLINE_FILES	= prompt.c
 BUILTS_FILES	= echo.c exit.c unset.c pwd.c
 PARSING_FILES	= simple_quote.c
 MEMORY_FILES	= mem_check.c
+ENV_FILES		= env.c
 ################################################################################
 
 OBJS_MAIN		= $(addprefix $(O_DIR)/, $(MAIN_FILES:.c=.o))
@@ -45,9 +47,10 @@ OBJS_READLINE	= $(addprefix $(O_DIR)/$(READLINE_FOLDER)/, $(READLINE_FILES:.c=.o
 OBJS_BUILTS		= $(addprefix $(O_DIR)/$(BUILTS_FOLDER)/, $(BUILTS_FILES:.c=.o))
 OBJS_PARSING	= $(addprefix $(O_DIR)/$(PARSING_FOLDER)/, $(PARSING_FILES:.c=.o))
 OBJS_MEMORY		= $(addprefix $(O_DIR)/$(MEMORY_FOLDER)/, $(MEMORY_FILES:.c=.o))
+OBJS_ENV		= $(addprefix $(O_DIR)/$(ENV_FOLDER)/, $(ENV_FILES:.c=.o))
 
 OBJS			:= $(OBJS_MAIN) $(OBJS_READLINE) $(OBJS_BUILTS) \
-				   $(OBJS_PARSING) $(OBJS_MEMORY)
+				   $(OBJS_PARSING) $(OBJS_MEMORY) $(OBJS_ENV)
 
 HEADS_DIR		= ./includes/
 

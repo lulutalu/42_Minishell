@@ -6,7 +6,7 @@
 /*   By: lduboulo && lzima				            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 18:21:59 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/05/31 19:04:12 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/06/01 15:21:08 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,19 @@ extern int	g_exit_status;
  * Structures
 */
 
-typedef struct s_echo
+typedef struct s_node
 {
-	char	*cmd;
-}				t_echo;
+	char			*var;
+	char			*value;
+	struct s_node	*next;
+}				t_node;
 
 typedef struct s_main
 {
 	char	*prompt;
 	char	*input;
 	char	*res;
+	t_node	*head_env;
 }				t_main;
 
 /*
@@ -100,6 +103,14 @@ void	b_unset();
 void	simple_quote(t_main *main);
 int		n_quote(t_main *main);
 void	memory_flush(char **tmp, char ***split);
+
+/*
+ * Environment
+*/
+
+// Duplication of envp variable to have a env that can be modified
+void	env_dup(t_main *main, char **envp);
+void	lst_add(t_node **head_env, t_node **tail, char *str);
 
 /*
  * Memory Functions

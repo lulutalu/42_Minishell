@@ -6,7 +6,7 @@
 /*   By: lduboulo && lzima				            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 18:21:59 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/06/01 15:21:08 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/06/02 15:23:15 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@
 */
 
 # define N_ARGS "\e[1;31mError, this binary doesn't accept arguments\n\e[0m"
-# define ALLOC "\e[1;31mError, dynamic memory allocation failed\n\e[0m"
-# define Q_ERROR "\e[1;31mQuote not closed\n\e[0m"
 
 /*
  * Global Variables
@@ -91,7 +89,7 @@ void	prompt_creation(t_main *main);
  * Builts-Ins
 */
 
-void	b_echo(t_main *main, char **input);
+void	b_echo(t_main *main);
 void	b_exit();
 void	b_pwd();
 void	b_unset();

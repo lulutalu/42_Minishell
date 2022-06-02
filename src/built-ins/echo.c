@@ -6,30 +6,23 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 23:20:31 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/06/01 12:36:00 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/06/02 14:04:36 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../../includes/minishell.h"
 
-void	b_echo(t_main *main, char **input)
+/* Pseudo-code as changes are expected once the parsing is done */
+void	b_echo(t_main *main)
 {
-	char	*output;
+	int	no_arg = 0;
+	int	n_arg = 0;
 
-	if (!input[1])
+	if (no_arg == 1)
 		printf("\n");
+	else if (n_arg == 1)
+		printf("%s", main->input);		//use of main->input will change (parsing)
 	else
-	{
-		if (ft_strncmp(input[1], "-n", 3) == 0)
-		{
-			output = ft_substr(main->res, 8, ft_strlen(main->res) - 8);
-			printf("%s", output);
-		}
-		else
-		{
-			output = ft_substr(main->res, 5, ft_strlen(main->res) - 5);
-			printf("%s\n", output);
-		}
-		free(output);
-	}
+		printf("%s\n", main->input);
+	g_exit_status = 0;					//never forget to set correct value for exit code
 }

@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 23:20:31 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/06/02 14:04:36 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/06/02 18:34:14 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,3 +26,4 @@ void	b_echo(t_main *main)
 		printf("%s\n", main->input);
 	g_exit_status = 0;					//never forget to set correct value for exit code
 }
+//what about echo ~ ?

@@ -1,40 +1,48 @@
-//
-// Created by Lowell Zima on 5/30/22.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/02 17:26:47 by lduboulo          #+#    #+#             */
+/*   Updated: 2022/06/02 19:14:52 by lduboulo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "./../../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-static char	*get_home_path(char *path)
+void	b_cd(t_main *main)
 {
-	char *tmp;
-	char *tmpp;
+	int		tilde;									//simple boolean
+	int		status;
+	char	*path;
 
-	if(ft_strncmp(path, "~/", 2))
+	tilde = 0;
+	path = NULL;
+	if (ft_strchr(main->input, '~') != NULL || ft_strlen(main->input) == 0)//check for tilde
+		tilde = 1;					//cd w/o args equal "cd ~"
+	if (tilde == 1)
 	{
-		if((tmp = getenv("HOME")))
-		{
-			tmpp = ft_substr(path, 1, ft_strlen(path));
-			free(path);
-			path = ft_strjoin(tmp, tmpp);
-			free(tmpp);
-			free(tmp);
-			return (path);
-		}
+		path = ft_strjoin(getenv("HOME"), "/");//'~' equal $HOME
+		if (ft_strlen(main->input) > 1)	//condition to avoid pointer algebra if string too small
+			path = ft_dyn_strjoin(path, main->input + 2);//add rest of command ex : cd ~/Downloads/
+		status = chdir(path);
+		free(path);
 	}
-	return (path);
+	else
+		status = chdir(main->input);
+	if (status < 0)
+		error_cd(main);
+	else
+		g_exit_status = 0;
 }
 
-static int change(char *path, int home)
+void	error_cd(t_main *main)
 {
-	char	*pwd;
-
-	pwd = getcwd(NULL, 0);
-	if (!chdir(path))
-	{
-		if (pwd)
-		{
-			set_env("OLDPWD, pwd")
-		}
-	}
+	ft_putstr_fd("minishell: cd: ", 2);
+	ft_putstr_fd(main->input, 2);
+	ft_putstr_fd(": ", 2);
+	perror("");
+	g_exit_status = 1;
 }
-

@@ -6,7 +6,7 @@
 /*   By: lduboulo && lzima				            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 18:21:59 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/06/05 16:21:02 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/06/05 18:59:06 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void		prompt_creation(t_main *main);
 
 void		b_echo(t_main *main);
 void		b_cd(t_main *main);
+void		b_pwd(void);
 
 /*
  * Parsing

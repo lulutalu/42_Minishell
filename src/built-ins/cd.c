@@ -6,43 +6,112 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 17:26:47 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/06/02 19:14:52 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/06/05 16:21:01 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	b_cd(t_main *main)
-{
-	int		tilde;									//simple boolean
-	int		status;
-	char	*path;
+/*static functions means they're only existing 
+for other functions of this file*/
 
-	tilde = 0;
-	path = NULL;
-	if (ft_strchr(main->input, '~') != NULL || ft_strlen(main->input) == 0)//check for tilde
-		tilde = 1;					//cd w/o args equal "cd ~"
-	if (tilde == 1)
-	{
-		path = ft_strjoin(getenv("HOME"), "/");//'~' equal $HOME
-		if (ft_strlen(main->input) > 1)	//condition to avoid pointer algebra if string too small
-			path = ft_dyn_strjoin(path, main->input + 2);//add rest of command ex : cd ~/Downloads/
-		status = chdir(path);
-		free(path);
-	}
-	else
-		status = chdir(main->input);
-	if (status < 0)
-		error_cd(main);
-	else
-		g_exit_status = 0;
+/*need to check cmd like "cd ~/Downloads ../Desktop" <---- this should cd to
+~/Downloads and void the '../Desktop' argument*/
+
+/*Updating the environnment variables impacted by PWD*/
+/*OLDPWD and PWD. Note that OLDPWD is used for "cd -"*/
+
+static void	change_env_cd(t_main *main, char *old_pwd)
+{
+	char	new_pwd[4096];
+
+	getcwd(new_pwd, 4096);
+	lst_replace(main, ft_strjoin("PWD=", new_pwd));
+	lst_replace(main, ft_strjoin("OLDPWD=", old_pwd));
 }
 
-void	error_cd(t_main *main)
+/*Function that checks if chdir call was successful or not*/
+/*In case it's not, error message is print and env variables are not changed*/
+/*In case it's successful, env variables are changed*/
+/*Also, global variables g_exit_status is updated each time*/
+static void	check_exec_cd(t_main *main, char *path, int status, char *old_pwd)
 {
-	ft_putstr_fd("minishell: cd: ", 2);
-	ft_putstr_fd(main->input, 2);
-	ft_putstr_fd(": ", 2);
-	perror("");
-	g_exit_status = 1;
+	if (status != 0)
+	{
+		ft_putstr_fd("minishell: cd: ", 2);
+		ft_putstr_fd(path, 2);
+		ft_putstr_fd(": ", 2);
+		perror("");
+		g_exit_status = 1;
+	}
+	else
+	{
+		g_exit_status = 0;
+		change_env_cd(main, old_pwd);
+	}
+}
+
+/*This function is used when env variables HOME is called*/
+/*Usually, it's the case when '~' is called in arguments*/
+/*Special cases : no arguments and "--" argument*/
+static void	tilde_cd(t_main *main, char *old_pwd)
+{
+	int		status;
+	char	*path;
+	t_node	*cur;
+
+	cur = find_var(main, "HOME");
+	if (cur != NULL)
+	{
+		path = ft_strjoin(cur->value, "/");
+		if (ft_strlen(main->input) > 1)
+			path = ft_dyn_strjoin(path, main->input + 2);
+		status = chdir(path);
+		check_exec_cd(main, path, status, old_pwd);
+		free(path);
+	}
+}
+
+/*This function is used when env variables OLDPWD is called*/
+/*The argument for this one is '-'. That equal to OLDPWD variable*/
+static void	dash_cd(t_main *main, char *old_pwd)
+{
+	int		status;
+	t_node	*cur;
+
+	cur = find_var(main, "OLDPWD");
+	if (cur != NULL)
+	{
+		ft_putendl_fd(cur->value, 1);
+		status = chdir(cur->value);
+		check_exec_cd(main, cur->value, status, old_pwd);
+	}
+}
+
+/*This is the main function of cd built-in*/
+/*It's primary job is to decide which case we need to use*/
+/*It check if it's "HOME" "OLDPWD" and also if it's neither of them*/
+void	b_cd(t_main *main)
+{
+	int		status;
+	char	actual_pwd[4096];
+	t_node	*cur;
+
+	getcwd(actual_pwd, 4096);
+	if (main->input[0] == '~' || ft_strlen(main->input) == 0 || \
+			ft_strncmp(main->input, "--", 3) == 0)
+		tilde_cd(main, actual_pwd);
+	else if (main->input[0] == '-')
+		dash_cd(main, actual_pwd);
+	else
+	{
+		status = chdir(main->input);
+		check_exec_cd(main, main->input, status, actual_pwd);
+	}
+	cur = main->head_env;
+	while (cur != NULL)
+	{
+		printf("%s=%s\n", cur->var, cur->value);
+		cur = cur->next;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: lduboulo && lzima				            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 21:39:39 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/05/23 20:15:33 by lzima            ###   ########.fr       */
+/*   Updated: 2022/06/03 22:01:04 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ void	prompt_creation(t_main *main)
 	main->prompt = ft_dyn_strjoin(main->prompt, split[i - 2]);
 	main->prompt = ft_dyn_strjoin(main->prompt, "/");
 	main->prompt = ft_dyn_strjoin(main->prompt, split[i - 1]);
-	main->prompt = ft_dyn_strjoin(main->prompt, "\e[1;92m");
+	if (g_exit_status == 0)
+		main->prompt = ft_dyn_strjoin(main->prompt, "\e[1;92m");
+	else
+		main->prompt = ft_dyn_strjoin(main->prompt, "\e[1;91m");
 	main->prompt = ft_dyn_strjoin(main->prompt, " ➜ \e[0m");
 }

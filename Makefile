@@ -6,7 +6,7 @@
 #    By: lduboulo && lzima				            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/27 18:29:51 by lduboulo          #+#    #+#              #
-#    Updated: 2022/06/02 17:25:50 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/06/04 17:20:37 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ MAIN_FILES		= minishell.c
 SHELL_FILES		= prompt.c
 BUILTS_FILES	= echo.c cd.c
 PARSING_FILES	= simple_quote.c
-ENV_FILES		= env.c
+ENV_FILES		= env.c env_manip.c
 ################################################################################
 
 OBJS_MAIN		= $(addprefix $(O_DIR)/, $(MAIN_FILES:.c=.o))

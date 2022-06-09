@@ -72,6 +72,8 @@ typedef struct s_node
 	struct s_node	*prev;
 }				t_node;
 
+
+
 typedef struct s_main
 {
 	char	*prompt;
@@ -99,9 +101,13 @@ void		b_pwd(void);
  * Parsing
 */
 
+<<<<<<< Updated upstream
 void		simple_quote(t_main *main);
 int			n_quote(t_main *main);
 void		memory_flush(char **tmp, char ***split);
+=======
+int		parser_launcher(char *input);
+>>>>>>> Stashed changes
 
 /*
  * Environment

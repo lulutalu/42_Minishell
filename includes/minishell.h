@@ -102,9 +102,13 @@ void		b_pwd(void);
 */
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 void		simple_quote(t_main *main);
 int			n_quote(t_main *main);
 void		memory_flush(char **tmp, char ***split);
+=======
+int		parser_launcher(char *input);
+>>>>>>> Stashed changes
 =======
 int		parser_launcher(char *input);
 >>>>>>> Stashed changes

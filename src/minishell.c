@@ -5,7 +5,6 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduboulo && lzima				            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/19 17:33:38 by lduboulo          #+#    #+#             */
 /*   Updated: 2022/06/15 13:45:01 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -18,9 +17,6 @@ int	g_exit_status = 0;
 int	main(int argc, char **argv, char **envp)
 {
 	t_main	main;
-	int		is_echo = 0;						//WIP
-	int		is_cd = 0;							//WIP
-	int		is_pwd = 0;
 
 	(void)argv;
 	if (argc > 1)
@@ -35,15 +31,21 @@ int	main(int argc, char **argv, char **envp)
 		prompt_creation(&main);					//creation of the prompt
 		main.input = readline(main.prompt);
 		if (ft_strlen(main.input) >= 0)			//even if line is empty, string still alloced
-		{										//so strlen is used to check if empty or not
+		{
+			main.input_split = ft_split(main.input, ' ');
 			add_history(main.input);
-			if (is_echo == 1)//pseudo-code for now, real variable will be added once parsing is done
-				b_echo(&main);					//main.input is temporary here (parsing)
-			if (is_cd == 1)
+			if (ft_strcmp_case(main.input_split[0], "echo") == 0)
+				b_echo(&main);
+			else if (ft_strncmp(main.input_split[0], "cd", 3) == 0)
 				b_cd(&main);
-			if (is_pwd == 1)
+			else if (ft_strcmp_case(main.input_split[0], "pwd") == 0)
 				b_pwd();
+			else if (ft_strncmp(main.input_split[0], "export", 7) == 0)
+				b_export(&main);
+			else if (ft_strcmp_case(main.input_split[0], "env") == 0)
+				b_env(&main);
 			free(main.input);
+			ft_tab_free((void **)main.input_split);
 		}
 		if (main.input != NULL)
 			parser_launcher(main.input);

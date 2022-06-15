@@ -5,7 +5,6 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduboulo && lzima				            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/16 18:21:59 by lduboulo          #+#    #+#             */
 /*   Updated: 2022/06/15 13:43:46 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -78,6 +77,7 @@ typedef struct s_main
 {
 	char	*prompt;
 	char	*input;
+	char	**input_split;
 	char	*res;
 	t_node	*head_env;
 	t_node	*tail_env;
@@ -93,9 +93,12 @@ void		prompt_creation(t_main *main);
  * Builts-Ins
 */
 
+char		*cmd_input(t_main *main);
 void		b_echo(t_main *main);
 void		b_cd(t_main *main);
 void		b_pwd(void);
+void		b_export(t_main *main);
+void		b_env(t_main *main);
 
 /*
  * Parsing

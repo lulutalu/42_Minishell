@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 17:26:47 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/06/05 18:57:58 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/06/09 18:35:07 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	check_exec_cd(t_main *main, char *path, int status, char *old_pwd)
 /*This function is used when env variables HOME is called*/
 /*Usually, it's the case when '~' is called in arguments*/
 /*Special cases : no arguments and "--" argument*/
-static void	tilde_cd(t_main *main, char *old_pwd)
+static void	tilde_cd(t_main *main, char *old_pwd, char *input)
 {
 	int		status;
 	char	*path;
@@ -64,8 +64,8 @@ static void	tilde_cd(t_main *main, char *old_pwd)
 	if (cur != NULL)
 	{
 		path = ft_strjoin(cur->value, "/");
-		if (ft_strlen(main->input) > 1)
-			path = ft_dyn_strjoin(path, main->input + 2);
+		if (ft_strlen(input) > 1)
+			path = ft_dyn_strjoin(path, input + 2);
 		status = chdir(path);
 		check_exec_cd(main, path, status, old_pwd);
 		free(path);
@@ -82,8 +82,9 @@ static void	dash_cd(t_main *main, char *old_pwd)
 	cur = find_var(main, "OLDPWD");
 	if (cur != NULL)
 	{
-		ft_putendl_fd(cur->value, 1);
 		status = chdir(cur->value);
+		if (status == 0)
+			ft_putendl_fd(cur->value, 1);
 		check_exec_cd(main, cur->value, status, old_pwd);
 	}
 }
@@ -95,23 +96,19 @@ void	b_cd(t_main *main)
 {
 	int		status;
 	char	actual_pwd[4096];
-	t_node	*cur;
+	char	*input;
 
+	input = cmd_input(main);
 	getcwd(actual_pwd, 4096);
-	if (main->input[0] == '~' || ft_strlen(main->input) == 0 || \
-			ft_strncmp(main->input, "--", 3) == 0)
-		tilde_cd(main, actual_pwd);
-	else if (main->input[0] == '-')
+	if (input[0] == '~' || ft_strlen(input) == 0 || \
+			ft_strncmp(input, "--", 3) == 0)
+		tilde_cd(main, actual_pwd, input);
+	else if (ft_strncmp(input, "-", 2) == 0)
 		dash_cd(main, actual_pwd);
 	else
 	{
-		status = chdir(main->input);
-		check_exec_cd(main, main->input, status, actual_pwd);
+		status = chdir(input);
+		check_exec_cd(main, input, status, actual_pwd);
 	}
-	cur = main->head_env;
-	while (cur != NULL)
-	{
-		printf("%s=%s\n", cur->var, cur->value);
-		cur = cur->next;
-	}
+	free(input);
 }

@@ -6,7 +6,7 @@
 #    By: lduboulo && lzima				            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/27 18:29:51 by lduboulo          #+#    #+#              #
-#    Updated: 2022/06/05 18:47:43 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/06/08 20:29:21 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ ENV_FOLDER		= env
 ##############################   FILES  ########################################
 MAIN_FILES		= minishell.c
 SHELL_FILES		= prompt.c
-BUILTS_FILES	= echo.c cd.c pwd.c
+BUILTS_FILES	= echo.c cd.c pwd.c export.c env.c utils.c
 PARSING_FILES	=
 ENV_FILES		= env.c env_manip.c
 ################################################################################
@@ -62,7 +62,6 @@ CC				= gcc
 AR				= ar rcs
 MKDIR			= mkdir -p
 RM				= rm -rf
-
 CFLAGS			= -Wall -Wextra -Werror -g3 -fsanitize=address -I~/.brew/opt/readline/include
 
 TSEP			= ${SEP}=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=${RESET}

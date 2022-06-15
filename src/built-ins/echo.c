@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 23:20:31 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/06/05 16:29:01 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/06/09 18:35:53 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,20 @@
 /*that tell wich operation should be done based on the parsing*/
 void	b_echo(t_main *main)
 {
-	int	no_arg;
-	int	n_arg;
+	int		no_arg;
+	int		n_arg;
+	char	*input;
 
+	input = cmd_input(main);
 	no_arg = 0;
 	n_arg = 0;
 	if (no_arg == 1)
 		printf("\n");
 	else if (n_arg == 1)
-		printf("%s", main->input);
+		printf("%s", input);
 	else
-		printf("%s\n", main->input);
+		printf("%s\n", input);
+	free(input);
 	g_exit_status = 0;
 }
 //what about echo ~ ?

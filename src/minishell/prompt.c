@@ -6,12 +6,15 @@
 /*   By: lduboulo && lzima				            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 21:39:39 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/06/03 22:01:04 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/06/08 20:45:22 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+/*Split may cause a heao buffer overflow in case the pwd doesn't contain*/
+/*More than two directory*/
+/*Need to fix this by checking if the string exists or not*/
 void	prompt_creation(t_main *main)
 {
 	char	*user;

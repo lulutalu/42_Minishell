@@ -6,7 +6,7 @@
 /*   By: lduboulo && lzima				            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 18:21:59 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/06/05 18:59:06 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/06/15 13:43:46 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,17 +101,11 @@ void		b_pwd(void);
  * Parsing
 */
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 void		simple_quote(t_main *main);
 int			n_quote(t_main *main);
 void		memory_flush(char **tmp, char ***split);
-=======
-int		parser_launcher(char *input);
->>>>>>> Stashed changes
-=======
-int		parser_launcher(char *input);
->>>>>>> Stashed changes
+int			parser_launcher(char *input);
+int			parser_launcher(char *input);
 
 /*
  * Environment

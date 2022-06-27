@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 18:07:14 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/05/24 18:06:26 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/06/15 13:58:42 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	int	idx;
 
+	if (s1 == NULL || s2 == NULL)
+		return (1);
 	idx = 0;
 	if (n == 0)
 		return (0);
@@ -30,13 +32,3 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 		return ((unsigned char)s1[idx] - (unsigned char)s2[idx]);
 	return (0);
 }
-
-/*int	main()
-{
-	char	*big = "abcdef";
-	char	*little = "abcdefghijklmnop";
-	size_t	size = 6;
-
-	printf("Fonction C = %d\n", strncmp(big, little, size));
-	printf("Fonction Mano = %d\n", ft_strncmp(big, little, size));
-}*/

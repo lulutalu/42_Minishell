@@ -6,29 +6,19 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 15:53:27 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/06/09 19:03:53 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/06/23 16:32:49 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/*static void	env_arg(t_main *main, char *var)
-{
-	char	**split;
-
-	split = ft_split(var, ' ');
-	if (split[1] != NULL)
-		usage_error(
-}*/
-
+/*Env command w/o argument only print the actual environnment*/
+/*Though env with argument is use to launch a command by specifying*/
+/*another environnment in wich to launch the said command*/
 void	b_env(t_main *main)
 {
 	t_node	*cur;
-	char	*input;
 
-	input = cmd_input(main);
-//	if (input != NULL)
-//		env_arg(main, input);
 	cur = main->head_env;
 	while (cur != NULL)
 	{

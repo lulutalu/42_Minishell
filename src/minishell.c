@@ -45,12 +45,13 @@ int	main(int argc, char **argv, char **envp)
 			else if (ft_strcmp_case(main.input_split[0], "env") == 0)
 				b_env(&main);
 			free(main.input);
+			free(main.prompt);
 			ft_tab_free((void **)main.input_split);
 		}
-		if (main.input != NULL)
+/*		if (main.input != NULL)
 			parser_launcher(main.input);
 		if (main.input != NULL)
-			parser_launcher(main.input);
+			parser_launcher(main.input);*/
 	}
 	return (0);
 }

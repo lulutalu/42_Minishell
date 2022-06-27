@@ -6,7 +6,7 @@
 /*   By: lduboulo && lzima				            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 21:39:39 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/06/08 20:45:22 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/06/15 14:03:27 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,5 @@ void	prompt_creation(t_main *main)
 	else
 		main->prompt = ft_dyn_strjoin(main->prompt, "\e[1;91m");
 	main->prompt = ft_dyn_strjoin(main->prompt, " ➜ \e[0m");
+	ft_tab_free((void **)split);
 }

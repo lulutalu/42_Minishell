@@ -8,3 +8,5 @@
   <p align="center">
 <a href="https://github.com/JaeSeoKim/badge42"><img src="https://badge42.vercel.app/api/v2/cl2668aqb008909jp0ecnecpa/project/2563041" alt="lduboulo's 42 minishell Score" /></a>
   </p>
+  <h2>To do</h2>
+  <p>Change the _ environnment variable after each command<br></p>

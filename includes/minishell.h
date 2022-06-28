@@ -67,6 +67,7 @@ typedef struct s_node
 {
 	char			*var;
 	char			*value;
+	int				sort_pos;
 	struct s_node	*next;
 	struct s_node	*prev;
 }				t_node;
@@ -120,6 +121,10 @@ void		lst_add(t_node **head_env, t_node **tail, char *str);
 void		lst_del(t_main *main, t_node *cur);
 void		lst_replace(t_main *main, char *var);
 t_node		*find_var(t_main *main, char *var);
+void		env_sort(t_main *main);
+void		sort_alphabetical(t_main *main);
+void		sort_all_alphabetical(t_main *main, t_node *lowest);
+int			lst_size(t_main *main);
 
 /*
  * Memory Functions

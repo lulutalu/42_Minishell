@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 18:41:39 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/06/06 14:06:18 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/06/28 15:17:00 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	lst_add(t_node **head_env, t_node **tail, char *str)
 	split = ft_split(str, '=');
 	cur->var = ft_strdup(split[0]);
 	cur->value = ft_strdup(ft_strchr(str, '=') + 1);
+	cur->sort_pos = 0;
 	cur->next = NULL;
 	if (*head_env == NULL)
 	{
@@ -98,4 +99,19 @@ void	lst_replace(t_main *main, char *var)
 	}
 	ft_tab_free((void **)split);
 	free(var);
+}
+
+int	lst_size(t_main *main)
+{
+	t_node	*cur;
+	int		i;
+
+	i = 0;
+	cur = main->head_env;
+	while (cur != NULL)
+	{
+		cur = cur->next;
+		i++;
+	}
+	return (i);
 }

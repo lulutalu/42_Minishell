@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 15:53:27 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/06/23 16:32:49 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/06/28 15:50:23 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@ void	b_env(t_main *main)
 {
 	t_node	*cur;
 
+	env_sort(main);
 	cur = main->head_env;
 	while (cur != NULL)
 	{
 		if (cur->value != NULL)
-			printf("%s=%s\n", cur->var, cur->value);
+			printf("%s=%s sort : %d\n", cur->var, cur->value, cur->sort_pos);
 		cur = cur->next;
 	}
 	g_exit_status = 0;

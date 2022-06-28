@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 11:52:44 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/06/23 18:47:29 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/06/28 18:23:00 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,37 @@ static void	export_variable(t_main *main, char **cmd_split)
 	}
 }
 
+static void	export_wo_arg(t_main *main)
+{
+	t_node	*cur;
+	int		i;
+
+	cur = main->head_env;
+	env_sort(main);
+	i = 1;
+	while (i <= lst_size(main))
+	{
+		while (cur != NULL && cur->sort_pos != i)
+			cur = cur->next;
+		if (cur->sort_pos == i)
+			printf("declare -x %s=\"%s\"\n", cur->var, cur->value);
+		i++;
+	}
+}
+
 void	b_export(t_main *main)
 {
 	char	**cmd_split;
 	char	*input;
 
 	input = cmd_input(main);
-	cmd_split = ft_split(input, ' ');
-	export_variable(main, cmd_split);
+	printf("%s\n", input);
+	if (ft_strncmp(input, "", 1) == 0)
+		export_wo_arg(main);
+	else
+	{
+		cmd_split = ft_split(input, ' ');
+		export_variable(main, cmd_split);
+	}
 	free(input);
 }

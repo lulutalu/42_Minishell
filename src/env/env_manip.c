@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 18:41:39 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/06/28 15:17:00 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/07/05 15:48:01 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,38 +24,6 @@ t_node	*find_var(t_main *main, char *var)
 	while (cur != NULL && ft_strncmp(cur->var, var, ft_strlen(var) + 1) != 0)
 		cur = cur->next;
 	return (cur);
-}
-
-/*This function is used to add a node inside the linked list*/
-/*It will always add the new node at the end of the linked list*/
-/*To add correctly a new variable, char *str must be formatted correctly*/
-/*char *str = "NAME_VAR=VALUE_VAR"*/
-/*ex : "HOME=/Users/lduboulo"*/
-void	lst_add(t_node **head_env, t_node **tail, char *str)
-{
-	t_node	*cur;
-	char	**split;
-
-	cur = ft_calloc(1, sizeof(t_node));
-	ft_mem_alloc_check((void *)cur);
-	split = ft_split(str, '=');
-	cur->var = ft_strdup(split[0]);
-	cur->value = ft_strdup(ft_strchr(str, '=') + 1);
-	cur->sort_pos = 0;
-	cur->next = NULL;
-	if (*head_env == NULL)
-	{
-		cur->prev = NULL;
-		*head_env = cur;
-		*tail = cur;
-	}
-	else
-	{
-		cur->prev = *tail;
-		(*tail)->next = cur;
-		*tail = cur;
-	}
-	ft_tab_free((void **)split);
 }
 
 /*This function is used to delete a certain node and correctly free it*/

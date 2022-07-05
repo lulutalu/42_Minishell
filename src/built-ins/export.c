@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 11:52:44 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/06/28 18:23:00 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/07/05 15:47:22 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	export_variable(t_main *main, char **cmd_split)
 			g_exit_status = 1;
 			break ;
 		}
-		else if (ft_strchr(cmd_split[icmd], '=') != NULL)
+		else
 			lst_replace(main, cmd_split[icmd]);
 		g_exit_status = 0;
 		icmd++;
@@ -40,15 +40,17 @@ static void	export_wo_arg(t_main *main)
 	t_node	*cur;
 	int		i;
 
-	cur = main->head_env;
 	env_sort(main);
 	i = 1;
 	while (i <= lst_size(main))
 	{
+		cur = main->head_env;
 		while (cur != NULL && cur->sort_pos != i)
 			cur = cur->next;
-		if (cur->sort_pos == i)
+		if (cur != NULL && cur->value)
 			printf("declare -x %s=\"%s\"\n", cur->var, cur->value);
+		else if (cur != NULL && !cur->value)
+			printf("declare -x %s\n", cur->var);
 		i++;
 	}
 }
@@ -59,7 +61,6 @@ void	b_export(t_main *main)
 	char	*input;
 
 	input = cmd_input(main);
-	printf("%s\n", input);
 	if (ft_strncmp(input, "", 1) == 0)
 		export_wo_arg(main);
 	else

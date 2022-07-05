@@ -122,8 +122,6 @@ void		lst_del(t_main *main, t_node *cur);
 void		lst_replace(t_main *main, char *var);
 t_node		*find_var(t_main *main, char *var);
 void		env_sort(t_main *main);
-void		sort_alphabetical(t_main *main);
-void		sort_all_alphabetical(t_main *main, t_node *lowest);
 int			lst_size(t_main *main);
 
 /*

@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 12:37:05 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/06/28 18:23:00 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/07/05 15:47:55 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,54 +26,45 @@ void	env_dup(t_main *main, char **envp)
 		lst_add(&main->head_env, &main->tail_env, envp[i++]);
 }
 
-void	env_sort(t_main *main)
+static void	value_assignation(t_node *cur, char *str)
 {
-	t_node	*cur;
+	char	**split;
+	char	*chr;
 
-	cur = main->head_env;
-	while (cur != NULL && cur->sort_pos)
-		cur = cur->next;
-	if (cur != NULL)
-		sort_alphabetical(main);
+	split = ft_split(str, '=');
+	cur->var = ft_strdup(split[0]);
+	chr = ft_strchr(str, '=');
+	if (chr)
+		cur->value = ft_strdup(chr + 1);
+	else
+		cur->value = NULL;
+	cur->sort_pos = 0;
+	cur->next = NULL;
+	ft_tab_free((void **)split);
 }
 
-void	sort_alphabetical(t_main *main)
+/*This function is used to add a node inside the linked list*/
+/*It will always add the new node at the end of the linked list*/
+/*To add correctly a new variable, char *str must be formatted correctly*/
+/*char *str = "NAME_VAR=VALUE_VAR"*/
+/*ex : "HOME=/Users/lduboulo"*/
+void	lst_add(t_node **head_env, t_node **tail, char *str)
 {
 	t_node	*cur;
-	t_node	*temp;
 
-	cur = main->head_env->next;
-	temp = main->head_env;
-	while (cur != NULL)
+	cur = ft_calloc(1, sizeof(t_node));
+	ft_mem_alloc_check((void *)cur);
+	value_assignation(cur, str);
+	if (*head_env == NULL)
 	{
-		if (ft_strncmp(temp->var, cur->var, ft_strlen(temp->var)) > 0)
-			temp = cur;
-		cur = cur->next;
+		cur->prev = NULL;
+		*head_env = cur;
+		*tail = cur;
 	}
-	temp->sort_pos = 1;
-	sort_all_alphabetical(main, temp);
-}
-
-void	sort_all_alphabetical(t_main *main, t_node *lowest)
-{
-	t_node	*cur;
-	t_node	*temp;
-	int		i;
-
-	i = 2;
-	while (i <= lst_size(main))
+	else
 	{
-		temp = main->head_env;
-		cur = temp->next;
-		while (cur != NULL)
-		{
-			printf("First %d\nSecond %d\n", ft_strncmp(temp->var, cur->var, ft_strlen(temp->var)), ft_strncmp(cur->var, lowest->var, ft_strlen(cur->var)));
-			if (ft_strncmp(temp->var, cur->var, ft_strlen(temp->var)) > 0 && \
-				ft_strncmp(cur->var, lowest->var, ft_strlen(cur->var)) < 0)
-				temp = cur;
-			cur = cur->next;
-		}
-		temp->sort_pos = i++;
-		lowest = temp;
+		cur->prev = *tail;
+		(*tail)->next = cur;
+		*tail = cur;
 	}
 }

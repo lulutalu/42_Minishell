@@ -6,7 +6,7 @@
 #    By: lduboulo && lzima				            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/27 18:29:51 by lduboulo          #+#    #+#              #
-#    Updated: 2022/07/05 15:50:25 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/07/05 19:07:40 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ ENV_FOLDER		= env
 ##############################   FILES  ########################################
 MAIN_FILES		= minishell.c
 SHELL_FILES		= prompt.c
-BUILTS_FILES	= echo.c cd.c pwd.c export.c env.c utils.c
+BUILTS_FILES	= echo.c cd.c pwd.c export.c env.c unset.c utils.c
 PARSING_FILES	=
 ENV_FILES		= env.c env_manip.c env_alpha_sort.c
 ################################################################################

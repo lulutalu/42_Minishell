@@ -44,6 +44,8 @@ int	main(int argc, char **argv, char **envp)
 				b_export(&main);
 			else if (ft_strcmp_case(main.input_split[0], "env") == 0)
 				b_env(&main);
+			else if (ft_strncmp(main.input_split[0], "unset", 6) == 0)
+				b_unset(&main);
 			free(main.input);
 			free(main.prompt);
 			ft_tab_free((void **)main.input_split);

@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 11:52:44 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/07/05 15:47:22 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/07/05 19:07:14 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static void	export_variable(t_main *main, char **cmd_split)
 		}
 		else
 			lst_replace(main, cmd_split[icmd]);
-		g_exit_status = 0;
 		icmd++;
+		g_exit_status = 0;
 	}
 }
 
@@ -53,6 +53,7 @@ static void	export_wo_arg(t_main *main)
 			printf("declare -x %s\n", cur->var);
 		i++;
 	}
+	g_exit_status = 0;
 }
 
 void	b_export(t_main *main)

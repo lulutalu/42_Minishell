@@ -2,6 +2,10 @@
 // Created by Lowell Zima on 6/1/22.
 //
 
+#include "../includes/minishell.h"
+#include "parsing.h"
+
+/* -- ascii -- */
 #define ALPHA_UP 		1
 #define ALPHA_DOWN 		2
 #define NUM				3
@@ -18,12 +22,34 @@
 #define MONEY			36
 #define SEMICOLON		59
 
-typedef struct s_token
+/* -- token -- */
+#define T_D_QUOTE 		999
+#define T_S_QUOTE 		998
+
+typedef struct s_node
 {
-	int				id;
 	char			*var;
-	struct s_token	*next;
-}	t_token;
+	char			*value;
+	struct s_node	*next;
+	struct s_node	*prev;
+}				t_node;
+
+typedef struct s_quote
+{
+	int				start;
+	int				end;
+	int				type;
+	char 			*data;
+}	t_quote;
+
+typedef struct s_cell
+{
+	int				token;
+	int				pos;
+	char			*data;
+	t_node			*head_cell;
+	t_node			*tail_cell;
+}	t_cell;
 
 typedef struct s_id
 {
@@ -44,3 +70,16 @@ typedef struct s_id
 	int	 *indexs;
 }	t_id;
 
+/* --- parser_main --- */
+int 	parser_main(char *input);
+
+/* --- parser_utils --- */
+int		message(char *message);
+void	error_message(char *message);
+void	free_alloc(t_cell *c);
+t_cell	*cell_mem_alloc(void);
+
+/* --- quote_utils --- */
+int		stock_quote_data(char *input, s_quote quote, int i);
+int 	check_quote(char *input, s_quote quote);
+void	quote(char *input, t_cell *cell);

@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 18:41:39 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/07/05 19:14:54 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/07/05 19:46:07 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,17 @@ t_node	*find_var(t_main *main, char *var)
 /*The node that will be deleted will be the one pointed by *cur*/
 void	lst_del(t_main *main, t_node *cur)
 {
-	if (cur == main->tail_env)
+	if (cur == main->tail_env && cur->prev != NULL)
 	{
 		main->tail_env = cur->prev;
 		main->tail_env->next = NULL;
 	}
-	else if (cur == main->head_env)
+	else if (cur == main->head_env && cur->next != NULL)
 	{
 		main->head_env = cur->next;
 		main->head_env->prev = NULL;
 	}
-	else
+	else if (cur->prev != NULL && cur->next != NULL)
 	{
 		cur->prev->next = cur->next;
 		cur->next->prev = cur->prev;

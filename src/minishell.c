@@ -46,6 +46,8 @@ int	main(int argc, char **argv, char **envp)
 				b_env(&main);
 			else if (ft_strncmp(main.input_split[0], "unset", 6) == 0)
 				b_unset(&main);
+			else if (ft_strncmp(main.input_split[0], "exit", 5) == 0)
+				b_exit(&main);
 			free(main.input);
 			free(main.prompt);
 			ft_tab_free((void **)main.input_split);

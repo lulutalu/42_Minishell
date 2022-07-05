@@ -101,6 +101,7 @@ void		b_pwd(void);
 void		b_export(t_main *main);
 void		b_env(t_main *main);
 void		b_unset(t_main *main);
+void		b_exit(t_main *main);
 
 /*
  * Parsing

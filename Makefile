@@ -6,7 +6,7 @@
 #    By: lduboulo && lzima				            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/27 18:29:51 by lduboulo          #+#    #+#              #
-#    Updated: 2022/07/05 19:33:55 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/07/06 18:45:57 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SHELL_FOLDER	= minishell
 BUILTS_FOLDER	= built-ins
 PARSING_FOLDER	= parsing
 ENV_FOLDER		= env
+EXEC_FOLDER		= exec
 ################################################################################
 
 
@@ -38,6 +39,7 @@ SHELL_FILES		= prompt.c
 BUILTS_FILES	= echo.c cd.c pwd.c export.c env.c unset.c exit.c utils.c
 PARSING_FILES	=
 ENV_FILES		= env.c env_manip.c env_alpha_sort.c
+EXEC_FILES		= main_operation.c
 ################################################################################
 
 OBJS_MAIN		= $(addprefix $(O_DIR)/, $(MAIN_FILES:.c=.o))
@@ -45,9 +47,10 @@ OBJS_SHELL		= $(addprefix $(O_DIR)/$(SHELL_FOLDER)/, $(SHELL_FILES:.c=.o))
 OBJS_BUILTS		= $(addprefix $(O_DIR)/$(BUILTS_FOLDER)/, $(BUILTS_FILES:.c=.o))
 OBJS_PARSING	= $(addprefix $(O_DIR)/$(PARSING_FOLDER)/, $(PARSING_FILES:.c=.o))
 OBJS_ENV		= $(addprefix $(O_DIR)/$(ENV_FOLDER)/, $(ENV_FILES:.c=.o))
+OBJS_EXEC		= $(addprefix $(O_DIR)/$(EXEC_FOLDER)/, $(EXEC_FILES:.c=.o))
 
 OBJS			:= $(OBJS_MAIN) $(OBJS_SHELL) $(OBJS_BUILTS) \
-				   $(OBJS_PARSING) $(OBJS_ENV)
+				   $(OBJS_PARSING) $(OBJS_ENV) $(OBJS_EXEC)
 
 HEADS_DIR		= ./includes/
 

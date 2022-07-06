@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 11:52:44 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/07/05 19:35:45 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/07/06 13:56:53 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static void	export_variable(t_main *main, char **cmd_split)
 			ft_putstr_fd("minishell: export: `", 2);
 			ft_putstr_fd(cmd_split[icmd], 2);
 			ft_putendl_fd("': not a valid identifier", 2);
-			ft_tab_free((void **)cmd_split);
 			g_exit_status = 1;
+			ft_tab_free((void **)cmd_split);
 			break ;
 		}
 		else

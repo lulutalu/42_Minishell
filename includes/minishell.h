@@ -3,9 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lduboulo && lzima				            +#+  +:+       +#+        */
+/*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Updated: 2022/06/15 13:43:46 by lduboulo         ###   ########.fr       */
+/*   Created: 2022/07/06 18:42:40 by lduboulo          #+#    #+#             */
+/*   Updated: 2022/07/06 18:48:13 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +73,6 @@ typedef struct s_node
 	struct s_node	*prev;
 }				t_node;
 
-
-
 typedef struct s_main
 {
 	char	*prompt;
@@ -93,6 +92,8 @@ void		prompt_creation(t_main *main);
 /*
  * Builts-Ins
 */
+
+void		built_in(t_main *main);
 
 char		*cmd_input(t_main *main);
 void		b_echo(t_main *main);

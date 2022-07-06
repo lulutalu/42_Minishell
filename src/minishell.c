@@ -1,11 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lduboulo && lzima				            +#+  +:+       +#+        */
+/*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Updated: 2022/06/15 13:45:01 by lduboulo         ###   ########.fr       */
+/*   Created: 2022/07/06 18:44:20 by lduboulo          #+#    #+#             */
+/*   Updated: 2022/07/06 18:48:12 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,38 +25,17 @@ int	main(int argc, char **argv, char **envp)
 		printf(N_ARGS);
 		exit(1);
 	}
-	env_dup(&main, envp);						//function that store env inside linked list
+	env_dup(&main, envp);
 	while (1)
 	{
-		printf("%d\n", g_exit_status);
-		prompt_creation(&main);					//creation of the prompt
+		prompt_creation(&main);
 		main.input = readline(main.prompt);
-		if (ft_strlen(main.input) >= 0)			//even if line is empty, string still alloced
+		if (ft_strlen(main.input) >= 0)
 		{
 			main.input_split = ft_split(main.input, ' ');
 			add_history(main.input);
-			if (ft_strcmp_case(main.input_split[0], "echo") == 0)
-				b_echo(&main);
-			else if (ft_strncmp(main.input_split[0], "cd", 3) == 0)
-				b_cd(&main);
-			else if (ft_strcmp_case(main.input_split[0], "pwd") == 0)
-				b_pwd();
-			else if (ft_strncmp(main.input_split[0], "export", 7) == 0)
-				b_export(&main);
-			else if (ft_strcmp_case(main.input_split[0], "env") == 0)
-				b_env(&main);
-			else if (ft_strncmp(main.input_split[0], "unset", 6) == 0)
-				b_unset(&main);
-			else if (ft_strncmp(main.input_split[0], "exit", 5) == 0)
-				b_exit(&main);
-			free(main.input);
-			free(main.prompt);
-			ft_tab_free((void **)main.input_split);
+			built_in(&main);
 		}
-/*		if (main.input != NULL)
-			parser_launcher(main.input);
-		if (main.input != NULL)
-			parser_launcher(main.input);*/
 	}
 	return (0);
 }

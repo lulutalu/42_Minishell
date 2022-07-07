@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 18:41:39 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/07/06 13:56:51 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/07/07 14:31:04 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ void	lst_replace(t_main *main, char *var)
 			cur->value = NULL;
 	}
 	ft_tab_free((void **)split);
-	free(var);
 }
 
 int	lst_size(t_main *main)

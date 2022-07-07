@@ -6,7 +6,7 @@
 #    By: lduboulo && lzima				            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/27 18:29:51 by lduboulo          #+#    #+#              #
-#    Updated: 2022/07/06 18:45:57 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/07/07 14:28:42 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,7 @@ CC				= gcc
 AR				= ar rcs
 MKDIR			= mkdir -p
 RM				= rm -rf
-CFLAGS			= -Wall -Wextra -Werror -g3 -fsanitize=address -I~/.brew/opt/readline/include
+CFLAGS			= -Wall -Wextra -Werror -g3 -I~/.brew/opt/readline/include
 
 TSEP			= ${SEP}=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=${RESET}
 

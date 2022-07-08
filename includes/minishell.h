@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:42:40 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/07/07 14:29:21 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/07/08 18:27:15 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,10 @@
 
 # define N_ARGS "\e[1;31mError, this binary doesn't accept arguments\n\e[0m"
 
+/*Those define are used for easier manipulation of in and out of pipes*/
+# define PIPE_IN 1
+# define PIPE_OUT 0
+
 /*
  * Global Variables
 */
@@ -73,12 +77,21 @@ typedef struct s_node
 	struct s_node	*prev;
 }				t_node;
 
+typedef struct s_fd
+{
+	int	infile;
+	int	outfile;
+	int	io[2];
+	int	new_io[2];
+}				t_fd;
+
 typedef struct s_main
 {
 	char	*prompt;
 	char	*input;
 	char	**input_split;
 	char	*res;
+	t_fd	fd;
 	t_node	*head_env;
 	t_node	*tail_env;
 }				t_main;
@@ -103,6 +116,14 @@ void		b_export(t_main *main);
 void		b_env(t_main *main);
 void		b_unset(t_main *main);
 void		b_exit(t_main *main);
+
+/*
+ * Redirections
+*/
+
+void	redirection(t_main *main);
+
+void	less_than(t_main *main);
 
 /*
  * Parsing

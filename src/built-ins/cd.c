@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 17:26:47 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/06/23 16:32:58 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/07/08 16:51:04 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	b_cd(t_main *main)
 
 	input = cmd_input(main);
 	getcwd(actual_pwd, 4096);
-	if (input[0] == '~' || ft_strlen(input) == 0 || \
+	if ((input[0] == '~' && ft_strlen(input) == 1) || ft_strlen(input) == 0 || \
 			ft_strncmp(input, "--", 3) == 0)
 		tilde_cd(main, actual_pwd, input);
 	else if (ft_strncmp(input, "-", 2) == 0)

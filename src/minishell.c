@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:44:20 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/07/06 18:48:12 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/07/08 18:27:16 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	main(int argc, char **argv, char **envp)
 		{
 			main.input_split = ft_split(main.input, ' ');
 			add_history(main.input);
+			redirection(&main);
 			built_in(&main);
 		}
 	}

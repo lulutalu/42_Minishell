@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:38:55 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/07/06 18:44:36 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/07/08 18:27:17 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,10 @@ void	built_in(t_main *main)
 	free(main->input);
 	free(main->prompt);
 	ft_tab_free((void **)main->input_split);
+}
+
+void	redirection(t_main *main)
+{
+	if (ft_strchr(main->input, '<') != NULL)
+		less_than(main);
 }

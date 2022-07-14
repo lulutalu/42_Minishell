@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:38:55 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/07/08 18:27:17 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/07/11 17:40:17 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,6 @@ void	redirection(t_main *main)
 {
 	if (ft_strchr(main->input, '<') != NULL)
 		less_than(main);
+	if (ft_strchr(main->input, '>') != NULL)
+		more_than(main);
 }

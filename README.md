@@ -11,4 +11,6 @@
   <h2>To do</h2>
   <p>Change the _ environnment variable after each command<br>
   Might want to redo a bit the exit built-in<br>
-  Check and fix the built-in when use with a redirection<br></p>
+  Check and fix the built-in when use with a redirection<br>
+  Might wanna check the correct execution when using a redirection multiple times<br>
+  </p>

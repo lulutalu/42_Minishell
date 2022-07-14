@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:42:40 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/07/08 18:27:15 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/07/13 17:17:46 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,9 @@ void		b_exit(t_main *main);
 void	redirection(t_main *main);
 
 void	less_than(t_main *main);
+void	double_less_than(t_main *main);
+void	more_than(t_main *main);
+void	more_than_double(t_main *main);
 
 /*
  * Parsing

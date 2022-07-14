@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 19:21:57 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/07/06 13:50:05 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/07/11 12:31:19 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static void	free_all(t_main *main)
 		lst_del(main, node->next);
 	}
 	lst_del(main, node);
+	close(main->fd.infile);
+	close(main->fd.outfile);
 }
 
 static void	not_numeric(t_main *main, char **split)

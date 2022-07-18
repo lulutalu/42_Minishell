@@ -2,60 +2,72 @@
 // Created by Lowell Zima on 6/1/22.
 //
 #include "./../../includes/minishell.h"
+#include "parsing.h"
 
-int	stock_quote_data(char *input, s_quote quote, int i)
+void	stock_quote_data(const char *input, t_quote *quote, int end)
 {
 	int len;
-	char **temp;
 
-	len = quote->end - quote->start;
-	if (len == 0)
-		quote->data = ft_substr("");
-	quote->data = ft_dyn_substr(input, (quote->start + 1), len - 1);
+	len = end - (quote->start + 1);
+	if (len <= 0)
+		quote->data_quote = ft_strdup("");
+	quote->data_quote = ft_substr(input, (quote->start + 1), len);
 }
 
-int check_quote(char *input, s_quote quote, char quote_type)
+int check_quote(const char *input, t_quote *quote, int quote_type)
 {
-	int i;
-	int pair;
+	size_t i;
 
 	quote->type = quote_type;
-	i = -1;
-	while (input[++i])
+	i = 0;
+	while (i < ft_strlen(input))
 	{
 		if (input[i] == quote->type)
 		{
-			pair = 1;
 			quote->start = i;
-			while (input[++i])
+			while (i < ft_strlen(input))
 			{
+				i++;
 				if (input[i] == quote->type)
 				{
-					pair = 2;
-					quote->end = i;
 					stock_quote_data(input, quote, i);
-					return(1);
+					return (1);
 				}
 			}
-			if (pair != 2)
-				error_message("Error pair: quote missing\n")
+			if (input[i] == '\0')
+				error_message("Error pair: quote missing\n");
 		}
+		i++;
 	}
 	return(0);
 }
 
-void	quote(char *input, t_cell *cell)
+void	free_quote(t_cell *cell)
 {
-	if (check_quote(input, cell, S_QUOTE == 1))
+	if (!cell->quote->data_quote)
+		free(cell->quote->data_quote);
+	if (cell->quote)
+		free(cell->quote);
+}
+
+char	*quote(const char *input, t_cell *cell)
+{
+	char *ret;
+
+	ret = NULL;
+	if (check_quote(input, cell->quote, S_QUOTE) == 1)
 	{
 		cell->token = T_S_QUOTE;
-		cell->data = ft_strdup(quote->data);
-		cell->pos = quote->start;
+		cell->data = ft_strdup(cell->quote->data_quote);
+		printf("cell-data: %s \n token %d\n", cell->data, cell->token);
+		ret = ft_strreplace(input, "S_QUOTE", S_QUOTE);
 	}
-	if (check_quote(input, cell, D_QUOTE == 1))
+	if (check_quote(input, cell->quote, D_QUOTE) == 1)
 	{
 		cell->token = T_D_QUOTE;
-		cell->data = ft_strdup(quote->data);
-		cell->pos = quote->start;
+		cell->data = ft_strdup(cell->quote->data_quote);
+		printf("cell-data: %s \n token %d\n", cell->data, cell->token);
+		ret = ft_strreplace(input, "D_QUOTE", D_QUOTE);
 	}
+	return (ret);
 }

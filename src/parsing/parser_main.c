@@ -4,6 +4,80 @@
 #include "./../../includes/minishell.h"
 #include "parsing.h"
 
+#define T_D_QUOTE 3
+
+int	char_dup(char *input, char data)
+{
+	char		*one;
+	char 		*two;
+	t_trigger	*trigger;
+
+	//malloc trigger
+	one = ft_strchr(input, data);
+	if (one != NULL)
+		trigger->one = 1;
+	two = ft_strchr(one, data);
+	if (two != NULL)
+		trigger->two = 1;
+	return (0);
+}
+
+char *stock_input(char *in, char *new_in)
+{
+	char	*ret;
+	ret = ft_dyn_strjoin(in, new_in);
+	return(ret);
+}
+
+int error_double_quotes_b_slash(char *input, t_cell *cell)
+{
+	char *in;
+	char *stock;
+	char *out;
+	int i;
+
+	while(1)
+	{
+		in = readline("> ");
+		stock = ft_dyn_strjoin(input, in);
+		i = 0;
+		while (in[i])
+		{
+			if (in[i++] == D_QUOTE)
+			{
+				cell->token = T_D_QUOTE;
+				cell->data = stock;
+			}
+		}
+	}
+}
+
+int error_double_quotes(char *input)
+{
+	int		i;
+	int		y;
+
+	i = 0;
+	while (input[i])
+	{
+		if (input[i] == D_QUOTE)
+		{
+			while (input[i])
+			{
+				if (input[i] == B_SLASH)
+					error_double_quotes_b_slash(input);
+				else if (input[i] == D_QUOTE)
+					return(T_D_QUOTE);
+				else
+					return(ERROR);
+			}
+			i++;
+		}
+		i++;
+	}
+}
+
+
 
 t_token *mem_alloc(t_token *token)
 {
@@ -14,18 +88,19 @@ t_token *mem_alloc(t_token *token)
 	return (token);
 }
 
-t_token	*create_token(char *input)
+t_token	*create_cell(char *input)
 {
-	token = mem_alloc(token);
+	cell = mem_alloc(cell);
 }
 
-char	**split_semicolon(char *input, t_token *token)
+char	**split_space(char *input, t_token *token)
 {
-	char **splited;
+	char 	**splited;
+	int		i;
 
 	splited = ft_split(input, SEMICOLON);
 	while (splited[++i])
-		token = add_token(token, splitted[i], i);
+		token = add_cell(token, splited[i], i);
 	return (splited);
 }
 

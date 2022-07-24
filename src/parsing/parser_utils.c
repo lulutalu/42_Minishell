@@ -35,7 +35,7 @@
 int	error_message(char *message)
 {
 	write(2, message, ft_strlen(message));
-	return (1);
+	exit (1);
 }
 
 /* keeping start trigger and keep rest of the string as it is */
@@ -54,9 +54,6 @@ static char *check_trigger(const char *input, int i, char trigger)
 	while (input[++tmp_i])
 		if (input[tmp_i] == trigger)
 		{
-//			printf("saved_i: %d\n", saved_i);
-//			printf("tmp_i: %d\n", tmp_i);
-
 			ret = ft_substr(input, tmp_i + 1, len);
 			break ;
 		}
@@ -69,6 +66,29 @@ static char *check_trigger(const char *input, int i, char trigger)
 	return (ret);
 }
 
+char	*ft_strreplace_one_trigger(const char *input, char *replace, char one_trigger)
+{
+	int i;
+	char *tmp;
+	char *output;
+
+	output = NULL;
+	i = -1;
+	while (input[++i])
+	{
+		if (input[i] == one_trigger) /* | */
+		{
+			tmp = ft_substr(input, 0, i);
+			output = ft_strjoin(tmp, replace);
+			if (tmp != NULL)
+				free(tmp);
+			tmp = ft_substr(input, i + 1, (ft_strlen(input) - i));
+			output = ft_strjoin(output, tmp);
+			return (output);
+		}
+	}
+	return(NULL);
+}
 
 char	*ft_strreplace(const char *input, char *replace, char trigger)
 {

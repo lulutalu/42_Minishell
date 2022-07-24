@@ -4,54 +4,42 @@
 #include "./../../includes/minishell.h"
 #include "parsing.h"
 
-int t_redirection_input(const char *input, t_cell *cell)
+char *t_redirection_input(const char *input, t_cell *cell, int token, size_t i)
 {
-	int i;
-
-	i = -1;
-	while (input[++i])
+	if (input[i] == token && input[i + 1] == token)
 	{
-		if (input[i] == S_TO_BIG)
-		{
-			cell->token = RE_INPUT;
-			cell->data = ft_strdup("<");
-			cell->pos = i;
-		}
-		if (input[i] && input[i + 1] == S_TO_BIG)
-		{
-			cell->token = D_RE_INPUT;
-			cell->data = ft_strdup("<<");
-			cell->pos = i;
-		}
+		cell->token = D_RE_INPUT;
+		cell->data = ft_strdup("<<");
+		cell->pos = i;
+		cell->ret = ft_strreplace(cell->ret, "D_RE_INPUT", S_TO_BIG);
+
 	}
-	return(0);
+	else
+	{
+		cell->token = RE_INPUT;
+		cell->data = ft_strdup("<");
+		cell->pos = i;
+		cell->ret = ft_strreplace_one_trigger(cell->ret, "RE_INPUT", S_TO_BIG);
+	}
+	return(cell->ret);
 }
 
-int t_redirection_output(const char *input, t_cell *cell)
+char *t_redirection_output(const char *input, t_cell *cell, int token, size_t i)
 {
-	int	i;
-
-	i = -1;
-	while(input[++i])
+	if (input[i] == token && input[i + 1] == token)
 	{
-		if (input[i] == BIG_TO_S)
-		{
-			cell->token = RE_OUTPUT;
-			cell->data = ft_strdup(">");
-			cell->pos = i;
-		}
-		if (input[i] && input[i + 1] == BIG_TO_S)
-		{
-			cell->token = D_RE_OUTPUT;
-			cell->data = ft_strdup(">>");
-			cell->pos = i;
-		}
-	}
-	return(0);
-}
+		cell->token = D_RE_OUTPUT;
+		cell->data = ft_strdup(">>");
+		cell->pos = i;
+		cell->ret = ft_strreplace_one_trigger(cell->ret, "RE_OUTPUT", BIG_TO_S);
 
-void	redirection(char *input, t_cell *cell)
-{
-	t_redirection_input(input, cell);
-	t_redirection_output(input, cell);
+	}
+	else
+	{
+		cell->token = RE_OUTPUT;
+		cell->data = ft_strdup(">");
+		cell->pos = i;
+		cell->ret = ft_strreplace_one_trigger(cell->ret, "RE_OUTPUT", BIG_TO_S);
+	}
+	return(cell->ret);
 }

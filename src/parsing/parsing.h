@@ -28,6 +28,7 @@ typedef enum e_token
 	T_S_QUOTE = '\'',
 	T_CMD = 999,
 	T_ARG = 998,
+	T_BUILT_IN = 997,
 }	t_token;
 
 /* -- "" && '' token --
@@ -41,6 +42,9 @@ typedef enum e_token
 /* -- > && >> token -- */
 #define RE_OUTPUT		995
 #define D_RE_OUTPUT		994
+
+/* -- > && >> token -- */
+#define BUILT_IN		993
 
 typedef struct s_quote
 {
@@ -57,6 +61,7 @@ typedef struct s_cell
 {
 	t_token				token; /*T_D_QUOTE*/
 	size_t				pos;   /* index de input trouvé */
+	size_t 				end;
 	char				*data; /* "103" */
 	char 				*ret;
 	struct s_cell		*next;
@@ -74,6 +79,9 @@ typedef struct s_network
 /* --- parser_main.c --- */
 char *parser_main_quote(char *ret);
 void parser_pipe(char *saved_ret);
+
+/* --- cmd_utils.c --- */
+char *cmd_saving(const char *input, t_cell *cell, size_t i);
 
 /* --- cell_utils.c --- */
 //t_cell		*set_node(t_cell **node, t_network **network, char *av);

@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:42:40 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/07/13 17:17:46 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/07/27 18:25:21 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 */
 
 # include <readline/readline.h>
-# include <readline/history.h>
+void		rl_replace_line(const char *text, int clear_undo);
 
 /*
  * Error And Messages Handling
@@ -87,20 +87,23 @@ typedef struct s_fd
 
 typedef struct s_main
 {
-	char	*prompt;
-	char	*input;
-	char	**input_split;
-	char	*res;
-	t_fd	fd;
-	t_node	*head_env;
-	t_node	*tail_env;
+	char				*prompt;
+	char				*restore_prompt;
+	char				*input;
+	char				**input_split;
+	char				*res;
+	t_fd				fd;
+	t_node				*head_env;
+	t_node				*tail_env;
+	struct sigaction	sa;
 }				t_main;
 
 /*
- * Functions Declaration
+ * Minishell utils
 */
 
 void		prompt_creation(t_main *main);
+void		check_for_signals(t_main *main);
 
 /*
  * Builts-Ins
@@ -121,12 +124,12 @@ void		b_exit(t_main *main);
  * Redirections
 */
 
-void	redirection(t_main *main);
+void		redirection(t_main *main);
 
-void	less_than(t_main *main);
-void	double_less_than(t_main *main);
-void	more_than(t_main *main);
-void	more_than_double(t_main *main);
+void		less_than(t_main *main);
+void		double_less_than(t_main *main);
+void		more_than(t_main *main);
+void		more_than_double(t_main *main);
 
 /*
  * Parsing

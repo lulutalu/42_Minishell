@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 14:39:00 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/05/19 17:51:21 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/07/27 17:21:06 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,7 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	int	idx;
-
-	idx = 0;
-	if (s != NULL)
-	{
-		while (s[idx] != '\0')
-		{
-			write(fd, s + idx, 1);
-			idx++;
-		}
-	}
+	if (s)
+		if (write(fd, s, ft_strlen(s)) < 0)
+			perror("");
 }

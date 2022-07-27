@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 19:21:57 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/07/11 12:31:19 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/07/27 18:16:24 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	too_many_args(void)
 {
-	printf("exit\n");
+	ft_putstr_fd("exit\n", 1);
 	ft_putendl_fd("minishell: exit: too many arguments", 2);
 	g_exit_status = 1;
 }
@@ -41,7 +41,7 @@ static void	free_all(t_main *main)
 static void	not_numeric(t_main *main, char **split)
 {
 	free_all(main);
-	printf("exit\n");
+	ft_putstr_fd("exit\n", 1);
 	ft_putstr_fd("minishell: exit: ", 2);
 	ft_putstr_fd(split[0], 2);
 	ft_tab_free((void **)split);
@@ -73,7 +73,7 @@ static void	with_arg(t_main *main, char *input)
 		free(input);
 		g_exit_status = ft_atoi(split[0]);
 		ft_tab_free((void **)split);
-		printf("exit\n");
+		ft_putstr_fd("exit\n", 1);
 		exit(g_exit_status);
 	}
 }
@@ -87,7 +87,7 @@ void	b_exit(t_main *main)
 	{
 		free_all(main);
 		free(input);
-		printf("exit\n");
+		ft_putstr_fd("exit\n", 1);
 		exit(g_exit_status);
 	}
 	else

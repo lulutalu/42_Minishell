@@ -13,4 +13,5 @@
   Might want to redo a bit the exit built-in<br>
   Check and fix the built-in when use with a redirection<br>
   Might wanna check the correct execution when using a redirection multiple times<br>
+  Need to normed and retype the redirection function<br>
   </p>

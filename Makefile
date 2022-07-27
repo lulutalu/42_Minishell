@@ -6,7 +6,7 @@
 #    By: lduboulo && lzima				            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/27 18:29:51 by lduboulo          #+#    #+#              #
-#    Updated: 2022/07/12 17:44:24 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/07/27 17:30:55 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ EXEC_FOLDER		= exec
 
 ##############################   FILES  ########################################
 MAIN_FILES		= minishell.c
-SHELL_FILES		= prompt.c
+SHELL_FILES		= prompt.c signal.c
 BUILTS_FILES	= echo.c cd.c pwd.c export.c env.c unset.c exit.c utils.c
 PARSING_FILES	=
 ENV_FILES		= env.c env_manip.c env_alpha_sort.c
@@ -65,7 +65,7 @@ CC				= gcc
 AR				= ar rcs
 MKDIR			= mkdir -p
 RM				= rm -rf
-CFLAGS			= -Wall -Wextra -Werror -g3 -fsanitize=address -I~/.brew/opt/readline/include
+CFLAGS			= -Wall -Wextra -Werror -g3 -fsanitize=address 
 
 TSEP			= ${SEP}=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=${RESET}
 
@@ -78,7 +78,7 @@ ${NAME}:		${OBJS}
 				@${MAKELIB} ${LIBUTILS}
 				@printf "${TSEP}\n"
 				@printf "${GREEN} 💻 Successfully compiled ${NAME} .o's${RESET} ✅\n"
-				@${CC} ${CFLAGS} -L ~/.brew/opt/readline/lib -lreadline -o ${NAME} ${OBJS} ${LIBUTILS}/libutils.a
+				@${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBUTILS}/libutils.a -lreadline -L ~/.brew/opt/readline/lib/ -I ~/.brew/opt/readline/include/
 				@printf "${GREEN} 💻 Successfully created ${NAME} executable${RESET} ✅\n"
 				@printf "${TSEP}\n"
 

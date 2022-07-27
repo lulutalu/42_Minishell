@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 17:26:47 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/07/08 16:51:04 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/07/26 17:45:39 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,17 @@ static void	tilde_cd(t_main *main, char *old_pwd, char *input)
 		status = chdir(path);
 		check_exec_cd(main, path, status, old_pwd);
 		free(path);
+	}
+	else if (input[0] == '~')
+	{
+		path = getenv("HOME");
+		status = chdir(path);
+		check_exec_cd(main, path, status, old_pwd);
+	}
+	else
+	{
+		ft_putendl_fd("minishell: cd: HOME not set", 2);
+		g_exit_status = 1;
 	}
 }
 

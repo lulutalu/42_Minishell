@@ -5,82 +5,49 @@
 #include "./../../includes/minishell.h"
 #include "parsing.h"
 #include <fcntl.h>
-#include <unistd.h>
 
 
-int is_bin(char *word)
+
+size_t pipe_saving(t_cell *cell, int type, size_t i)
 {
-	char *path;
-
-	path = ft_strjoin("/bin/", word);
-	if (access(path, X_OK) == 0)
-	{
-		free(path);
-		return (1);
-	}
-	free(path);
-	return (0);
+	cell->token = type;
+	cell->start = i;
+	cell->end = i + 1;
+	cell->data = ft_strdup("|");
+	return (cell->end);
 }
 
-char *cmd_saving(const char *input, t_cell *cell, size_t i)
+size_t find_separators(const char *input, size_t i)
 {
-	char *check;
-
-	//TODO separator better than ft_strchr
-
-	check = ft_strtrim(input, " ");
-	if (ft_strncmp(check, "cd", 2) == 0)
+	while(input[i] != '\0')
 	{
-		cell->token = T_BUILT_IN;
-		cell->data = ft_strdup("cd");
-		cell->pos = i;
-		if(ft_strchr(check, ' ') != NULL)
-			return(ft_strchr(check, ' '));
+		if (input[i] == SPACE)
+			return(i);
+		if (input[i] == BIG_TO_S)
+			return(i);
+		if (input[i] == S_TO_BIG)
+			return(i);
+		if (input[i] == PIPE)
+			return(i);
+		i++;
 	}
-	if (ft_strncmp(check, "pwd", 3) == 0)
-	{
-		cell->token = T_BUILT_IN;
-		cell->data = ft_strdup("pwd");
-		cell->pos = i;
-		if(ft_strchr(check, ' ') != NULL)
-			return(ft_strchr(check, ' '));
-	}
-	if (ft_strncmp(check, "export", 6) == 0)
-	{
-		cell->token = T_BUILT_IN;
-		cell->data = ft_strdup("export");
-		cell->pos = i;
-		if(ft_strchr(check, ' ') != NULL)
-			return(ft_strchr(check, ' '));
-	}
-	if (ft_strncmp(check, "unset", 5) == 0)
-	{
-		cell->token = T_BUILT_IN;
-		cell->data = ft_strdup("unset");
-		cell->pos = i;
-		if(ft_strchr(check, ' ') != NULL)
-			return(ft_strchr(check, ' '));
-	}
-	if (ft_strncmp(check, "env", 3) == 0) {
-		cell->token = T_BUILT_IN;
-		cell->data = ft_strdup("env");
-		cell->pos = i;
-		if (ft_strchr(check, ' ') != NULL)
-			return (ft_strchr(check, ' '));
-	}
-	if (ft_strncmp(check, "exit", 4) == 0) {
-		cell->token = T_BUILT_IN;
-		cell->data = ft_strdup("exit");
-		cell->pos = i;
-		if (ft_strchr(check, ' ') != NULL)
-			return (ft_strchr(check, ' '));
-
-	}
-	else
-		return(NULL);
+	return(i);
 }
 
-//char *check_alpha(const char *input, t_cell *cell, size_t i)
-//{
-//
-//}
+size_t cmd_saving(const char *input, size_t len, t_cell *cell, size_t i)
+{
+	size_t y;
+
+	y = find_separators(input, i);
+	cell->start = i;
+	cell->data = ft_substr(input, i, (y - i));
+	if (*cell->data == DOLLAR)
+	{
+		cell->dollar_material = ft_split(cell->data, '$');
+		cell->token = T_DOLLAR;
+	}
+	if (cell->token != T_DOLLAR)
+		cell->token = T_CMD;
+	cell->end = ++y;
+		return(y);
+}

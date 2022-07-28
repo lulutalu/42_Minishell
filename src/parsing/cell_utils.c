@@ -23,29 +23,39 @@ t_cell	*init_cell(void)
 	if (!cell)
 		return(NULL);
 	cell->next = NULL;
-//	cell->prev = NULL;
 	cell->quote = NULL;
 	return(cell);
 }
 
-void	print_list(t_network *list)
+
+t_network 	*init_network(void)
 {
-	int		i;
-	t_cell *tmp;
+	t_network	*ptr;
 
-	tmp = list->head_cell;
+	ptr = (t_network *)malloc(sizeof(t_network));
+	if (!ptr)
+		return (NULL);
+	ptr->head_cell = NULL;
+	ptr->tail_cell = NULL;
+	return (ptr);
+}
 
-	i = 0;
-	printf("print list OK\n");
-	while (tmp->next != NULL)
-	{
-		printf("print list running...\n");
-		printf("-----------------------------------\n");
-		printf("| tmp->pos = %zu                    \n", tmp->pos);
-		printf("| cell->cmd_sep : %s               \n", tmp->data);
-		printf("| cell->token : %d                 \n", tmp->token);
-		printf("-----------------------------------\n");
-		tmp = tmp->next;
-		i++;
-	}
+t_network *set_network()
+{
+	t_network *list;
+
+	list = init_network();
+	list->head_cell = init_cell();
+	list->current_cell = init_cell();
+	list->current_cell = list->head_cell;
+	return (list);
+}
+
+t_cell	*add_node(t_network *list)
+{
+	list->current_cell->next = init_cell();
+	list->current_cell = list->current_cell->next;
+	list->tail_cell = list->current_cell;
+	list->current_cell->next = NULL;
+	return(list->tail_cell);
 }

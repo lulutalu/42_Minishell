@@ -3,10 +3,6 @@
 //
 
 #include "./../../includes/minishell.h"
-#include "parsing.h"
-#include <fcntl.h>
-
-
 
 size_t pipe_saving(t_cell *cell, int type, size_t i)
 {
@@ -38,6 +34,7 @@ size_t cmd_saving(const char *input, size_t len, t_cell *cell, size_t i)
 {
 	size_t y;
 
+	(void)len;
 	y = find_separators(input, i);
 	cell->start = i;
 	cell->data = ft_substr(input, i, (y - i));

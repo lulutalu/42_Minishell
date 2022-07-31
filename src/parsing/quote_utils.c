@@ -2,12 +2,12 @@
 // Created by Lowell Zima on 6/1/22.
 //
 #include "./../../includes/minishell.h"
-#include "parsing.h"
 
 void	stock_quote_data(const char *input, t_quote *quote, size_t end, int type)
 {
 	size_t len;
 
+	(void)type;
 	len = end - (quote->start + 1);
 	if (len <= 0)
 		quote->data_quote = ft_strdup("");
@@ -17,6 +17,7 @@ void	stock_quote_data(const char *input, t_quote *quote, size_t end, int type)
 size_t	check_by_type_quote(const char *input, t_cell *cell, int type)
 {
 	size_t len;
+
 	cell->quote->i = cell->quote->start;
 	len = ft_strlen(input);
 	while (cell->quote->i < len)
@@ -38,6 +39,7 @@ size_t	check_by_type_quote(const char *input, t_cell *cell, int type)
 
 size_t	quote_saving(const char *input, size_t len, t_cell *cell, size_t i)
 {
+	(void)len;
 	cell->quote = init_quote();
 	if (input[i] == S_QUOTE)
 		cell->type = S_QUOTE;

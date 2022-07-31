@@ -2,7 +2,6 @@
 // Created by Lowell Zima on 6/1/22.
 //
 #include "./../../includes/minishell.h"
-#include "parsing.h"
 
 size_t t_redirection_input(const char *input, t_cell *cell, int token, size_t i)
 {

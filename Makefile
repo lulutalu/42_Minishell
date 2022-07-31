@@ -6,7 +6,7 @@
 #    By: lduboulo && lzima				            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/27 18:29:51 by lduboulo          #+#    #+#              #
-#    Updated: 2022/07/27 17:30:55 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/07/31 17:28:29 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ EXEC_FOLDER		= exec
 MAIN_FILES		= minishell.c
 SHELL_FILES		= prompt.c signal.c
 BUILTS_FILES	= echo.c cd.c pwd.c export.c env.c unset.c exit.c utils.c
-PARSING_FILES	=
+PARSING_FILES	= cell_utils.c cmd_utils.c parser_main.c parser_utils.c \
+				  quote_utils.c redirection_utils.c
 ENV_FILES		= env.c env_manip.c env_alpha_sort.c
 EXEC_FILES		= main_operation.c redirection.c
 ################################################################################

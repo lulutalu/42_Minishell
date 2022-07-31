@@ -6,11 +6,23 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:38:55 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/07/27 18:08:48 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/07/31 18:31:04 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void	control_tower(t_main *main)
+{
+	t_cell	*cur;
+
+	add_history(main->input);
+	cur = main->list->head_cell;
+	while (cur != NULL)
+	{
+
+	}
+}
 
 void	built_in(t_main *main)
 {

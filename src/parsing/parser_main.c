@@ -2,7 +2,6 @@
 // Created by Lowell Zima on 6/1/22.
 //
 #include "./../../includes/minishell.h"
-#include "parsing.h"
 
 int	ft_isprint_without_space(int c)
 {
@@ -33,24 +32,23 @@ size_t	reader(const char *input, t_cell *cell, size_t i, size_t len)
 	return(i);
 }
 
-void parser_main_quote(char *ret)
+void parser_main_quote(char *ret, t_main *main)
 {
-	t_network *list;
 	static size_t i;
 	size_t len;
 
 	len = ft_strlen(ret);
-	list = set_network();
+	main->list = set_network();
 	i = 0;
 	while (i < len)
 	{
-		i = reader(ret, list->current_cell, i, len);
-		list->current_cell = add_node(list);
+		i = reader(ret, main->list->current_cell, i, len);
+		main->list->current_cell = add_node(main->list);
 	}
 
 	//print for tests
 	printf("print prepared OK\n");
-	print_list(list);
+	print_list(main->list);
 }
 
 
@@ -70,15 +68,15 @@ void	print_list(t_network *list) {
 		printf("| cell->data : %s               	\n", tmp->data);
 		printf("| cell->token : %d                 	\n", tmp->token);
 		if (tmp->dollar_material)
-			printf("| cell->dollar_material : %s     \n", tmp->dollar_material[0]);
+//			printf("| cell->dollar_material : %s     \n", tmp->dollar_material[0]);
 		printf("-----------------------------------	\n");
 		tmp = tmp->next;
 		i++;
 	}
 }
 
-int main()
+/*int main()
 {
 	char *input = " 1 '2' 3 \"d_q\" |3 > >> < << fin ";
 	parser_main_quote(input);
-}
+}*/

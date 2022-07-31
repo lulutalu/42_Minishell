@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:44:20 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/07/27 18:25:22 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/07/31 18:31:05 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,15 @@ int	main(int argc, char **argv, char **envp)
 	{
 		prompt_creation(&main);
 		main.input = readline(main.prompt);
+		parser_main_quote(main.input, &main);
+		print_list(main.list);
 		if (!main.input)
 		{
 			ft_putstr_fd(main.restore_prompt, 0);
-			main.input_split = ft_split(main.input, ' ');
 			b_exit(&main);
 		}
-		else if (ft_strlen(main.input) >= 0)
-		{
-			main.input_split = ft_split(main.input, ' ');
-			add_history(main.input);
-			redirection(&main);
-			built_in(&main);
-		}
+		else
+			control_tower(&main);
 	}
 	return (0);
 }

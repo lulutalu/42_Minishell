@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:42:40 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/07/27 18:25:21 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/07/31 18:31:03 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@
 void		rl_replace_line(const char *text, int clear_undo);
 
 /*
- * Error And Messages Handling
+ * Defined (messages, token, ...)
 */
 
 # define N_ARGS "\e[1;31mError, this binary doesn't accept arguments\n\e[0m"
@@ -57,6 +57,29 @@ void		rl_replace_line(const char *text, int clear_undo);
 /*Those define are used for easier manipulation of in and out of pipes*/
 # define PIPE_IN 1
 # define PIPE_OUT 0
+
+/* --  | token -- */
+#define PIPE			124
+
+/* -- ' ' token -- */
+#define SPACE			32
+
+/* --  ' && " token -- */
+#define S_QUOTE			39
+#define D_QUOTE			34
+
+/* --  < && << token -- */
+#define S_TO_BIG		60
+#define RE_INPUT		997
+#define D_RE_INPUT		996
+
+/* -- > && >> token -- */
+#define BIG_TO_S		62
+#define RE_OUTPUT		995
+#define D_RE_OUTPUT		994
+
+/* -- > $ token -- */
+#define DOLLAR			36
 
 /*
  * Global Variables
@@ -67,6 +90,43 @@ extern int	g_exit_status;
 /*
  * Structures
 */
+
+typedef enum e_token
+{
+	T_D_QUOTE = '"',
+	T_S_QUOTE = '\'',
+	T_CMD = 999,
+	T_DOLLAR = '$',
+}	t_token;
+
+typedef struct s_quote
+{
+	size_t				start;
+	size_t 				i;
+	char 				*data_quote;
+	char				*tmp;
+}				t_quote;
+
+typedef struct s_cell
+{
+	t_token				token; /*T_D_QUOTE*/
+	int 				type;
+	size_t				start;   /* index de input trouvé */
+	size_t 				end;
+	char 				**dollar_material; /* $test$lol Splitted */
+	char				*data; /* "103" */
+	char 				*ret;
+	struct s_cell		*next;
+//	struct s_cell		*prev;
+	t_quote				*quote;
+}				t_cell;
+
+typedef struct s_network
+{
+	t_cell		*head_cell;
+	t_cell		*current_cell;
+	t_cell		*tail_cell;
+}				t_network;
 
 typedef struct s_node
 {
@@ -95,6 +155,7 @@ typedef struct s_main
 	t_fd				fd;
 	t_node				*head_env;
 	t_node				*tail_env;
+	t_network			*list;
 	struct sigaction	sa;
 }				t_main;
 
@@ -135,11 +196,36 @@ void		more_than_double(t_main *main);
  * Parsing
 */
 
-void		simple_quote(t_main *main);
-int			n_quote(t_main *main);
-void		memory_flush(char **tmp, char ***split);
-int			parser_launcher(char *input);
-int			parser_launcher(char *input);
+/* --- parser_main.c --- */
+void 	parser_main_quote(char *ret, t_main *main);
+size_t	reader(const char *input, t_cell *cell, size_t i, size_t len);
+int		ft_isprint_without_space(int c);
+void	print_list(t_network *list);
+
+/* --- cell_utils.c --- */
+t_quote		*init_quote(void);
+t_cell		*init_cell(void);
+t_network 	*init_network(void);
+t_network	*set_network();
+t_cell		*add_node(t_network *list);
+
+/* --- parser_utils.c --- */
+int		error_message(char *message);
+//void	free_network(t_network *list);
+
+/* --- quote_utils.c --- */
+size_t	quote_saving(const char *input, size_t len, t_cell *cell, size_t i);
+size_t	check_by_type_quote(const char *input, t_cell *cell, int type);
+void	stock_quote_data(const char *input, t_quote *quote, size_t end, int type);
+
+/* --- cmd_utils.c --- */
+size_t cmd_saving(const char *input, size_t len, t_cell *cell, size_t i);
+size_t find_separators(const char *input, size_t i);
+size_t pipe_saving(t_cell *cell, int type, size_t i);
+
+/* --- redirection_utils.c --- */
+size_t t_redirection_output(const char *input, t_cell *cell, int token, size_t i);
+size_t t_redirection_input(const char *input, t_cell *cell, int token, size_t i);
 
 /*
  * Environment

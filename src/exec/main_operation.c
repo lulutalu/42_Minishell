@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:38:55 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/07/31 18:31:04 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/01 19:41:39 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,63 @@
 
 void	control_tower(t_main *main)
 {
-	t_cell	*cur;
+	int	icmd;
 
 	add_history(main->input);
-	cur = main->list->head_cell;
-	while (cur != NULL)
-	{
-
-	}
+	main->proc.npipe = main->proc.ncmd - 1;
+	icmd = 1;
+	while (icmd <= main->proc.ncmd)
+		launch_process(main, icmd++);
 }
 
-void	built_in(t_main *main)
+int	launch_process(t_main *main, int icmd)
+{
+	t_cell	*cur;
+	t_cell	*temp;
+
+	cur = main->list.head_cell;
+	while ((cur->pos != icmd || cur->token == PIPE) && cur != NULL)
+		cur = cur->next;
+	temp = cur;
+	main->proc.pid = fork();
+	if (main->proc.pid == 0)
+	{
+		if (check_redirection(main, cur, icmd) != 0)
+			return (1);
+	}
+	return (0);
+}
+
+int	check_redirection(t_main *main, t_cell *cur, int icmd)
+{
+	while (cur->pos == icmd && cur->next != NULL)
+	{
+		if (cur->token == 997 && cur->next->pos == icmd)
+		{
+			if (redirect_input(main, cur) != 0)
+				return (1);
+		}
+/*		else if (cur->token == 997)
+		{
+			if (here_doc(main, cur) != 0)
+				return (1);
+		}*/
+		else if (cur->token == 995)
+		{
+			if (redirect_output(main, cur) != 0)
+				return (1);
+		}
+		else if (cur->token == 994)
+		{
+			if (redirect_double_output(main, cur) != 0)
+				return (1);
+		}
+		cur = cur->next;
+	}
+	return (0);
+}
+
+/*void	built_in(t_main *main)
 {
 	if (ft_strcmp_case(main->input_split[0], "echo") == 0)
 		b_echo(main);
@@ -51,4 +97,4 @@ void	redirection(t_main *main)
 		less_than(main);
 	if (ft_strchr(main->input, '>') != NULL)
 		more_than(main);
-}
+}*/

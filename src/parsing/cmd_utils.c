@@ -48,3 +48,18 @@ size_t cmd_saving(const char *input, size_t len, t_cell *cell, size_t i)
 	cell->end = ++y;
 		return(y);
 }
+
+void	cmd_listing(t_main *main)
+{
+	t_cell	*cur;
+
+	main->proc.ncmd = 1;
+	cur = main->list.head_cell;
+	while (cur != NULL)
+	{
+		if (cur->token == PIPE)
+			main->proc.ncmd++;
+		cur->pos = main->proc.ncmd;
+		cur = cur->next;
+	}
+}

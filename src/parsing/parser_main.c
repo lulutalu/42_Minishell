@@ -32,7 +32,7 @@ size_t	reader(const char *input, t_cell *cell, size_t i, size_t len)
 	return(i);
 }
 
-void parser_main_quote(char *ret, t_main *main)
+int parser_main_quote(char *ret, t_main *main)
 {
 	static size_t i;
 	size_t len;
@@ -42,13 +42,11 @@ void parser_main_quote(char *ret, t_main *main)
 	i = 0;
 	while (i < len)
 	{
-		i = reader(ret, main->list->current_cell, i, len);
-		main->list->current_cell = add_node(main->list);
+		main->list.current_cell = add_node(&main->list);
+		i = reader(ret, main->list.current_cell, i, len);
 	}
-
-	//print for tests
-	printf("print prepared OK\n");
-	print_list(main->list);
+	cmd_listing(main);
+	return (check_input(main));
 }
 
 
@@ -69,14 +67,32 @@ void	print_list(t_network *list) {
 		printf("| cell->token : %d                 	\n", tmp->token);
 		if (tmp->dollar_material)
 //			printf("| cell->dollar_material : %s     \n", tmp->dollar_material[0]);
+		printf("| cell->pos : %d                    \n", tmp->pos);
 		printf("-----------------------------------	\n");
 		tmp = tmp->next;
 		i++;
 	}
 }
 
-/*int main()
+int	check_input(t_main *main)
 {
-	char *input = " 1 '2' 3 \"d_q\" |3 > >> < << fin ";
-	parser_main_quote(input);
-}*/
+	t_cell	*cur;
+
+	cur = main->list.head_cell;
+	while (cur->next != NULL)
+	{
+		if (cur->token == RE_INPUT && cur->pos != cur->next->pos)
+			return (1);
+		if (cur->token == D_RE_INPUT && cur->pos != cur->next->pos)
+			return (1);
+		if (cur->token == RE_OUTPUT && cur->pos != cur->next->pos)
+			return (1);
+		if (cur->token == D_RE_OUTPUT && cur->pos != cur->next->pos)
+			return (1);
+		cur = cur->next;
+	}
+	if (cur->token == RE_INPUT || cur->token == D_RE_INPUT || cur->token == \
+			RE_OUTPUT || cur->token == D_RE_OUTPUT)
+		return (1);
+	return (0);
+}

@@ -7,7 +7,7 @@ t_quote	*init_quote(void)
 {
 	t_quote *quote;
 
-	quote = (t_quote *)malloc(sizeof(t_quote));
+	quote = ft_calloc(1, sizeof(t_quote));
 	if (!quote)
 		return(NULL);
 	quote->tmp = NULL;
@@ -18,7 +18,7 @@ t_cell	*init_cell(void)
 {
 	t_cell	*cell;
 
-	cell = (t_cell *)malloc(sizeof(t_cell));
+	cell = ft_calloc(1, sizeof(t_cell));
 	if (!cell)
 		return(NULL);
 	cell->next = NULL;
@@ -27,34 +27,42 @@ t_cell	*init_cell(void)
 }
 
 
-t_network 	*init_network(void)
+t_network 	init_network(void)
 {
-	t_network	*ptr;
+	t_network	ptr;
 
-	ptr = (t_network *)malloc(sizeof(t_network));
-	if (!ptr)
-		return (NULL);
-	ptr->head_cell = NULL;
-	ptr->tail_cell = NULL;
+	ptr.head_cell = NULL;
+	ptr.tail_cell = NULL;
+	ptr.current_cell = NULL;
 	return (ptr);
 }
 
-t_network *set_network()
+t_network	set_network()
 {
-	t_network *list;
+	t_network list;
 
 	list = init_network();
-	list->head_cell = init_cell();
-	list->current_cell = init_cell();
-	list->current_cell = list->head_cell;
+	list.head_cell = list.current_cell;
+	list.tail_cell = list.current_cell;
 	return (list);
 }
 
 t_cell	*add_node(t_network *list)
 {
-	list->current_cell->next = init_cell();
-	list->current_cell = list->current_cell->next;
-	list->tail_cell = list->current_cell;
-	list->current_cell->next = NULL;
-	return(list->tail_cell);
+	t_cell	*cur;
+
+	cur = init_cell();
+	if (list->head_cell == NULL)
+	{
+		list->head_cell = cur;
+		list->tail_cell = cur;
+		list->current_cell = cur;
+	}
+	else
+	{
+		list->tail_cell->next = cur;
+		list->current_cell = cur;
+		list->tail_cell = cur;
+	}
+	return(list->current_cell);
 }

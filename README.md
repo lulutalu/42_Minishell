@@ -14,4 +14,5 @@
   Check and fix the built-in when use with a redirection<br>
   Might wanna check the correct execution when using a redirection multiple times<br>
   Need to normed and retype the redirection function<br>
+  Add alloc_check function that call exit function<br>
   </p>

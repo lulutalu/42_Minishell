@@ -79,20 +79,23 @@ int	check_input(t_main *main)
 	t_cell	*cur;
 
 	cur = main->list.head_cell;
-	while (cur->next != NULL)
+	if (cur != NULL)
 	{
-		if (cur->token == RE_INPUT && cur->pos != cur->next->pos)
+		while (cur->next != NULL)
+		{
+			if (cur->token == RE_INPUT && cur->pos != cur->next->pos)
+				return (1);
+			if (cur->token == D_RE_INPUT && cur->pos != cur->next->pos)
+				return (1);
+			if (cur->token == RE_OUTPUT && cur->pos != cur->next->pos)
+				return (1);
+			if (cur->token == D_RE_OUTPUT && cur->pos != cur->next->pos)
+				return (1);
+			cur = cur->next;
+		}
+		if (cur->token == RE_INPUT || cur->token == D_RE_INPUT || cur->token == \
+				RE_OUTPUT || cur->token == D_RE_OUTPUT)
 			return (1);
-		if (cur->token == D_RE_INPUT && cur->pos != cur->next->pos)
-			return (1);
-		if (cur->token == RE_OUTPUT && cur->pos != cur->next->pos)
-			return (1);
-		if (cur->token == D_RE_OUTPUT && cur->pos != cur->next->pos)
-			return (1);
-		cur = cur->next;
 	}
-	if (cur->token == RE_INPUT || cur->token == D_RE_INPUT || cur->token == \
-			RE_OUTPUT || cur->token == D_RE_OUTPUT)
-		return (1);
 	return (0);
 }

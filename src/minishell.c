@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:44:20 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/01 19:44:38 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/02 18:30:10 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,24 @@ int	main(int argc, char **argv, char **envp)
 	env_dup(&main, envp);
 	main.fd.infile = -1;
 	main.fd.outfile = -1;
-	check_for_signals(&main);
 	while (1)
 	{
+		check_for_signals(&main);
 		prompt_creation(&main);
 		main.input = readline(main.prompt);
-		if (parser_main_quote(main.input, &main) == 1)
-			ft_putstr_fd("minishell: syntax error near unexpected token\n", 2);
-/*		else
+		add_history(main.input);
+		if (!main.input)
 		{
-			if (!main.input)
-			{
-				ft_putstr_fd(main.restore_prompt, 0);
-				b_exit(&main);
-			}
-			else
-				control_tower(&main);
-		}*/
+			ft_putstr_fd(main.restore_prompt, 0);
+			b_exit(&main);
+		}
+		else if (parser_main_quote(main.input, &main) == 1)
+		{
+			g_exit_status = 258;
+			ft_putstr_fd("minishell: syntax error near unexpected token\n", 2);
+		}
+		else
+			control_tower(&main);
 	}
 	return (0);
 }

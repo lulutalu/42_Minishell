@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:42:40 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/01 20:28:25 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/02 19:48:21 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,7 @@ typedef struct s_fd
 	int	outfile;
 	int	input;
 	int	output;
+	int	here_doc[2];
 	int	io[2];
 	int	new_io[2];
 }				t_fd;
@@ -199,6 +200,7 @@ void		b_exit(t_main *main);
 int			redirect_input(t_main *main, t_cell *cur);
 int			redirect_output(t_main *main, t_cell *cur);
 int			redirect_double_output(t_main *main, t_cell *cur);
+int			here_doc(t_main *main, t_cell *cur);
 
 /*
  * Parsing
@@ -265,9 +267,10 @@ void		env_sort(t_main *main);
 int			lst_size(t_main *main);
 
 /*
- * Memory Functions
+ * Error and Memory Failure verification
 */
 
+int			check_for_error(int value);
 void		alloc_check(void *ptr);
 
 #endif

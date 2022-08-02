@@ -6,7 +6,7 @@
 #    By: lduboulo && lzima				            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/27 18:29:51 by lduboulo          #+#    #+#              #
-#    Updated: 2022/07/31 17:28:29 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/08/02 18:53:21 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ BUILTS_FOLDER	= built-ins
 PARSING_FOLDER	= parsing
 ENV_FOLDER		= env
 EXEC_FOLDER		= exec
+ERR_FOLDER		= error
 ################################################################################
 
 
@@ -41,6 +42,7 @@ PARSING_FILES	= cell_utils.c cmd_utils.c parser_main.c parser_utils.c \
 				  quote_utils.c redirection_utils.c
 ENV_FILES		= env.c env_manip.c env_alpha_sort.c
 EXEC_FILES		= main_operation.c redirection.c
+ERR_FILES		= error_check.c
 ################################################################################
 
 OBJS_MAIN		= $(addprefix $(O_DIR)/, $(MAIN_FILES:.c=.o))
@@ -49,9 +51,10 @@ OBJS_BUILTS		= $(addprefix $(O_DIR)/$(BUILTS_FOLDER)/, $(BUILTS_FILES:.c=.o))
 OBJS_PARSING	= $(addprefix $(O_DIR)/$(PARSING_FOLDER)/, $(PARSING_FILES:.c=.o))
 OBJS_ENV		= $(addprefix $(O_DIR)/$(ENV_FOLDER)/, $(ENV_FILES:.c=.o))
 OBJS_EXEC		= $(addprefix $(O_DIR)/$(EXEC_FOLDER)/, $(EXEC_FILES:.c=.o))
+OBJS_ERR		= $(addprefix $(O_DIR)/$(ERR_FOLDER)/, $(ERR_FILES:.c=.o))
 
 OBJS			:= $(OBJS_MAIN) $(OBJS_SHELL) $(OBJS_BUILTS) \
-				   $(OBJS_PARSING) $(OBJS_ENV) $(OBJS_EXEC)
+				   $(OBJS_PARSING) $(OBJS_ENV) $(OBJS_EXEC) $(OBJS_ERR)
 
 HEADS_DIR		= ./includes/
 

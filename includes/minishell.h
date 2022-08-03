@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:42:40 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/02 19:48:21 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/03 21:05:17 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,12 @@ void		rl_replace_line(const char *text, int clear_undo);
 /*Those define are used for easier manipulation of in and out of pipes*/
 # define PIPE_IN 1
 # define PIPE_OUT 0
+
 # define STDIN 0
 # define STDOUT 1
+
+# define RE_BOTH 500
+# define RE_BOTH_HERE_DOC 501
 
 /* --  | token -- */
 #define PIPE			124
@@ -151,8 +155,6 @@ typedef struct s_fd
 {
 	int	infile;
 	int	outfile;
-	int	input;
-	int	output;
 	int	here_doc[2];
 	int	io[2];
 	int	new_io[2];
@@ -252,6 +254,22 @@ void		control_tower(t_main *main);
 void		cmd_listing(t_main *main);
 int			launch_process(t_main *main, int icmd);
 int			check_redirection(t_main *main, t_cell *cur, int icmd);
+int			check_redirection_combo(int re1, int re2);
+
+/*
+ * Child and processes
+*/
+
+int			child_process(t_main *main, int icmd, int ret);
+int			open_pipe(t_main *main, int icmd);
+void		who_do_i_dup(t_main *main, int icmd, int ret);
+
+void		only_pipe(t_main *main, int icmd);
+void		dup_input(t_main *main, int icmd);
+void		dup_here_doc(t_main *main, int icmd);
+void		dup_output(t_main *main, int icmd);
+void		dup_input_and_output(t_main *main);
+void		dup_here_doc_and_output(t_main *main);
 
 /*
  * Environment
@@ -270,7 +288,9 @@ int			lst_size(t_main *main);
  * Error and Memory Failure verification
 */
 
+void		check_for_error_fork(int value);
 int			check_for_error(int value);
 void		alloc_check(void *ptr);
+int			fd_not_valid(char *filename);
 
 #endif

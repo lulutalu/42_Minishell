@@ -1,36 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_check.c                                      :+:      :+:    :+:   */
+/*   fd_duplication_bis.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/02 18:50:53 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/03 16:06:49 by lduboulo         ###   ########.fr       */
+/*   Created: 2022/08/03 20:59:49 by lduboulo          #+#    #+#             */
+/*   Updated: 2022/08/03 21:03:28 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	check_for_error_fork(int value)
+void	dup_here_doc_and_output(t_main *main)
 {
-	if (value != 0)
-	{
-		perror("");
-		g_exit_status = 1;
-		exit(1);
-	}
-	g_exit_status = 0;
-}
-
-int	check_for_error(int value)
-{
-	if (value != 0)
-	{
-		perror("");
-		g_exit_status = 1;
-		return (g_exit_status);
-	}
-	g_exit_status = 0;
-	return (g_exit_status);
+	check_for_error_fork(dup2(main->fd.outfile, STDOUT));
+	check_for_error_fork(dup2(main->fd.here_doc[PIPE_OUT], STDIN));
+	close(main->fd.here_doc[PIPE_IN]);
 }

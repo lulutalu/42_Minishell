@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:42:40 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/03 21:05:17 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/04 20:19:21 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,6 @@ void		rl_replace_line(const char *text, int clear_undo);
 
 # define STDIN 0
 # define STDOUT 1
-
-# define RE_BOTH 500
-# define RE_BOTH_HERE_DOC 501
 
 /* --  | token -- */
 #define PIPE			124
@@ -149,6 +146,7 @@ typedef struct s_proc
 	int		ncmd;
 	int		npipe;
 	pid_t	pid;
+	int		status;
 }				t_proc;
 
 typedef struct s_fd
@@ -167,6 +165,7 @@ typedef struct s_main
 	char				*input;
 	char				**input_split;
 	char				*res;
+	char				**env;
 	t_proc				proc;
 	t_fd				fd;
 	t_node				*head_env;
@@ -181,6 +180,7 @@ typedef struct s_main
 
 void		prompt_creation(t_main *main);
 void		check_for_signals(t_main *main);
+void		struct_init(t_main *main);
 
 /*
  * Builts-Ins
@@ -253,16 +253,22 @@ size_t		t_redirection_input(const char *input, t_cell *cell, int token, size_t i
 void		control_tower(t_main *main);
 void		cmd_listing(t_main *main);
 int			launch_process(t_main *main, int icmd);
+void		clear_fd(t_main *main);
 int			check_redirection(t_main *main, t_cell *cur, int icmd);
-int			check_redirection_combo(int re1, int re2);
+
+void		exec(t_main *main, int icmd);
+char		**get_path(t_main *main);
+char		**get_args(t_main *main, int icmd);
+int			n_args(t_cell *cur, int icmd);
+void		command_not_found(char *command);
 
 /*
  * Child and processes
 */
 
-int			child_process(t_main *main, int icmd, int ret);
+int			child_process(t_main *main, int icmd);
 int			open_pipe(t_main *main, int icmd);
-void		who_do_i_dup(t_main *main, int icmd, int ret);
+void		who_do_i_dup(t_main *main, int icmd);
 
 void		only_pipe(t_main *main, int icmd);
 void		dup_input(t_main *main, int icmd);
@@ -283,6 +289,7 @@ void		lst_replace(t_main *main, char *var);
 t_node		*find_var(t_main *main, char *var);
 void		env_sort(t_main *main);
 int			lst_size(t_main *main);
+void		tab_format_env(t_main *main);
 
 /*
  * Error and Memory Failure verification

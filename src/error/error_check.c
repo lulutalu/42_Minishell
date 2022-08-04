@@ -6,17 +6,28 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 18:50:53 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/03 16:06:49 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/04 19:52:30 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+void	alloc_check(void *ptr)
+{
+	if (!ptr)
+	{
+		g_exit_status = 1;
+		ft_putstr_fd("An error as occured during a dynamic allocation", 2);
+		exit(1);
+	}
+}
+
 void	check_for_error_fork(int value)
 {
-	if (value != 0)
+	if (value < 0)
 	{
 		perror("");
+		ft_putstr_fd("fd error", 2);
 		g_exit_status = 1;
 		exit(1);
 	}

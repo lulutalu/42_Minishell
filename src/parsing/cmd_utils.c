@@ -57,9 +57,12 @@ void	cmd_listing(t_main *main)
 	cur = main->list.head_cell;
 	while (cur != NULL)
 	{
-		if (cur->token == PIPE)
-			main->proc.ncmd++;
 		cur->pos = main->proc.ncmd;
+		if (cur->token == PIPE)
+		{
+			cur->pos = 0;
+			main->proc.ncmd++;
+		}
 		cur = cur->next;
 	}
 }

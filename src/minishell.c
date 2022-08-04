@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:44:20 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/03 20:41:24 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/04 19:59:16 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,10 @@ int	main(int argc, char **argv, char **envp)
 		exit(1);
 	}
 	env_dup(&main, envp);
-	main.fd.infile = -1;
-	main.fd.outfile = -1;
+	struct_init(&main);
+	check_for_signals(&main);
 	while (1)
 	{
-		check_for_signals(&main);
 		prompt_creation(&main);
 		main.input = readline(main.prompt);
 		add_history(main.input);

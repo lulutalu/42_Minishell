@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 12:37:05 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/07/27 18:10:25 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/04 15:18:46 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,32 @@ void	env_dup(t_main *main, char **envp)
 	i = 0;
 	while (envp[i])
 		lst_add(&main->head_env, &main->tail_env, envp[i++]);
+	main->env = NULL;
+	tab_format_env(main);
+}
+
+void	tab_format_env(t_main *main)
+{
+	int		i;
+	char	*str;
+	t_node	*cur;
+
+	if (main->env)
+		ft_tab_free((void **)main->env);
+	i = lst_size(main);
+	main->env = ft_calloc(i + 1, sizeof(char *));
+	alloc_check(main->env);
+	cur = main->head_env;
+	i = 0;
+	while (cur != NULL)
+	{
+		str = ft_strjoin(cur->var, "=");
+		str = ft_dyn_strjoin(str, cur->value);
+		main->env[i] = ft_strdup(str);
+		alloc_check(main->env[i++]);
+		free(str);
+		cur = cur->next;
+	}
 }
 
 static void	value_assignation(t_node *cur, char *str)

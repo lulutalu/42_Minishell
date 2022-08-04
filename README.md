@@ -15,4 +15,5 @@
   Might wanna check the correct execution when using a redirection multiple times<br>
   Need to normed and retype the redirection function<br>
   Add alloc_check function that call exit function<br>
+  Check if tab_format_env correctly reset when using export and unset built-ins<br>
   </p>

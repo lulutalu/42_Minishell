@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:38:55 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/03 20:57:16 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/04 20:08:01 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,50 +26,39 @@ void	control_tower(t_main *main)
 int	launch_process(t_main *main, int icmd)
 {
 	t_cell	*cur;
-	int		redirect;
-	int		d_redirect;
-	int		ret;
 
-	redirect = 0;
-	d_redirect = 0;
 	cur = main->list.head_cell;
 	if (cur != NULL)
 	{
 		while ((cur->pos != icmd || cur->token == PIPE) && cur != NULL)
 			cur = cur->next;
-		redirect = check_redirection(main, cur, icmd);
-		if (redirect == 1)
+		clear_fd(main);
+		if (check_redirection(main, cur, icmd) != 0)
 			return (1);
-		if (cur->next != NULL)
-			d_redirect = check_redirection(main, cur->next, icmd);
-		if (d_redirect == 1)
-			return (1);
-		ret = check_redirection_combo(redirect, d_redirect);
-		printf("%d\n", ret);
-		if (child_process(main, icmd, ret) != 0)
+		if (child_process(main, icmd) != 0)
 			return (fd_not_valid("pipe"));
 	}
 	return (0);
 }
 
-int	check_redirection_combo(int re1, int re2)
+void	clear_fd(t_main *main)
 {
-	if (re1 != re2 && re1 != 0)
-	{
-		if (re1 == D_RE_INPUT || re2 == D_RE_INPUT)
-			return (RE_BOTH_HERE_DOC);
-		else
-			return (RE_BOTH);
-	}
-	return (re1);
+	close(main->fd.infile);
+	close(main->fd.outfile);
+	close(main->fd.here_doc[PIPE_IN]);
+	close(main->fd.here_doc[PIPE_OUT]);
+	main->fd.infile = -1;
+	main->fd.outfile = -1;
+	main->fd.here_doc[PIPE_IN] = -1;
+	main->fd.here_doc[PIPE_OUT] = -1;
+	main->proc.pid = -1;
 }
 
 int	check_redirection(t_main *main, t_cell *cur, int icmd)
 {
 	int	ret;
 
-	ret = 0;
-	while (cur->pos == icmd && cur->next != NULL && ret == 0)
+	while (cur->pos == icmd && cur->next != NULL)
 	{
 		if (cur->token == RE_INPUT)
 			ret = redirect_input(main, cur);
@@ -83,5 +72,5 @@ int	check_redirection(t_main *main, t_cell *cur, int icmd)
 			return (1);
 		cur = cur->next;
 	}
-	return (ret);
+	return (0);
 }

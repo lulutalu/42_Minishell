@@ -58,7 +58,7 @@ void	print_list(t_network *list) {
 
 	i = 0;
 	printf("print list OK\n");
-	while (tmp->next != NULL) {
+	while (tmp != NULL) {
 		printf("print list running...\n");
 		printf("-----------------------------------	\n");
 		printf("| Start = %zu                   	\n", tmp->start);

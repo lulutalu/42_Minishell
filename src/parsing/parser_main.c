@@ -1,6 +1,15 @@
-//
-// Created by Lowell Zima on 6/1/22.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_main.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/06 11:50:58 by lzima             #+#    #+#             */
+/*   Updated: 2022/08/06 11:51:32 by lzima            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "./../../includes/minishell.h"
 
 int	ft_isprint_without_space(int c)
@@ -18,24 +27,24 @@ size_t	reader(const char *input, t_cell *cell, size_t i, size_t len)
 		while (input[i] == SPACE)
 			i++;
 		if (input[i] == S_QUOTE || input[i] == D_QUOTE)
-			return(quote_saving(input, len, cell, i));
+			return (quote_saving(input, len, cell, i));
 		else if (input[i] == PIPE)
-			return(pipe_saving(cell, PIPE, i));
+			return (pipe_saving(cell, PIPE, i));
 		else if (input[i] == S_TO_BIG)
-			return(t_redirection_input(input, cell, S_TO_BIG, i));
+			return (t_re_input(input, cell, S_TO_BIG, i));
 		else if (input[i] == BIG_TO_S)
-			return(t_redirection_output(input, cell, BIG_TO_S, i));
+			return (t_re_output(input, cell, BIG_TO_S, i));
 		else if (input[i] == ft_isprint_without_space(input[i]))
-			return(cmd_saving(input, len, cell, i));
+			return (cmd_saving(input, cell, i));
 		i++;
 	}
-	return(i);
+	return (i);
 }
 
-int parser_main_quote(char *ret, t_main *main)
+int	parser_main_quote(char *ret, t_main *main)
 {
-	static size_t i;
-	size_t len;
+	static size_t	i;
+	size_t			len;
 
 	len = ft_strlen(ret);
 	main->list = set_network();
@@ -49,24 +58,22 @@ int parser_main_quote(char *ret, t_main *main)
 	return (check_input(main));
 }
 
-
-void	print_list(t_network *list) {
-	int i;
-	t_cell *tmp;
+void	print_list(t_network *list)
+{
+	int		i;
+	t_cell	*tmp;
 
 	tmp = list->head_cell;
-
 	i = 0;
 	printf("print list OK\n");
-	while (tmp != NULL) {
+	while (tmp != NULL)
+	{
 		printf("print list running...\n");
 		printf("-----------------------------------	\n");
 		printf("| Start = %zu                   	\n", tmp->start);
 		printf("| End = %zu                    		\n", tmp->end);
 		printf("| cell->data : %s               	\n", tmp->data);
 		printf("| cell->token : %d                 	\n", tmp->token);
-		if (tmp->dollar_material)
-//			printf("| cell->dollar_material : %s     \n", tmp->dollar_material[0]);
 		printf("| cell->pos : %d                    \n", tmp->pos);
 		printf("-----------------------------------	\n");
 		tmp = tmp->next;

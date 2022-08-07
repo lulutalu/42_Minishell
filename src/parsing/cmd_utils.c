@@ -1,10 +1,18 @@
-//
-// Created by Lowell Zima on 7/24/22.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cmd_utils.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/06 12:16:24 by lzima             #+#    #+#             */
+/*   Updated: 2022/08/06 12:16:27 by lzima            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "./../../includes/minishell.h"
 
-size_t pipe_saving(t_cell *cell, int type, size_t i)
+size_t	pipe_saving(t_cell *cell, int type, size_t i)
 {
 	cell->token = type;
 	cell->start = i;
@@ -13,28 +21,27 @@ size_t pipe_saving(t_cell *cell, int type, size_t i)
 	return (cell->end);
 }
 
-size_t find_separators(const char *input, size_t i)
+size_t	find_separators(const char *input, size_t i)
 {
-	while(input[i] != '\0')
+	while (input[i] != '\0')
 	{
 		if (input[i] == SPACE)
-			return(i);
+			return (i);
 		if (input[i] == BIG_TO_S)
-			return(i);
+			return (i);
 		if (input[i] == S_TO_BIG)
-			return(i);
+			return (i);
 		if (input[i] == PIPE)
-			return(i);
+			return (i);
 		i++;
 	}
-	return(i);
+	return (i);
 }
 
-size_t cmd_saving(const char *input, size_t len, t_cell *cell, size_t i)
+size_t	cmd_saving(const char *input, t_cell *cell, size_t i)
 {
-	size_t y;
+	size_t	y;
 
-	(void)len;
 	y = find_separators(input, i);
 	cell->start = i;
 	cell->data = ft_substr(input, i, (y - i));
@@ -46,7 +53,7 @@ size_t cmd_saving(const char *input, size_t len, t_cell *cell, size_t i)
 	if (cell->token != T_DOLLAR)
 		cell->token = T_CMD;
 	cell->end = ++y;
-		return(y);
+	return (cell->end);
 }
 
 void	cmd_listing(t_main *main)

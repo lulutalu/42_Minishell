@@ -1,17 +1,26 @@
-//
-// Created by Lowell Zima on 6/1/22.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cell_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/06 11:47:00 by lzima             #+#    #+#             */
+/*   Updated: 2022/08/06 11:48:13 by lzima            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "./../../includes/minishell.h"
 
 t_quote	*init_quote(void)
 {
-	t_quote *quote;
+	t_quote	*quote;
 
 	quote = ft_calloc(1, sizeof(t_quote));
 	if (!quote)
-		return(NULL);
+		return (NULL);
 	quote->tmp = NULL;
-	return(quote);
+	return (quote);
 }
 
 t_cell	*init_cell(void)
@@ -20,14 +29,13 @@ t_cell	*init_cell(void)
 
 	cell = ft_calloc(1, sizeof(t_cell));
 	if (!cell)
-		return(NULL);
+		return (NULL);
 	cell->next = NULL;
 	cell->quote = NULL;
-	return(cell);
+	return (cell);
 }
 
-
-t_network 	init_network(void)
+t_network	init_network(void)
 {
 	t_network	ptr;
 
@@ -37,9 +45,9 @@ t_network 	init_network(void)
 	return (ptr);
 }
 
-t_network	set_network()
+t_network	set_network(void)
 {
-	t_network list;
+	t_network	list;
 
 	list = init_network();
 	list.head_cell = list.current_cell;
@@ -64,5 +72,5 @@ t_cell	*add_node(t_network *list)
 		list->current_cell = cur;
 		list->tail_cell = cur;
 	}
-	return(list->current_cell);
+	return (list->current_cell);
 }

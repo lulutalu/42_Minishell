@@ -58,5 +58,6 @@ size_t	quote_saving(const char *input, size_t len, t_cell *cell, size_t i)
 	cell->quote->start = i;
 	cell->end = check_by_type_quote(input, cell, cell->type);
 	cell->data = ft_strdup(cell->quote->data_quote);
+	free_quote(cell->quote);
 	return (cell->end);
 }

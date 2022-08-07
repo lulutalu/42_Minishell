@@ -120,7 +120,6 @@ typedef struct s_cell
 	size_t				end;
 	char				**dollar_material;
 	char				*data;
-	char				*ret;
 	struct s_cell		*next;
 	t_quote				*quote;
 }				t_cell;
@@ -227,6 +226,7 @@ t_cell		*add_node(t_network *list);
 /* --- parser_utils.c --- */
 
 int			error_message(char *message);
+void		free_quote(t_quote *quote);
 //void	free_network(t_network *list);
 
 /* --- quote_utils.c --- */

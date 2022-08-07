@@ -17,3 +17,28 @@ int	error_message(char *message)
 	write(2, message, ft_strlen(message));
 	return (0);
 }
+
+void	free_quote(t_quote *quote)
+{
+	if (quote->data_quote != NULL)
+	{
+		free(quote->data_quote);
+		quote->data_quote = NULL;
+	}
+	free(quote);
+	quote = NULL;
+}
+
+void	free_cell(t_cell *cell)
+{
+	int	i;
+
+	if (cell->data != NULL)
+	{
+		free(cell->data);
+		cell->data = NULL;
+	}
+	i = -1;
+	while (cell->dollar_material[++i] != NULL)
+		free(cell->dollar_material[i]);
+}

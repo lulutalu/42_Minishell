@@ -42,3 +42,16 @@ void	free_cell(t_cell *cell)
 	while (cell->dollar_material[++i] != NULL)
 		free(cell->dollar_material[i]);
 }
+
+size_t	ft_strchr_int(const char *s, int c)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i] != (char)c && s[i] != '\0')
+		i++;
+	if (s[i] == (char)c)
+		return (i);
+	else
+		return (0);
+}

@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:42:40 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/08 19:16:11 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/04 20:19:21 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ void		rl_replace_line(const char *text, int clear_undo);
 # define SPACE			32
 
 /* --  ' && " token -- */
-# define S_QUOTE		39
-# define D_QUOTE		34
+# define S_QUOTE			39
+# define D_QUOTE			34
 
 /* --  < && << token -- */
 # define S_TO_BIG		60
@@ -80,7 +80,7 @@ void		rl_replace_line(const char *text, int clear_undo);
 /* -- > && >> token -- */
 # define BIG_TO_S		62
 # define RE_OUTPUT		995
-# define D_RE_OUTPUT	994
+# define D_RE_OUTPUT		994
 
 /* -- > $ token -- */
 # define DOLLAR			36
@@ -180,7 +180,6 @@ typedef struct s_main
 void		prompt_creation(t_main *main);
 void		check_for_signals(t_main *main);
 void		struct_init(t_main *main);
-void		ignore_signal(int signum, siginfo_t *info, void *ucontext);
 
 /*
  * Builts-Ins
@@ -202,7 +201,7 @@ void		b_exit(t_main *main);
 int			redirect_input(t_main *main, t_cell *cur);
 int			redirect_output(t_main *main, t_cell *cur);
 int			redirect_double_output(t_main *main, t_cell *cur);
-int			main_here_doc(t_main *main, t_cell *cur);
+int			here_doc(t_main *main, t_cell *cur);
 
 /*
  * Parsing
@@ -211,7 +210,7 @@ int			main_here_doc(t_main *main, t_cell *cur);
 /* --- parser_main.c --- */
 
 int			parser_main_quote(char *ret, t_main *main);
-size_t		reader(const char *input, t_cell *cell, size_t i, size_t len);
+size_t		reader(char *input, t_cell *cell, t_main *main, size_t i);
 int			ft_isprint_without_space(int c);
 void		print_list(t_network *list);
 int			check_input(t_main *main);
@@ -228,13 +227,20 @@ t_cell		*add_node(t_network *list);
 
 int			error_message(char *message);
 void		free_quote(t_quote *quote);
+size_t		ft_strchr_int(const char *s, int c);
 //void	free_network(t_network *list);
 
 /* --- quote_utils.c --- */
 
-size_t		quote_saving(const char *input, size_t len, t_cell *cell, size_t i);
-size_t		check_by_type_quote(const char *input, t_cell *cell, int type);
-void		stock_quote_data(const char *input, t_quote *quote, size_t end);
+size_t		quote_saving(char *input, t_cell *cell, t_main *main, size_t i);
+size_t		check_by_type(char *input, t_cell *cell, t_main *main, int type);
+void		quote_data(char *input, t_quote *quote, t_main *main, size_t end);
+
+/* --- dollar_utils.c --- */
+
+char		*replace_dollar(const char *input, char *var_value);
+int			s_dollar_end(char *s);
+char		*is_dollar_in_d_quote(t_quote *quote, t_main *main);
 
 /* --- cmd_utils.c --- */
 
@@ -256,8 +262,6 @@ void		cmd_listing(t_main *main);
 int			launch_process(t_main *main, int icmd);
 void		clear_fd(t_main *main);
 int			check_redirection(t_main *main, t_cell *cur, int icmd);
-
-void		parent_operation(t_main *main, int icmd);
 
 void		exec(t_main *main, int icmd);
 char		**get_path(t_main *main);
@@ -302,6 +306,5 @@ void		check_for_error_fork(int value);
 int			check_for_error(int value);
 void		alloc_check(void *ptr);
 int			fd_not_valid(char *filename);
-void		exit_error(int value);
 
 #endif

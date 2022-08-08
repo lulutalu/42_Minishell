@@ -6,7 +6,7 @@
 /*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 11:50:58 by lzima             #+#    #+#             */
-/*   Updated: 2022/08/08 17:49:13 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/06 11:51:32 by lzima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,17 @@ int	ft_isprint_without_space(int c)
 		return (0);
 }
 
-size_t	reader(const char *input, t_cell *cell, size_t i, size_t len)
+size_t	reader(char *input, t_cell *cell, t_main *main, size_t i)
 {
+	size_t	len;
+
+	len = ft_strlen(input);
 	while (i < len)
 	{
 		while (input[i] == SPACE)
 			i++;
 		if (input[i] == S_QUOTE || input[i] == D_QUOTE)
-			return (quote_saving(input, len, cell, i));
+			return (quote_saving(input, cell, main, i));
 		else if (input[i] == PIPE)
 			return (pipe_saving(cell, PIPE, i));
 		else if (input[i] == S_TO_BIG)
@@ -52,7 +55,7 @@ int	parser_main_quote(char *ret, t_main *main)
 	while (i < len)
 	{
 		main->list.current_cell = add_node(&main->list);
-		i = reader(ret, main->list.current_cell, i, len);
+		i = reader(ret, main->list.current_cell, main, i);
 	}
 	cmd_listing(main);
 	return (check_input(main));
@@ -75,8 +78,6 @@ void	print_list(t_network *list)
 		printf("| cell->data : %s               	\n", tmp->data);
 		printf("| cell->token : %d                 	\n", tmp->token);
 		printf("| cell->pos : %d                    \n", tmp->pos);
-		if (tmp->dollar_material)
-			printf("| cell->dollar : %s                    \n", tmp->dollar_material[0]);
 		printf("-----------------------------------	\n");
 		tmp = tmp->next;
 		i++;

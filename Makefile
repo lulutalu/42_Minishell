@@ -6,7 +6,7 @@
 #    By: lduboulo && lzima				            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/27 18:29:51 by lduboulo          #+#    #+#              #
-#    Updated: 2022/08/04 18:52:03 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/08/08 17:45:25 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,8 @@ PARSING_FILES	= cell_utils.c cmd_utils.c parser_main.c parser_utils.c \
 				  quote_utils.c redirection_utils.c
 ENV_FILES		= env.c env_manip.c env_alpha_sort.c
 EXEC_FILES		= main_operation.c redirection.c child_process.c \
-				  fd_duplication.c fd_duplication_bis.c execve.c
+				  fd_duplication.c fd_duplication_bis.c execve.c \
+				  here_doc_redirection.c
 ERR_FILES		= error_check.c
 ################################################################################
 

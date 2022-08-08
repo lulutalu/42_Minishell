@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 15:20:38 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/08 15:45:06 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/08 17:56:52 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ char	**get_args(t_main *main, int icmd)
 		alloc_check(args[i++]);
 		cur = cur->next;
 	}
+	if (args[0] == NULL)
+		exit(0);
 	return (args);
 }
 

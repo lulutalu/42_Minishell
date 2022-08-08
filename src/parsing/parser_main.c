@@ -6,7 +6,7 @@
 /*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 11:50:58 by lzima             #+#    #+#             */
-/*   Updated: 2022/08/08 14:11:30 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/08 17:49:13 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ void	print_list(t_network *list)
 		printf("| cell->data : %s               	\n", tmp->data);
 		printf("| cell->token : %d                 	\n", tmp->token);
 		printf("| cell->pos : %d                    \n", tmp->pos);
+		if (tmp->dollar_material)
+			printf("| cell->dollar : %s                    \n", tmp->dollar_material[0]);
 		printf("-----------------------------------	\n");
 		tmp = tmp->next;
 		i++;

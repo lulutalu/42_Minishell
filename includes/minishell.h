@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:42:40 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/08 15:48:34 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/08 19:16:11 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ void		rl_replace_line(const char *text, int clear_undo);
 # define SPACE			32
 
 /* --  ' && " token -- */
-# define S_QUOTE			39
-# define D_QUOTE			34
+# define S_QUOTE		39
+# define D_QUOTE		34
 
 /* --  < && << token -- */
 # define S_TO_BIG		60
@@ -80,7 +80,7 @@ void		rl_replace_line(const char *text, int clear_undo);
 /* -- > && >> token -- */
 # define BIG_TO_S		62
 # define RE_OUTPUT		995
-# define D_RE_OUTPUT		994
+# define D_RE_OUTPUT	994
 
 /* -- > $ token -- */
 # define DOLLAR			36
@@ -202,7 +202,7 @@ void		b_exit(t_main *main);
 int			redirect_input(t_main *main, t_cell *cur);
 int			redirect_output(t_main *main, t_cell *cur);
 int			redirect_double_output(t_main *main, t_cell *cur);
-int			here_doc(t_main *main, t_cell *cur);
+int			main_here_doc(t_main *main, t_cell *cur);
 
 /*
  * Parsing
@@ -302,5 +302,6 @@ void		check_for_error_fork(int value);
 int			check_for_error(int value);
 void		alloc_check(void *ptr);
 int			fd_not_valid(char *filename);
+void		exit_error(int value);
 
 #endif

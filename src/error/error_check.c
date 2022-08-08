@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 18:50:53 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/04 19:52:30 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/08 17:17:51 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,16 @@ void	alloc_check(void *ptr)
 		g_exit_status = 1;
 		ft_putstr_fd("An error as occured during a dynamic allocation", 2);
 		exit(1);
+	}
+}
+
+void	exit_error(int value)
+{
+	if (value < 0)
+	{
+		perror("");
+		g_exit_status = 1;
+		exit(g_exit_status);
 	}
 }
 

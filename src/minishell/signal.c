@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:23:21 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/08 15:45:14 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/08 19:10:33 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,6 @@ static void	signal_handler(int signum, siginfo_t *info, void *ucontext)
 		ctrl_c(info);
 	else if (signum == 3)
 		ctrl_backslash();
-}
-
-void	ignore_signal(int signum, siginfo_t *info, void *ucontext)
-{
-	(void)signum;
-	(void)ucontext;
-	(void)info;
 }
 
 void	check_for_signals(t_main *main)

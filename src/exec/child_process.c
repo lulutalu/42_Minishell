@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 15:36:03 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/08 15:48:34 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/08 19:16:11 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ int	child_process(t_main *main, int icmd)
 		return (1);
 	main->proc.pid = fork();
 	if (main->proc.pid < 0)
-	{
-		ft_putendl_fd("Fork error", 2);
-		exit(1);
-	}
+		exit_error(main->proc.pid);
 	else if (main->proc.pid == 0)
 	{
 		who_do_i_dup(main, icmd);
@@ -35,11 +32,15 @@ int	child_process(t_main *main, int icmd)
 void	parent_operation(t_main *main, int icmd)
 {
 	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	waitpid(main->proc.pid, &main->proc.status, 0);
 	if (WIFSIGNALED(main->proc.status) == 1)
 	{
-		ft_putendl_fd("", 2);
-		g_exit_status = 1;
+		if (main->proc.status == 3)
+			ft_putendl_fd("Quit : 3", 2);
+		else
+			ft_putendl_fd("", 2);
+		g_exit_status = 128 + main->proc.status;
 	}
 	if (WIFEXITED(main->proc.status) != 0)
 		g_exit_status = WEXITSTATUS(main->proc.status);

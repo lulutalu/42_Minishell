@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:38:55 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/08 14:11:58 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/08 19:11:52 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,14 @@ void	clear_fd(t_main *main)
 
 int	check_redirection(t_main *main, t_cell *cur, int icmd)
 {
-	int	ret;
+	int		ret;
 
 	while (cur->pos == icmd && cur->next != NULL)
 	{
 		if (cur->token == RE_INPUT)
 			ret = redirect_input(main, cur);
 		else if (cur->token == D_RE_INPUT)
-			ret = here_doc(main, cur);
+			ret = main_here_doc(main, cur);
 		else if (cur->token == RE_OUTPUT)
 			ret = redirect_output(main, cur);
 		else if (cur->token == D_RE_OUTPUT)

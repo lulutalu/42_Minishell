@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:42:40 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/04 20:19:21 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/08 15:48:34 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,7 @@ typedef struct s_main
 void		prompt_creation(t_main *main);
 void		check_for_signals(t_main *main);
 void		struct_init(t_main *main);
+void		ignore_signal(int signum, siginfo_t *info, void *ucontext);
 
 /*
  * Builts-Ins
@@ -255,6 +256,8 @@ void		cmd_listing(t_main *main);
 int			launch_process(t_main *main, int icmd);
 void		clear_fd(t_main *main);
 int			check_redirection(t_main *main, t_cell *cur, int icmd);
+
+void		parent_operation(t_main *main, int icmd);
 
 void		exec(t_main *main, int icmd);
 char		**get_path(t_main *main);

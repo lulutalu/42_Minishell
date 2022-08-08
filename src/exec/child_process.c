@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 15:36:03 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/04 20:08:09 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/08 15:48:34 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,28 +17,39 @@ int	child_process(t_main *main, int icmd)
 	if (open_pipe(main, icmd) != 0)
 		return (1);
 	main->proc.pid = fork();
-	if (main->proc.pid == 0)
+	if (main->proc.pid < 0)
+	{
+		ft_putendl_fd("Fork error", 2);
+		exit(1);
+	}
+	else if (main->proc.pid == 0)
 	{
 		who_do_i_dup(main, icmd);
 		exec(main, icmd);
 	}
 	else
-	{
-		waitpid(main->proc.pid, &main->proc.status, 0);
-		if (WIFEXITED(main->proc.status) != 0)
-		{
-			g_exit_status = WEXITSTATUS(main->proc.status);
-			printf("Exit status : %d\n", g_exit_status);
-		}
-		if (icmd > 1)
-		{
-			close(main->fd.io[PIPE_IN]);
-			close(main->fd.io[PIPE_OUT]);
-			main->fd.io[PIPE_IN] = main->fd.new_io[PIPE_IN];
-			main->fd.io[PIPE_OUT] = main->fd.new_io[PIPE_OUT];
-		}
-	}
+		parent_operation(main, icmd);
 	return (0);
+}
+
+void	parent_operation(t_main *main, int icmd)
+{
+	signal(SIGINT, SIG_IGN);
+	waitpid(main->proc.pid, &main->proc.status, 0);
+	if (WIFSIGNALED(main->proc.status) == 1)
+	{
+		ft_putendl_fd("", 2);
+		g_exit_status = 1;
+	}
+	if (WIFEXITED(main->proc.status) != 0)
+		g_exit_status = WEXITSTATUS(main->proc.status);
+	if (icmd > 1)
+	{
+		close(main->fd.io[PIPE_IN]);
+		close(main->fd.io[PIPE_OUT]);
+		main->fd.io[PIPE_IN] = main->fd.new_io[PIPE_IN];
+		main->fd.io[PIPE_OUT] = main->fd.new_io[PIPE_OUT];
+	}
 }
 
 void	who_do_i_dup(t_main *main, int icmd)

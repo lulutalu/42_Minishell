@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:42:40 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/08 19:16:11 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/08 21:21:19 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,7 @@ typedef struct s_main
 	t_node				*tail_env;
 	t_network			list;
 	struct sigaction	sa;
+	struct termios		term;
 }				t_main;
 
 /*

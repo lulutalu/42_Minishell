@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 17:32:52 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/08 19:16:10 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/08 21:21:16 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ static int	here_doc(t_main *main, t_cell *cur)
 	limiter = ft_strjoin(cur->next->data, "\n");
 	while (1)
 	{
-		ft_putstr_fd("\e[1mhere_doc > \e[0m", 1);
-		buf = get_next_line(0);
+		buf = readline("\e[1mhere_doc > \e[0m");
 		if (!buf || ft_strncmp(buf, limiter, ft_strlen(buf)) == 0)
 			break ;
 		here_doc = ft_dyn_strjoin(here_doc, buf);

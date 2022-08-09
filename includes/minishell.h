@@ -247,7 +247,7 @@ char		*is_dollar_in_d_quote(t_quote *quote, t_main *main);
 
 /* --- cmd_utils.c --- */
 
-size_t		cmd_saving(const char *input, t_cell *cell, size_t i);
+size_t		cmd_saving(const char *input, t_cell *cell, size_t i, t_main *main);
 size_t		find_separators(const char *input, size_t i);
 size_t		pipe_saving(t_cell *cell, int type, size_t i);
 

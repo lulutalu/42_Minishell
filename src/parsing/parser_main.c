@@ -38,7 +38,7 @@ size_t	reader(char *input, t_cell *cell, t_main *main, size_t i)
 		else if (input[i] == BIG_TO_S)
 			return (t_re_output(input, cell, BIG_TO_S, i));
 		else if (input[i] == ft_isprint_without_space(input[i]))
-			return (cmd_saving(input, cell, i));
+			return (cmd_saving(input, cell, i, main));
 		i++;
 	}
 	return (i);

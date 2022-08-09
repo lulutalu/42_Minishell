@@ -52,14 +52,10 @@ char	*is_dollar_in_d_quote(t_quote *quote, t_main *main)
 	t_node	*cur;
 
 	founded = ft_strchr_int(quote->data_quote, '$');
-	printf("founded: %d\n", founded);
-	printf("data_quote: %s\n", quote->data_quote);
-
 	if (founded < 0)
 		return (NULL);
 	str = NULL;
 	len = s_dollar_end(quote->data_quote, founded);
-	printf("len: %d\n", len);
 	if (founded >= 0)
 	{
 		if (len != 0)

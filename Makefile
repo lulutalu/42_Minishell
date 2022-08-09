@@ -39,7 +39,7 @@ MAIN_FILES		= minishell.c
 SHELL_FILES		= prompt.c signal.c init.c
 BUILTS_FILES	= echo.c cd.c pwd.c export.c env.c unset.c exit.c utils.c
 PARSING_FILES	= cell_utils.c cmd_utils.c parser_main.c parser_utils.c \
-				  quote_utils.c redirection_utils.c
+				  quote_utils.c redirection_utils.c dollar_utils.c
 ENV_FILES		= env.c env_manip.c env_alpha_sort.c
 EXEC_FILES		= main_operation.c redirection.c child_process.c \
 				  fd_duplication.c fd_duplication_bis.c execve.c \

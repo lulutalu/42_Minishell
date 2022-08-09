@@ -31,7 +31,7 @@ int	main(int argc, char **argv, char **envp)
 		check_for_signals(&main);
 		prompt_creation(&main);
 		main.input = readline(main.prompt);
-		add_history(main.input);
+//		add_history(main.input);
 		if (!main.input)
 		{
 			ft_putstr_fd(main.restore_prompt, 0);
@@ -42,8 +42,9 @@ int	main(int argc, char **argv, char **envp)
 			g_exit_status = 258;
 			ft_putstr_fd("minishell: syntax error near unexpected token\n", 2);
 		}
-		else
-			control_tower(&main);
+		print_list(&main.list);
+//		else
+//			control_tower(&main);
 	}
 	return (0);
 }

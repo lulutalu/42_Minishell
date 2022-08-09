@@ -66,8 +66,9 @@ void		rl_replace_line(const char *text, int clear_undo);
 # define PIPE			124
 
 /* -- ' ' token -- */
-# define SPACE			32
-
+# ifndef SPACE
+#  define SPACE			32
+# endif
 /* --  ' && " token -- */
 # define S_QUOTE			39
 # define D_QUOTE			34
@@ -203,6 +204,7 @@ int			redirect_input(t_main *main, t_cell *cur);
 int			redirect_output(t_main *main, t_cell *cur);
 int			redirect_double_output(t_main *main, t_cell *cur);
 int			here_doc(t_main *main, t_cell *cur);
+int			main_here_doc(t_main *main, t_cell *cur);
 
 /*
  * Parsing
@@ -228,7 +230,7 @@ t_cell		*add_node(t_network *list);
 
 int			error_message(char *message);
 void		free_quote(t_quote *quote);
-size_t		ft_strchr_int(const char *s, int c);
+int			ft_strchr_int(const char *s, int c);
 //void	free_network(t_network *list);
 
 /* --- quote_utils.c --- */
@@ -239,8 +241,8 @@ void		quote_data(char *input, t_quote *quote, t_main *main, size_t end);
 
 /* --- dollar_utils.c --- */
 
-char		*replace_dollar(const char *input, char *var_value);
-int			s_dollar_end(char *s);
+char		*replace_dollar(char *input, char *var_value);
+int			s_dollar_end(char *s, int i);
 char		*is_dollar_in_d_quote(t_quote *quote, t_main *main);
 
 /* --- cmd_utils.c --- */
@@ -257,7 +259,7 @@ size_t		t_re_input(const char *input, t_cell *cell, int token, size_t i);
 /*
  * Execution
 */
-
+void		parent_operation(t_main *main, int icmd);
 void		control_tower(t_main *main);
 void		cmd_listing(t_main *main);
 int			launch_process(t_main *main, int icmd);
@@ -307,5 +309,6 @@ void		check_for_error_fork(int value);
 int			check_for_error(int value);
 void		alloc_check(void *ptr);
 int			fd_not_valid(char *filename);
+void		exit_error(int value);
 
 #endif

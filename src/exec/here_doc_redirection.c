@@ -35,7 +35,7 @@ static void	signals(void)
 	sigaction(SIGINT, &doc, NULL);
 }
 
-static int	here_doc(t_main *main, t_cell *cur)
+int	here_doc(t_main *main, t_cell *cur)
 {
 	char				*limiter;
 	char				*buf;

@@ -15,13 +15,18 @@
 void	quote_data(char *input, t_quote *quote, t_main *main, size_t end)
 {
 	size_t	len;
+	char	*ret;
 
 	len = end - (quote->start + 1);
 	if (len <= 0)
 		quote->data_quote = ft_strdup("");
 	quote->data_quote = ft_substr(input, (quote->start + 1), len);
-	if (is_dollar_in_d_quote(quote, main) != NULL)
-		quote->data_quote = is_dollar_in_d_quote(quote, main);
+	ret = is_dollar_in_d_quote(quote, main);
+	while (ret != NULL)
+	{
+		quote->data_quote = ret;
+		ret = is_dollar_in_d_quote(quote, main);
+	}
 }
 
 size_t	check_by_type(char *input, t_cell *cell, t_main *main, int type)

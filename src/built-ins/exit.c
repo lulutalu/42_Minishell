@@ -25,7 +25,7 @@ static void	free_all(t_main *main)
 
 	free(main->prompt);
 	free(main->input);
-	clear_history();
+//	clear_history();
 	node = main->tail_env;
 	while (node->prev != NULL)
 	{

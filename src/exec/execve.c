@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 15:20:38 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/08 17:56:52 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/09 20:37:24 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ void	exec(t_main *main, int icmd)
 
 	path = get_path(main);
 	args = get_args(main, icmd);
-	for (int i = 0; args[i]; i++)
-		ft_putendl_fd(args[i], 2);
 	i = 0;
 	while (path[i])
 	{

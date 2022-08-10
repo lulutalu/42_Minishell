@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 17:32:52 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/08 21:21:16 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/09 20:37:23 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ int	here_doc(t_main *main, t_cell *cur)
 	while (1)
 	{
 		buf = readline("\e[1mhere_doc > \e[0m");
-		if (!buf || ft_strncmp(buf, limiter, ft_strlen(buf)) == 0)
+		buf = ft_dyn_strjoin(buf, "\n");
+		if (!buf || ft_strncmp(buf, limiter, ft_strlen(limiter)) == 0)
 			break ;
 		here_doc = ft_dyn_strjoin(here_doc, buf);
 		free(buf);
@@ -57,7 +58,6 @@ int	here_doc(t_main *main, t_cell *cur)
 		g_exit_status = 0;
 		exit(1);
 	}
-	check_for_error_fork(pipe(main->fd.here_doc));
 	ft_putstr_fd(here_doc, main->fd.here_doc[PIPE_IN]);
 	exit(0);
 }
@@ -67,6 +67,7 @@ int	main_here_doc(t_main *main, t_cell *cur)
 	pid_t	pid;
 	int		status;
 
+	check_for_error_fork(pipe(main->fd.here_doc));
 	pid = fork();
 	if (pid < 0)
 		exit_error(pid);
@@ -80,7 +81,11 @@ int	main_here_doc(t_main *main, t_cell *cur)
 		if (WIFEXITED(status) != 0)
 			g_exit_status = 1;
 		if (WIFSIGNALED(status) == 1)
+		{
+			close(main->fd.here_doc[PIPE_IN]);
+			close(main->fd.here_doc[PIPE_OUT]);
 			return (1);
+		}
 	}
 	return (0);
 }

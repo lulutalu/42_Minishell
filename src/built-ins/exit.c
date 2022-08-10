@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 19:21:57 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/04 18:25:05 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/09 20:02:52 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	free_all(t_main *main)
 
 	free(main->prompt);
 	free(main->input);
-//	clear_history();
+	clear_history();
 	node = main->tail_env;
 	while (node->prev != NULL)
 	{

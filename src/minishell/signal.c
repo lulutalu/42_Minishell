@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:23:21 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/08 21:21:18 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/10 20:14:05 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	signal_handler(int signum, siginfo_t *info, void *ucontext)
 void	check_for_signals(t_main *main)
 {
 	ft_memset(&main->sa, 0, sizeof(main->sa));
-	main->sa.sa_flags = SA_SIGINFO | SA_RESTART | SA_NODEFER;
+	main->sa.sa_flags = SA_SIGINFO;
 	main->sa.sa_sigaction = signal_handler;
 	sigemptyset(&main->sa.sa_mask);
 	sigaction(SIGQUIT, &main->sa, NULL);

@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 16:00:56 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/09 20:17:38 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/10 21:08:55 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	dup_here_doc(t_main *main, int icmd)
 	if (main->proc.ncmd > 1 && icmd != main->proc.ncmd)
 	{
 		close(main->fd.new_io[PIPE_OUT]);
-		check_for_error_fork(dup2(main->fd.new_io[PIPE_IN], STDOUT));
+		check_for_error_fork(dup2(main->fd.io[PIPE_IN], STDOUT));
 	}
 	ft_putendl_fd("Dup here_doc fd", 2);
 }
@@ -47,8 +47,8 @@ void	dup_input(t_main *main, int icmd)
 	check_for_error_fork(dup2(main->fd.infile, STDIN));
 	if (main->proc.ncmd > 1 && icmd != main->proc.ncmd)
 	{
-		check_for_error_fork(dup2(main->fd.new_io[PIPE_IN], STDOUT));
-		close(main->fd.new_io[PIPE_OUT]);
+		check_for_error_fork(dup2(main->fd.io[PIPE_IN], STDOUT));
+		close(main->fd.io[PIPE_OUT]);
 	}
 	ft_putendl_fd("Dup input fd", 2);
 }
@@ -74,6 +74,5 @@ void	only_pipe(t_main *main, int icmd)
 			close(main->fd.io[PIPE_IN]);
 			close(main->fd.new_io[PIPE_OUT]);
 		}
-		ft_putendl_fd("Dup pipe fd", 2);
 	}
 }

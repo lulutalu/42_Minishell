@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 15:36:03 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/09 20:37:23 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/10 21:21:18 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ int	child_process(t_main *main, int icmd)
 {
 	if (open_pipe(main, icmd) != 0)
 		return (1);
-	main->proc.pid = fork();
-	if (main->proc.pid < 0)
-		exit_error(main->proc.pid);
-	else if (main->proc.pid == 0)
+	main->proc.pid[icmd - 1] = fork();
+	if (main->proc.pid[icmd - 1] < 0)
+		exit_error(main->proc.pid[icmd - 1]);
+	else if (main->proc.pid[icmd - 1] == 0)
 	{
 		who_do_i_dup(main, icmd);
 		exec(main, icmd);
@@ -33,17 +33,7 @@ void	parent_operation(t_main *main, int icmd)
 {
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
-	waitpid(main->proc.pid, &main->proc.status, 0);
-	if (WIFSIGNALED(main->proc.status) == 1)
-	{
-		if (main->proc.status == 3)
-			ft_putendl_fd("Quit : 3", 2);
-		else
-			ft_putendl_fd("", 2);
-		g_exit_status = 128 + main->proc.status;
-	}
-	if (WIFEXITED(main->proc.status) != 0)
-		g_exit_status = WEXITSTATUS(main->proc.status);
+	close(main->fd.here_doc[PIPE_IN]);
 	if (icmd > 1)
 	{
 		close(main->fd.io[PIPE_IN]);
@@ -57,16 +47,15 @@ void	who_do_i_dup(t_main *main, int icmd)
 {
 	if (main->fd.infile > 0 && main->fd.outfile > 0)
 		dup_input_and_output(main);
-	else if (main->fd.here_doc[PIPE_IN] > 0 && main->fd.outfile > 0)
-		dup_here_doc_and_output(main);
 	else if (main->fd.infile > 0)
 		dup_input(main, icmd);
-	else if (main->fd.here_doc[PIPE_IN] > 0)
-		dup_here_doc(main, icmd);
 	else if (main->fd.outfile > 0)
 		dup_output(main, icmd);
-	else
-		only_pipe(main, icmd);
+	if (main->fd.here_doc[PIPE_IN] > 0 && main->fd.outfile > 0)
+		dup_here_doc_and_output(main);
+	else if (main->fd.here_doc[PIPE_IN] > 0)
+		dup_here_doc(main, icmd);
+	only_pipe(main, icmd);
 }
 
 int	open_pipe(t_main *main, int icmd)

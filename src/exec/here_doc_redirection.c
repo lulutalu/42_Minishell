@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 17:32:52 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/09 20:37:23 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/10 21:02:38 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void	handler(int signum)
 		ft_putstr_fd("\e[2K\r\e[1mhere_doc > \e[0m", 1);
 	else if (signum == 2)
 	{
+		ft_putendl_fd("Salut connard", 2);
 		ft_putstr_fd("\n", 1);
 		exit(1);
 	}
@@ -28,7 +29,7 @@ static void	signals(void)
 	struct sigaction	doc;
 
 	ft_memset(&doc, 0, sizeof(doc));
-	doc.sa_flags = SA_RESTART;
+	doc.sa_flags = 0;
 	doc.sa_handler = handler;
 	sigemptyset(&doc.sa_mask);
 	sigaction(SIGQUIT, &doc, NULL);
@@ -46,8 +47,8 @@ int	here_doc(t_main *main, t_cell *cur)
 	limiter = ft_strjoin(cur->next->data, "\n");
 	while (1)
 	{
-		buf = readline("\e[1mhere_doc > \e[0m");
-		buf = ft_dyn_strjoin(buf, "\n");
+		ft_putstr_fd("Here_doc > ", 1);
+		buf = get_next_line(0);
 		if (!buf || ft_strncmp(buf, limiter, ft_strlen(limiter)) == 0)
 			break ;
 		here_doc = ft_dyn_strjoin(here_doc, buf);
@@ -59,6 +60,8 @@ int	here_doc(t_main *main, t_cell *cur)
 		exit(1);
 	}
 	ft_putstr_fd(here_doc, main->fd.here_doc[PIPE_IN]);
+	close(main->fd.here_doc[PIPE_IN]);
+	close(main->fd.here_doc[PIPE_OUT]);
 	exit(0);
 }
 
@@ -78,6 +81,7 @@ int	main_here_doc(t_main *main, t_cell *cur)
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
 		waitpid(pid, &status, 0);
+		check_for_signals(main);
 		if (WIFEXITED(status) != 0)
 			g_exit_status = 1;
 		if (WIFSIGNALED(status) == 1)

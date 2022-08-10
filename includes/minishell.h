@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:42:40 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/09 20:37:24 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/10 21:00:24 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ typedef struct s_proc
 {
 	int		ncmd;
 	int		npipe;
-	pid_t	pid;
+	pid_t	*pid;
 	int		status;
 }				t_proc;
 
@@ -172,7 +172,6 @@ typedef struct s_main
 	t_node				*tail_env;
 	t_network			list;
 	struct sigaction	sa;
-	struct termios		term;
 }				t_main;
 
 /*
@@ -262,6 +261,7 @@ size_t		t_re_input(const char *input, t_cell *cell, int token, size_t i);
 */
 void		parent_operation(t_main *main, int icmd);
 void		control_tower(t_main *main);
+void		wait_process(t_main *main, int icmd);
 void		cmd_listing(t_main *main);
 int			launch_process(t_main *main, int icmd);
 void		clear_fd(t_main *main);

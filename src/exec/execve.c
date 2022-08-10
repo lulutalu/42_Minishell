@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 15:20:38 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/09 20:37:24 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/10 21:02:37 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	exec(t_main *main, int icmd)
 		}
 		else
 			directory = ft_strdup(args[0]);
-		alloc_check(directory);	
+		alloc_check(directory);
 		if (access(directory, X_OK) == 0)
 			execve(directory, args, main->env);
 		free(directory);

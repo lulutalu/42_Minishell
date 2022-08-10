@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:38:55 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/09 20:34:09 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/10 21:21:38 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,34 @@ void	control_tower(t_main *main)
 {
 	int	icmd;
 
+	main->proc.pid = ft_calloc(main->proc.ncmd + 1, sizeof(pid_t));
+	alloc_check(main->proc.pid);
 	main->proc.npipe = main->proc.ncmd - 1;
 	icmd = 1;
 	while (icmd <= main->proc.ncmd)
+	{
 		if (launch_process(main, icmd++) != 0)
 			break ;
+	}
+	icmd = 1;
+	while (icmd <= main->proc.ncmd)
+		wait_process(main, icmd++);
+}
+
+void	wait_process(t_main *main, int icmd)
+{
+	waitpid(main->proc.pid[icmd - 1], &main->proc.status, 0);
+	g_exit_status = 0;
+	if (WIFSIGNALED(main->proc.status) == 1)
+	{
+		if (main->proc.status == 3)
+			ft_putendl_fd("Quit : 3", 2);
+		else if (main->proc.status == 2)
+			ft_putendl_fd("", 2);
+		g_exit_status = 128 + main->proc.status;
+	}
+	if (WIFEXITED(main->proc.status) != 0)
+		g_exit_status = WEXITSTATUS(main->proc.status);
 }
 
 int	launch_process(t_main *main, int icmd)
@@ -30,7 +53,7 @@ int	launch_process(t_main *main, int icmd)
 	cur = main->list.head_cell;
 	if (cur != NULL)
 	{
-		while ((cur->pos != icmd || cur->token == PIPE) && cur != NULL)
+		while (cur->pos != icmd && cur != NULL)
 			cur = cur->next;
 		clear_fd(main);
 		if (check_redirection(main, cur, icmd) != 0)
@@ -43,15 +66,15 @@ int	launch_process(t_main *main, int icmd)
 
 void	clear_fd(t_main *main)
 {
-	close(main->fd.infile);
-	close(main->fd.outfile);
-	close(main->fd.here_doc[PIPE_IN]);
-	close(main->fd.here_doc[PIPE_OUT]);
-	main->fd.infile = -1;
-	main->fd.outfile = -1;
-	main->fd.here_doc[PIPE_IN] = -1;
-	main->fd.here_doc[PIPE_OUT] = -1;
-	main->proc.pid = -1;
+	if (main->fd.infile > 2)
+		close(main->fd.infile);
+	if (main->fd.outfile > 2)
+		close(main->fd.outfile);
+	if (main->fd.here_doc[PIPE_IN] > 2)
+		close(main->fd.here_doc[PIPE_IN]);
+	if (main->fd.here_doc[PIPE_OUT] > 2)
+		close(main->fd.here_doc[PIPE_OUT]);
+	struct_init(main);
 }
 
 int	check_redirection(t_main *main, t_cell *cur, int icmd)

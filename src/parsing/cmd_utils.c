@@ -38,22 +38,28 @@ size_t	find_separators(const char *input, size_t i)
 	return (i);
 }
 
-void dollar_data(t_cell *cell, t_main *main)
+void	dollar_data(t_cell *cell, t_main *main)
 {
-	int	i;
-	t_node *cur;
+	int		i;
+	int		y;
+	char	*tmp;
+	t_node	*cur;
 
 	i = 0;
 	while (cell->dollar_material[i] != NULL)
 	{
-		cell->dollar_material[i] = ft_strtrim(cell->dollar_material[i], "$");
 		cur = find_var(main, cell->dollar_material[i]);
 		if (cur != NULL)
-			cell->data = ft_strdup(cur->value);
+			cell->dollar_material[i] = ft_strdup(cur->value);
 		else
-			cell->data = ft_strdup("");
+			cell->dollar_material[i] = ft_strdup("");
 		i++;
 	}
+	y = 0;
+	tmp = ft_strdup("");
+	while (y < i)
+		tmp = ft_strjoin(tmp, cell->dollar_material[y++]);
+	cell->data = tmp;
 }
 
 size_t	cmd_saving(const char *input, t_cell *cell, size_t i, t_main *main)

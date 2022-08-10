@@ -2,3 +2,8 @@ workspace
 .idea
 CMakeLists.txt
 cmake-build-debug
+minishell
+objs/
+utils/libutils.a
+utils/objs/
+

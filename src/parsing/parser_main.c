@@ -67,7 +67,7 @@ void	print_list(t_network *list)
 	t_cell	*tmp;
 
 	tmp = list->head_cell;
-	i = 0;
+	i = -1;
 	printf("print list OK\n");
 	while (tmp != NULL)
 	{
@@ -78,9 +78,11 @@ void	print_list(t_network *list)
 		printf("| cell->data : %s               	\n", tmp->data);
 		printf("| cell->token : %d                 	\n", tmp->token);
 		printf("| cell->pos : %d                    \n", tmp->pos);
+		if (tmp->dollar_material != NULL)
+			while (tmp->dollar_material[++i] != NULL)
+				printf("| cell->dollar[%d] : %s \n", i, tmp->dollar_material[i]);
 		printf("-----------------------------------	\n");
 		tmp = tmp->next;
-		i++;
 	}
 }
 

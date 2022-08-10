@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 15:20:38 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/10 21:02:37 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/10 23:09:23 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,22 @@ void	exec(t_main *main, int icmd)
 
 void	command_not_found(char *command)
 {
-	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd(command, 2);
-	ft_putendl_fd(": command not found", 2);
-	g_exit_status = 127;
-	exit(g_exit_status);
+	if (ft_strchr(command, '/') == NULL)
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(command, 2);
+		ft_putendl_fd(": command not found", 2);
+		g_exit_status = 127;
+		exit(g_exit_status);
+	}
+	else
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(command, 2);
+		ft_putendl_fd(": is a directory", 2);
+		g_exit_status = 126;
+		exit(g_exit_status);
+	}
 }
 
 char	**get_args(t_main *main, int icmd)
@@ -64,7 +75,7 @@ char	**get_args(t_main *main, int icmd)
 	i = 0;
 	while (cur != NULL && cur->pos == icmd)
 	{
-		if (cur->token != 999)
+		if (cur->token != 999 && cur->token != 36)
 		{
 			cur = cur->next->next;
 			continue ;

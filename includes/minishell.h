@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:42:40 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/10 21:00:24 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/10 23:09:26 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,7 @@ typedef struct s_main
 void		prompt_creation(t_main *main);
 void		check_for_signals(t_main *main);
 void		struct_init(t_main *main);
+void		main_operation(t_main *main);
 
 /*
  * Builts-Ins

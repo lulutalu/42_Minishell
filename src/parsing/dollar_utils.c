@@ -15,7 +15,7 @@
 char	*replace_dollar(char *input, char *var_value)
 {
 	size_t	i;
-	size_t 	len_input;
+	size_t	len_input;
 	char	*tmp;
 	char	*output;
 
@@ -47,8 +47,8 @@ int	s_dollar_end(char *s, int i)
 char	*is_dollar_in_d_quote(t_quote *quote, t_main *main)
 {
 	char	*str;
-	int 	founded;
-	int 	len;
+	int		founded;
+	int		len;
 	t_node	*cur;
 
 	founded = ft_strchr_int(quote->data_quote, '$');

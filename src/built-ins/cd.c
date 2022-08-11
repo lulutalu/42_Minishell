@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 17:26:47 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/11 16:34:17 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/11 21:28:14 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,13 @@ static void	tilde_cd(t_main *main, char *old_pwd, char *input)
 	if (cur != NULL)
 	{
 		path = ft_strjoin(cur->value, "/");
-		if (ft_strlen(input) > 1)
+		if (ft_strlen(input) > 2)
 			path = ft_dyn_strjoin(path, input + 2);
 		status = chdir(path);
 		check_exec_cd(main, path, status, old_pwd);
 		free(path);
 	}
-	else if (input[0] == '~')
+	else if (input)
 	{
 		path = getenv("HOME");
 		status = chdir(path);
@@ -95,31 +95,41 @@ static void	dash_cd(t_main *main, char *old_pwd)
 	{
 		status = chdir(cur->value);
 		if (status == 0)
-			ft_putendl_fd(cur->value, 1);
+		{
+			if (main->fd.outfile > 1)
+				ft_putendl_fd(cur->value, main->fd.outfile);
+			else
+				ft_putendl_fd(cur->value, 1);
+		}
 		check_exec_cd(main, cur->value, status, old_pwd);
 	}
+	else
+		ft_putendl_fd("minishell: cd: OLDPWD not set", 2);
 }
 
 /*This is the main function of cd built-in*/
 /*It's primary job is to decide which case we need to use*/
 /*It check if it's "HOME" "OLDPWD" and also if it's neither of them*/
-void	b_cd(t_main *main)
+int	b_cd(t_main *main, t_cell *cur, int icmd)
 {
 	int		status;
 	char	actual_pwd[4096];
-	char	*input;
 
-	input = cmd_input(main);
-	getcwd(actual_pwd, 4096);
-	if ((input[0] == '~' && ft_strlen(input) == 1) || ft_strlen(input) == 0 || \
-			ft_strncmp(input, "--", 3) == 0)
-		tilde_cd(main, actual_pwd, input);
-	else if (ft_strncmp(input, "-", 2) == 0)
-		dash_cd(main, actual_pwd);
-	else
+	if (ft_strncmp(cur->data, "cd", 3) == 0)
 	{
-		status = chdir(input);
-		check_exec_cd(main, input, status, actual_pwd);
+		cur = avoid_redir(cur->next, icmd);
+		getcwd(actual_pwd, 4096);
+		if (cur == NULL)
+			tilde_cd(main, actual_pwd, NULL);
+		else if (cur->data[0] == '~')
+			tilde_cd(main, actual_pwd, cur->data);
+		else if (ft_strncmp(cur->data, "-", 2) == 0)
+			dash_cd(main, actual_pwd);
+		else
+		{
+			status = chdir(cur->data);
+			check_exec_cd(main, cur->data, status, actual_pwd);
+		}
 	}
-	free(input);
+	return (0);
 }

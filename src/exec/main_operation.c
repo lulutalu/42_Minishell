@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:38:55 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/11 18:28:20 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/11 21:09:16 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,21 @@ void	control_tower(t_main *main)
 
 void	wait_process(t_main *main, int icmd)
 {
-	waitpid(main->proc.pid[icmd - 1], &main->proc.status, 0);
-	g_exit_status = 0;
-	if (WIFSIGNALED(main->proc.status) == 1)
+	if (main->proc.pid[icmd - 1] != 0)
 	{
-		if (main->proc.status == 3)
-			ft_putendl_fd("Quit : 3", 2);
-		else if (main->proc.status == 2)
-			ft_putendl_fd("", 2);
-		g_exit_status = 128 + main->proc.status;
+		waitpid(main->proc.pid[icmd - 1], &main->proc.status, 0);
+		g_exit_status = 0;
+		if (WIFSIGNALED(main->proc.status) == 1)
+		{
+			if (main->proc.status == 3)
+				ft_putendl_fd("Quit : 3", 2);
+			else if (main->proc.status == 2)
+				ft_putendl_fd("", 2);
+			g_exit_status = 128 + main->proc.status;
+		}
+		if (WIFEXITED(main->proc.status) != 0)
+			g_exit_status = WEXITSTATUS(main->proc.status);
 	}
-	if (WIFEXITED(main->proc.status) != 0)
-		g_exit_status = WEXITSTATUS(main->proc.status);
 }
 
 int	launch_process(t_main *main, int icmd)

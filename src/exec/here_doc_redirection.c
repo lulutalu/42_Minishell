@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 17:32:52 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/10 21:02:38 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/11 15:27:38 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,8 @@
 
 static void	handler(int signum)
 {
-	if (signum == 3)
-		ft_putstr_fd("\e[2K\r\e[1mhere_doc > \e[0m", 1);
-	else if (signum == 2)
+	if (signum == 2)
 	{
-		ft_putendl_fd("Salut connard", 2);
 		ft_putstr_fd("\n", 1);
 		exit(1);
 	}
@@ -32,7 +29,7 @@ static void	signals(void)
 	doc.sa_flags = 0;
 	doc.sa_handler = handler;
 	sigemptyset(&doc.sa_mask);
-	sigaction(SIGQUIT, &doc, NULL);
+	signal(SIGQUIT, SIG_IGN);
 	sigaction(SIGINT, &doc, NULL);
 }
 
@@ -44,13 +41,13 @@ int	here_doc(t_main *main, t_cell *cur)
 
 	signals();
 	here_doc = ft_calloc(1, sizeof(char));
-	limiter = ft_strjoin(cur->next->data, "\n");
+	limiter = cur->next->data;
 	while (1)
 	{
-		ft_putstr_fd("Here_doc > ", 1);
-		buf = get_next_line(0);
+		buf = readline("\e[1mHere_doc > \e[0m");
 		if (!buf || ft_strncmp(buf, limiter, ft_strlen(limiter)) == 0)
 			break ;
+		buf = ft_dyn_strjoin(buf, "\n");
 		here_doc = ft_dyn_strjoin(here_doc, buf);
 		free(buf);
 	}

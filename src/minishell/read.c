@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 21:22:44 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/11 15:08:51 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/11 18:30:44 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	main_operation(t_main *main)
 	if (!main->input)
 	{
 		ft_putstr_fd(main->restore_prompt, 0);
-		b_exit(main);
+		b_exit(main, NULL, 0);
 	}
 	else if (parser_main_quote(main->input, main) == 1)
 	{

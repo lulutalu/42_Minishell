@@ -6,7 +6,7 @@
 /*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 11:47:00 by lzima             #+#    #+#             */
-/*   Updated: 2022/08/06 11:48:13 by lzima            ###   ########.fr       */
+/*   Updated: 2022/08/11 18:40:52 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_cell	*init_cell(void)
 	if (!cell)
 		return (NULL);
 	cell->next = NULL;
+	cell->prev = NULL;
 	cell->quote = NULL;
 	return (cell);
 }
@@ -69,6 +70,7 @@ t_cell	*add_node(t_network *list)
 	else
 	{
 		list->tail_cell->next = cur;
+		cur->prev = list->tail_cell;
 		list->current_cell = cur;
 		list->tail_cell = cur;
 	}

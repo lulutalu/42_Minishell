@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:42:40 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/10 23:09:26 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/11 20:39:38 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ typedef struct s_cell
 	char				**dollar_material;
 	char				*data;
 	struct s_cell		*next;
+	struct s_cell		*prev;
 	t_quote				*quote;
 }				t_cell;
 
@@ -194,7 +195,10 @@ void		b_pwd(void);
 void		b_export(t_main *main);
 void		b_env(t_main *main);
 void		b_unset(t_main *main);
-void		b_exit(t_main *main);
+int			b_exit(t_main *main, t_cell *cur, int icmd);
+
+void		exit_free(t_main *main);
+t_cell		*avoid_redir(t_cell *cur, int icmd);
 
 /*
  * Redirections
@@ -261,6 +265,7 @@ size_t		t_re_input(const char *input, t_cell *cell, int token, size_t i);
  * Execution
 */
 void		parent_operation(t_main *main, int icmd);
+int			is_built_ins(t_main *main, t_cell *cur, int icmd);
 void		control_tower(t_main *main);
 void		wait_process(t_main *main, int icmd);
 void		cmd_listing(t_main *main);
@@ -281,6 +286,7 @@ void		command_not_found(char *command);
 int			child_process(t_main *main, int icmd);
 int			open_pipe(t_main *main, int icmd);
 void		who_do_i_dup(t_main *main, int icmd);
+int			is_forked_built_ins(t_main *main, int icmd);
 
 void		only_pipe(t_main *main, int icmd);
 void		dup_input(t_main *main, int icmd);

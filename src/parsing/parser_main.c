@@ -6,7 +6,7 @@
 /*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 11:50:58 by lzima             #+#    #+#             */
-/*   Updated: 2022/08/10 22:59:59 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/11 18:39:55 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	check_input(t_main *main)
 			cur = cur->next;
 		}
 		if (cur->token == RE_INPUT || cur->token == D_RE_INPUT || cur->token == \
-				RE_OUTPUT || cur->token == D_RE_OUTPUT)
+				RE_OUTPUT || cur->token == D_RE_OUTPUT || cur->token == PIPE)
 			return (1);
 	}
 	return (0);

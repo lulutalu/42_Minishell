@@ -1,32 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   exit_free.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/06 18:44:20 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/11 16:26:26 by lduboulo         ###   ########.fr       */
+/*   Created: 2022/08/11 16:41:45 by lduboulo          #+#    #+#             */
+/*   Updated: 2022/08/11 17:32:44 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-int	g_exit_status = 0;
-
-int	main(int argc, char **argv, char **envp)
+void	exit_free(t_main *main)
 {
-	t_main	main;
-
-	(void)argv;
-	if (argc > 1)
-	{
-		ft_putstr_fd(N_ARGS, 2);
-		exit(1);
-	}
-	env_dup(&main, envp);
-	struct_init(&main);
-	while (1)
-		main_operation(&main);
-	return (0);
+	(void)main;
+	ft_putstr_fd("exit\n", 1);
 }

@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:38:55 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/10 23:09:25 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/11 18:28:20 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ int	launch_process(t_main *main, int icmd)
 		clear_fd(main);
 		if (check_redirection(main, cur, icmd) != 0)
 			return (1);
+		if (is_built_ins(main, cur, icmd) == 0)
+			return (0);
 		if (child_process(main, icmd) != 0)
 			return (fd_not_valid("pipe"));
 	}

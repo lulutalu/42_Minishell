@@ -9,11 +9,8 @@
 <a href="https://github.com/JaeSeoKim/badge42"><img src="https://badge42.vercel.app/api/v2/cl2668aqb008909jp0ecnecpa/project/2563041" alt="lduboulo's 42 minishell Score" /></a>
   </p>
   <h2>To do</h2>
-  <p>Change the _ environnment variable after each command<br>
-  Might want to redo a bit the exit built-in<br>
+  <p>
   Check and fix the built-in when use with a redirection<br>
-  Might wanna check the correct execution when using a redirection multiple times<br>
-  Need to normed and retype the redirection function<br>
-  Add alloc_check function that call exit function<br>
   Check if tab_format_env correctly reset when using export and unset built-ins<br>
+  Completely fill exit_free function to avoid leaks<br>
   </p>

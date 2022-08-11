@@ -6,7 +6,7 @@
 #    By: lduboulo && lzima				            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/27 18:29:51 by lduboulo          #+#    #+#              #
-#    Updated: 2022/08/10 22:59:03 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/08/11 18:08:51 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ ERR_FOLDER		= error
 ##############################   FILES  ########################################
 MAIN_FILES		= minishell.c
 SHELL_FILES		= prompt.c signal.c init.c read.c
-BUILTS_FILES	= echo.c cd.c pwd.c export.c env.c unset.c exit.c utils.c
+BUILTS_FILES	= echo.c cd.c pwd.c export.c env.c unset.c exit.c b_exec.c \
+				  exit_free.c utils.c
 PARSING_FILES	= cell_utils.c cmd_utils.c parser_main.c parser_utils.c \
 				  quote_utils.c redirection_utils.c dollar_utils.c
 ENV_FILES		= env.c env_manip.c env_alpha_sort.c

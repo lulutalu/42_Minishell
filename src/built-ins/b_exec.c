@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   b_exec.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/06 18:44:20 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/11 16:26:26 by lduboulo         ###   ########.fr       */
+/*   Created: 2022/08/11 16:31:10 by lduboulo          #+#    #+#             */
+/*   Updated: 2022/08/11 20:39:39 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-int	g_exit_status = 0;
-
-int	main(int argc, char **argv, char **envp)
+int	is_built_ins(t_main *main, t_cell *cur, int icmd)
 {
-	t_main	main;
-
-	(void)argv;
-	if (argc > 1)
+	cur = avoid_redir(cur, icmd);
+	if (ft_strncmp(cur->data, "exit", ft_strlen(cur->data)) == 0)
 	{
-		ft_putstr_fd(N_ARGS, 2);
-		exit(1);
+		if (icmd == 1 && main->proc.ncmd == 1)
+			if (b_exit(main, cur, icmd) == 1)
+				return (0);
 	}
-	env_dup(&main, envp);
-	struct_init(&main);
-	while (1)
-		main_operation(&main);
-	return (0);
+	return (1);
 }

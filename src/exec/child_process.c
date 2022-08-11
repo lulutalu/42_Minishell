@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 15:36:03 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/10 21:21:18 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/11 20:40:23 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,27 @@ int	child_process(t_main *main, int icmd)
 	else if (main->proc.pid[icmd - 1] == 0)
 	{
 		who_do_i_dup(main, icmd);
+		if (is_forked_built_ins(main, icmd) == 0)
+			exit(g_exit_status);
 		exec(main, icmd);
 	}
 	else
 		parent_operation(main, icmd);
 	return (0);
+}
+
+int	is_forked_built_ins(t_main *main, int icmd)
+{
+	t_cell	*cur;
+
+	cur = main->list.head_cell;
+	if (!cur)
+		exit_error(-1);
+	cur = avoid_redir(cur, icmd);
+	if (strncmp(cur->data, "exit", ft_strlen(cur->data)) == 0)
+		if (b_exit(main, cur, icmd) == 1)
+			return (0);
+	return (1);
 }
 
 void	parent_operation(t_main *main, int icmd)

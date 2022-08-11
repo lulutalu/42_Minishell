@@ -6,89 +6,88 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 19:21:57 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/09 20:02:52 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/11 20:22:18 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	too_many_args(void)
+static void	not_numeric(t_main *main, t_cell *cur)
 {
-	ft_putstr_fd("exit\n", 1);
-	ft_putendl_fd("minishell: exit: too many arguments", 2);
-	g_exit_status = 1;
-}
-
-static void	free_all(t_main *main)
-{
-	t_node	*node;
-
-	free(main->prompt);
-	free(main->input);
-	clear_history();
-	node = main->tail_env;
-	while (node->prev != NULL)
-	{
-		node = node->prev;
-		lst_del(main, node->next);
-	}
-	lst_del(main, node);
-	close(main->fd.infile);
-	close(main->fd.outfile);
-}
-
-static void	not_numeric(t_main *main, char **split)
-{
-	free_all(main);
-	ft_putstr_fd("exit\n", 1);
-	ft_putstr_fd("minishell: exit: ", 2);
-	ft_putstr_fd(split[0], 2);
-	ft_tab_free((void **)split);
-	ft_putendl_fd(": numeric argument required", 2);
-	exit(255);
-}
-
-static void	with_arg(t_main *main, char *input)
-{
-	char	**split;
 	int		i;
 
-	split = ft_split(input, ' ');
 	i = 0;
-	while (split[0][i])
+	while (cur->data[i])
 	{
-		if (ft_isalpha(split[0][i]) != 0)
+		if (ft_isdigit(cur->data[i++]) != 1)
 		{
-			free(input);
-			not_numeric(main, split);
+			exit_free(main);
+			ft_putstr_fd("minishell: exit: ", 2);
+			ft_putstr_fd(cur->data, 2);
+			ft_putendl_fd(": numeric argument required", 2);
+			exit(255);
 		}
-		i++;
-	}
-	if (split[1])
-		too_many_args();
-	else
-	{
-		free_all(main);
-		free(input);
-		g_exit_status = ft_atoi(split[0]);
-		ft_tab_free((void **)split);
-		ft_putstr_fd("exit\n", 1);
-		exit(g_exit_status);
 	}
 }
 
-void	b_exit(t_main *main)
+static int	too_many_args(t_cell *cur, int icmd)
 {
-	char	*input;
+	int	n;
 
-	input = cmd_input(main);
-	if (ft_strncmp(input, "", 1) == 0)
+	n = 0;
+	while (cur != NULL && cur->pos == icmd)
 	{
-		free_all(main);
-		free(input);
-		ft_putstr_fd("exit\n", 1);
-		exit(g_exit_status);
+		if (cur->token == 999 || cur->token == DOLLAR || cur->token == S_QUOTE \
+				|| cur->token == D_QUOTE)
+			n++;
+		cur = cur->next;
+	}
+	if (n > 1)
+	{
+		ft_putendl_fd("exit", 1);
+		ft_putendl_fd("minishell: exit: too many arguments", 2);
+		g_exit_status = 1;
+		return (1);
 	}
 	else
-		with_arg(main, input);
+		return (0);
+}
+
+static void	correct_arg(t_main *main, t_cell *cur, int icmd)
+{
+	int	exit_value;
+
+	exit_value = ft_atoi(cur->data);
+	if (exit_value < 0 || exit_value > 255)
+		exit_value %= 256;
+	if (icmd == 1 && main->proc.ncmd == 1)
+		exit_free(main);
+	exit(exit_value);
+}
+
+static void	normal_exit(t_main *main, int icmd)
+{
+	if (icmd == 1 && main->proc.ncmd == 1)
+		exit_free(main);
+	exit(g_exit_status);
+}
+
+int	b_exit(t_main *main, t_cell *cur, int icmd)
+{
+	t_cell	*tmp;
+
+	tmp = cur;
+	if (cur == NULL || cur->next == NULL || cur->next->pos != icmd)
+		normal_exit(main, icmd);
+	else
+	{
+		cur = avoid_redir(cur->next, icmd);
+		if (cur == NULL)
+			normal_exit(main, icmd);
+	}
+	not_numeric(main, cur);
+	if (too_many_args(cur, icmd) == 1)
+		return (1);
+	correct_arg(main, cur, icmd);
+	return (0);
 }

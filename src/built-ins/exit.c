@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 19:21:57 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/11 20:22:18 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/12 17:09:30 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	correct_arg(t_main *main, t_cell *cur, int icmd)
 
 static void	normal_exit(t_main *main, int icmd)
 {
-	if (icmd == 1 && main->proc.ncmd == 1)
+	if ((icmd == 1 && main->proc.ncmd == 1) || !main->input)
 		exit_free(main);
 	exit(g_exit_status);
 }

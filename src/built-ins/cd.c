@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 17:26:47 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/12 17:25:12 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/12 18:35:28 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,12 @@ static void	dash_cd(t_main *main, char *old_pwd)
 	{
 		status = chdir(cur->value);
 		if (status == 0)
-			ft_putendl_fd(cur->value, STDOUT);
+		{
+			if (main->proc.ncmd == 1 && main->fd.outfile > 1)
+				ft_putendl_fd(cur->value, main->fd.outfile);
+			else
+				ft_putendl_fd(cur->value, STDOUT);
+		}
 		check_exec_cd(main, cur->value, status, old_pwd);
 	}
 	else

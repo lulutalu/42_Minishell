@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 17:12:00 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/12 17:28:46 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/12 18:48:00 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,24 @@ char	*cmd_input(t_main *main)
 	else
 		input = ft_strdup("");
 	return (input);
+}
+
+int	echo_protection(t_cell *cur)
+{
+	if (cur == NULL)
+	{
+		ft_putendl_fd("", STDOUT);
+		return (0);
+	}
+	return (1);
+}
+
+void	echo_end_print(t_main *main)
+{
+	if (main->proc.ncmd == 1 && main->fd.outfile > 1)
+		ft_putendl_fd("", main->fd.outfile);
+	else
+		ft_putendl_fd("", STDOUT);
 }
 
 t_cell	*avoid_redir(t_cell *cur, int icmd)

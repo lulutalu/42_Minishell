@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 23:20:31 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/12 17:34:02 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/12 19:05:32 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,30 @@ static bool	echo_check_arg(t_main *main, t_cell *cur)
 
 static void	print_echo(t_main *main, t_cell *cur, int n, int i)
 {
+	int	fd;
+
+	fd = STDOUT;
+	if (main->proc.ncmd == 1 && main->fd.outfile > 1)
+		fd = main->fd.outfile;
 	if (cur->token == 39 || cur->token == 34)
 	{
-		ft_putstr_fd(cur->data, STDOUT);
+		ft_putstr_fd(cur->data, fd);
 		if (echo_check_arg(main, cur) == TRUE && i < n)
-			ft_putchar_fd(' ', STDOUT);
+			ft_putchar_fd(' ', fd);
+	}
+	else if (cur->next && (cur->next->token == 39 || cur->next->token == 34))
+	{
+		ft_putstr_fd(cur->data, fd);
+		if (echo_check_arg(main, cur) == TRUE && i < n)
+			ft_putchar_fd(' ', fd);
 	}
 	else if (i < n)
 	{
-		ft_putstr_fd(cur->data, STDOUT);
-		ft_putchar_fd(' ', STDOUT);
+		ft_putstr_fd(cur->data, fd);
+		ft_putchar_fd(' ', fd);
 	}
 	else
-		ft_putstr_fd(cur->data, STDOUT);
+		ft_putstr_fd(cur->data, fd);
 }
 
 static void	print_loop(t_main *main, t_cell *cur, int n, int icmd)
@@ -87,6 +98,8 @@ int	b_echo(t_main *main, t_cell *cur, int icmd)
 
 	i = 2;
 	cur = avoid_redir(cur->next, icmd);
+	if (echo_protection(cur) == 0)
+		return (0);
 	arg = FALSE;
 	if (ft_strncmp(cur->data, "-n", 2) == 0)
 	{
@@ -101,7 +114,7 @@ int	b_echo(t_main *main, t_cell *cur, int icmd)
 	n = echo_n_args(cur, icmd);
 	print_loop(main, cur, n, icmd);
 	if (arg == FALSE)
-		ft_putendl_fd("", 1);
+		echo_end_print(main);
 	g_exit_status = 0;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 15:36:03 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/11 21:26:45 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/12 14:57:05 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	is_forked_built_ins(t_main *main, int icmd)
 	if (!cur)
 		exit_error(-1);
 	cur = avoid_redir(cur, icmd);
-	if (strncmp(cur->data, "exit", ft_strlen(cur->data)) == 0)
+	if (strncmp(cur->data, "exit", ft_strlen("exit")) == 0)
 	{
 		if (b_exit(main, cur, icmd) == 1)
 			return (0);

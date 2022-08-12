@@ -6,7 +6,7 @@
 /*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 11:50:58 by lzima             #+#    #+#             */
-/*   Updated: 2022/08/11 20:58:50 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/12 14:52:45 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	parser_main_quote(char *ret, t_main *main)
 		main->list.current_cell = add_node(&main->list);
 		i = reader(ret, main->list.current_cell, main, i);
 	}
+	print_list(&main->list);
 	cmd_listing(main);
 	return (check_input(main));
 }

@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 15:20:38 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/11 19:58:17 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/12 14:55:04 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	**get_args(t_main *main, int icmd)
 	i = 0;
 	while (cur != NULL && cur->pos == icmd)
 	{
-		if (is_token(cur) == 1)
+		if (cur->token >= 994 && cur->token <= 997)
 		{
 			cur = cur->next->next;
 			continue ;

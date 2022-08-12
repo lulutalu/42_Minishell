@@ -13,4 +13,6 @@
   Check and fix the built-in when use with a redirection<br>
   Check if tab_format_env correctly reset when using export and unset built-ins<br>
   Completely fill exit_free function to avoid leaks<br>
+  Check if environment variable is NULL to do nothing<br>
+  Correctly stop the main programm when simple or double quote is not closed<br>
   </p>

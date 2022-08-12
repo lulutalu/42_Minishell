@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 18:50:53 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/11 18:17:45 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/12 14:40:34 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,4 @@ int	check_for_error(int value)
 	}
 	g_exit_status = 0;
 	return (g_exit_status);
-}
-
-int	is_token(t_cell *cur)
-{
-	if (cur->token != 999 && cur->token != 36 && cur->token != 34
-		&& cur->token != 39)
-		return (1);
-	return (0);
 }

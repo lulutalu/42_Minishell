@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 17:12:00 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/11 21:07:10 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/12 14:52:28 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ char	*cmd_input(t_main *main)
 
 t_cell	*avoid_redir(t_cell *cur, int icmd)
 {
-	while (cur != NULL && cur->pos == icmd && cur->token != 999)
+	while (cur != NULL && cur->pos == icmd && cur->token != 999 && cur->token \
+			!= DOLLAR && cur->token != S_QUOTE && cur->token != D_QUOTE)
 	{
-		if (cur->token != 999 && cur->token != 36)
+		if (cur->token != 999 && cur->token != 36 && cur->token != S_QUOTE \
+				&& cur->token != D_QUOTE)
 		{
 			cur = cur->next->next;
 			continue ;

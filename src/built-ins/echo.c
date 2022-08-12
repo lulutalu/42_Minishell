@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 23:20:31 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/12 19:05:32 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/12 21:56:27 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static bool	echo_check_arg(t_main *main, t_cell *cur)
 
 	check = FALSE;
 	arg = ft_strnstr(main->input, cur->data, 10000);
-	arg += ft_strlen(cur->data) + 1;
-	if (arg[0] == ' ')
+	arg += ft_strlen(cur->data);
+	if (arg[0] == ' ' || arg[1] == ' ')
 		check = TRUE;
 	return (check);
 }

@@ -50,6 +50,7 @@ size_t	check_by_type(char *input, t_cell *cell, t_main *main, int type)
 		if (input[cell->quote->i] == '\0')
 		{
 			error_message("Error pair: cell->quote missing\n");
+			cell->quote->error = 1;
 			return (len);
 		}
 	}
@@ -66,7 +67,9 @@ size_t	quote_saving(char *input, t_cell *cell, t_main *main, size_t i)
 	cell->start = i;
 	cell->token = cell->type;
 	cell->quote->start = i;
+	cell->quote->error = 0;
 	cell->end = check_by_type(input, cell, main, cell->type);
+	cell->error = cell->quote->error;
 	cell->data = ft_strdup(cell->quote->data_quote);
 	free_quote(cell->quote);
 	return (cell->end);

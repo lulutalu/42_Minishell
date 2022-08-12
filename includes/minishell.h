@@ -109,6 +109,7 @@ typedef struct s_quote
 	size_t				start;
 	size_t				i;
 	int					type;
+	int					error;
 	char				*data_quote;
 	char				*tmp;
 }				t_quote;
@@ -120,6 +121,7 @@ typedef struct s_cell
 	int					type;
 	size_t				start;
 	size_t				end;
+	int					error;
 	char				**dollar_material;
 	char				*data;
 	struct s_cell		*next;

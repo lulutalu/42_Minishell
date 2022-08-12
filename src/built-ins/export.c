@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 11:52:44 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/04 15:01:10 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/12 23:11:15 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,28 @@ static void	export_variable(t_main *main, char **cmd_split)
 	ft_tab_free((void **)cmd_split);
 }
 
+static void	export_print_value(t_node *cur, int fd, int i)
+{
+	if (i % 2 == 1)
+		ft_putstr_fd("\e[38;5;14m", fd);
+	else
+		ft_putstr_fd("\e[35;5;27m", fd);
+	ft_putstr_fd("declare -x ", fd);
+	ft_putstr_fd(cur->var, fd);
+	ft_putstr_fd("=\"", fd);
+	ft_putstr_fd(cur->value, fd);
+	ft_putendl_fd("\"\e[0m", fd);
+}
+
 static void	export_wo_arg(t_main *main)
 {
 	t_node	*cur;
 	int		i;
+	int		fd;
 
+	fd = STDOUT;
+	if (main->proc.ncmd == 1 && main->fd.outfile > 1)
+		fd = main->fd.outfile;
 	env_sort(main);
 	i = 1;
 	while (i <= lst_size(main))
@@ -48,7 +65,7 @@ static void	export_wo_arg(t_main *main)
 		while (cur != NULL && cur->sort_pos != i)
 			cur = cur->next;
 		if (cur != NULL && cur->value)
-			printf("declare -x %s=\"%s\"\n", cur->var, cur->value);
+			export_print_value(cur, fd, i);
 		else if (cur != NULL && !cur->value)
 			printf("declare -x %s\n", cur->var);
 		i++;
@@ -56,18 +73,14 @@ static void	export_wo_arg(t_main *main)
 	g_exit_status = 0;
 }
 
-void	b_export(t_main *main)
+int	b_export(t_main *main, t_cell *cur, int icmd)
 {
-	char	**cmd_split;
-	char	*input;
-
-	input = cmd_input(main);
-	if (ft_strncmp(input, "", 1) == 0)
+	cur = avoid_redir(cur->next, icmd);
+	if (cur == NULL)
 		export_wo_arg(main);
 	else
 	{
-		cmd_split = ft_split(input, ' ');
-		export_variable(main, cmd_split);
+		export_variable(main, &cur->data);
 	}
-	free(input);
+	return (0);
 }

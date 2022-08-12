@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:42:40 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/12 21:57:17 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/12 23:26:12 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ typedef struct s_cell
 	size_t				end;
 	int					error;
 	char				**dollar_material;
+	char				*dollar_var;
 	char				*data;
 	struct s_cell		*next;
 	struct s_cell		*prev;
@@ -201,7 +202,7 @@ int			b_cd(t_main *main, t_cell *cur, int icmd);
 
 void		b_pwd(void);
 
-void		b_export(t_main *main);
+int			b_export(t_main *main, t_cell *cur, int icmd);
 
 int			b_env(t_main *main);
 

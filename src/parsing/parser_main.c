@@ -6,7 +6,7 @@
 /*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 11:50:58 by lzima             #+#    #+#             */
-/*   Updated: 2022/08/12 20:14:54 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/12 23:25:11 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	print_list(t_network *list)
 	t_cell	*tmp;
 
 	tmp = list->head_cell;
-	i = -1;
+	i = 0;
 	printf("print list OK\n");
 	while (tmp != NULL)
 	{

@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 23:20:31 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/12 21:56:27 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/12 23:22:29 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,16 @@ static bool	echo_check_arg(t_main *main, t_cell *cur)
 	char	*arg;
 
 	check = FALSE;
-	arg = ft_strnstr(main->input, cur->data, 10000);
-	arg += ft_strlen(cur->data);
+	if (cur->token == DOLLAR)
+	{
+		arg = ft_strnstr(main->input, cur->dollar_var, 1000000);
+		arg += ft_strlen(cur->dollar_var);
+	}
+	else
+	{
+		arg = ft_strnstr(main->input, cur->data, 1000000);
+		arg += ft_strlen(cur->data);
+	}
 	if (arg[0] == ' ' || arg[1] == ' ')
 		check = TRUE;
 	return (check);

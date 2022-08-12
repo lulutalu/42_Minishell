@@ -6,7 +6,7 @@
 /*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 11:54:47 by lzima             #+#    #+#             */
-/*   Updated: 2022/08/06 11:54:50 by lzima            ###   ########.fr       */
+/*   Updated: 2022/08/12 23:23:06 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,7 @@ char	*is_dollar_in_d_quote(t_quote *quote, t_main *main)
 			str = ft_substr(quote->data_quote, founded + 1, len - founded);
 			cur = find_var(main, str);
 			if (cur != NULL)
-			{
 				return (replace_dollar(quote->data_quote, cur->value));
-			}
 			else
 				return (replace_dollar(quote->data_quote, ""));
 		}

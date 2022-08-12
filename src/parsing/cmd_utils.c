@@ -6,7 +6,7 @@
 /*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:16:24 by lzima             #+#    #+#             */
-/*   Updated: 2022/08/10 20:02:47 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/12 18:14:21 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ size_t	cmd_saving(const char *input, t_cell *cell, size_t i, t_main *main)
 	}
 	if (cell->token != T_DOLLAR)
 		cell->token = T_CMD;
-	cell->end = ++y;
+	cell->end = y;
 	return (cell->end);
 }
 

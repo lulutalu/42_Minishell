@@ -12,6 +12,23 @@
 
 #include "./../../includes/minishell.h"
 
+void check_last(t_main *m)
+{
+	char	*check;
+	int		i;
+
+	check = m->list.current_cell->data;
+	i = 0;
+	while (check[i] == SPACE || check[i] == '\t' || check[i] != '\0')
+		i++;
+	if (check[i] != SPACE || check[i] != '\t')
+	{
+		m->list.tail_cell = m->list.current_cell->prev;
+		m->list.tail_cell->next = NULL;
+		free_cell(m->list.current_cell);
+	}
+}
+
 int	error_message(char *message)
 {
 	write(2, message, ft_strlen(message));

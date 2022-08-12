@@ -52,6 +52,7 @@ char	*is_dollar_in_d_quote(t_quote *quote, t_main *main)
 	t_node	*cur;
 
 	founded = ft_strchr_int(quote->data_quote, '$');
+	printf("founded %d\n", founded);
 	if (founded < 0)
 		return (NULL);
 	str = NULL;

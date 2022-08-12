@@ -24,6 +24,7 @@ void	quote_data(char *input, t_quote *quote, t_main *main, size_t end)
 	if (quote->type == D_QUOTE)
 	{
 		ret = is_dollar_in_d_quote(quote, main);
+		printf("ret %s\n", ret);
 		while (ret != NULL)
 		{
 			quote->data_quote = ret;
@@ -36,7 +37,8 @@ size_t	check_by_type(char *input, t_cell *cell, t_main *main, int type)
 {
 	size_t	len;
 
-	cell->type = type;
+	printf("check_by_type \n");
+	cell->quote->type = type;
 	cell->quote->i = cell->quote->start;
 	len = ft_strlen(input);
 	while (cell->quote->i < len)
@@ -59,6 +61,7 @@ size_t	check_by_type(char *input, t_cell *cell, t_main *main, int type)
 
 size_t	quote_saving(char *input, t_cell *cell, t_main *main, size_t i)
 {
+	cell->dollar_material = NULL;
 	cell->quote = init_quote();
 	if (input[i] == S_QUOTE)
 		cell->type = S_QUOTE;

@@ -242,6 +242,8 @@ t_cell		*add_node(t_network *list);
 int			error_message(char *message);
 void		free_quote(t_quote *quote);
 int			ft_strchr_int(const char *s, int c);
+void		free_cell(t_cell *cell);
+void		check_last(t_main *m);
 //void	free_network(t_network *list);
 
 /* --- quote_utils.c --- */

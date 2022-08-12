@@ -32,7 +32,7 @@ static void	print_echo(t_main *main, t_cell *cur, int n, int i)
 	fd = STDOUT;
 	if (main->proc.ncmd == 1 && main->fd.outfile > 1)
 		fd = main->fd.outfile;
-	if (cur->token == 39 || cur->token == 34)
+	if (cur->next && (cur->token == 39 || cur->token == 34))
 	{
 		ft_putstr_fd(cur->data, fd);
 		if (echo_check_arg(main, cur) == TRUE && i < n)

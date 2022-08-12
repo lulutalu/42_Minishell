@@ -27,7 +27,7 @@ size_t	reader(char *input, t_cell *cell, t_main *main, size_t i)
 	len = ft_strlen(input);
 	while (i < len)
 	{
-		while (input[i] == SPACE)
+		while (input[i] == SPACE || input[i] == '\t')
 			i++;
 		if (input[i] == S_QUOTE || input[i] == D_QUOTE)
 			return (quote_saving(input, cell, main, i));
@@ -59,7 +59,9 @@ int	parser_main_quote(char *ret, t_main *main)
 		if (main->list.current_cell->error == 1)
 			return (1);
 	}
+//	check_last(main);
 	cmd_listing(main);
+	print_list(&main->list);
 	return (check_input(main));
 }
 

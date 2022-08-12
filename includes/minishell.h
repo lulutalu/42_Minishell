@@ -108,6 +108,7 @@ typedef struct s_quote
 {
 	size_t				start;
 	size_t				i;
+	int					type;
 	char				*data_quote;
 	char				*tmp;
 }				t_quote;

@@ -6,7 +6,7 @@
 /*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 11:54:47 by lzima             #+#    #+#             */
-/*   Updated: 2022/08/12 23:23:06 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/12 23:35:05 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ char	*is_dollar_in_d_quote(t_quote *quote, t_main *main)
 	t_node	*cur;
 
 	founded = ft_strchr_int(quote->data_quote, '$');
-	printf("founded %d\n", founded);
 	if (founded < 0)
 		return (NULL);
 	str = NULL;

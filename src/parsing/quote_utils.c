@@ -6,7 +6,7 @@
 /*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 11:54:47 by lzima             #+#    #+#             */
-/*   Updated: 2022/08/12 18:13:35 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/12 23:35:48 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	quote_data(char *input, t_quote *quote, t_main *main, size_t end)
 	if (quote->type == D_QUOTE)
 	{
 		ret = is_dollar_in_d_quote(quote, main);
-		printf("ret %s\n", ret);
 		while (ret != NULL)
 		{
 			quote->data_quote = ret;
@@ -37,7 +36,6 @@ size_t	check_by_type(char *input, t_cell *cell, t_main *main, int type)
 {
 	size_t	len;
 
-	printf("check_by_type \n");
 	cell->quote->type = type;
 	cell->quote->i = cell->quote->start;
 	len = ft_strlen(input);
@@ -51,7 +49,6 @@ size_t	check_by_type(char *input, t_cell *cell, t_main *main, int type)
 		}
 		if (input[cell->quote->i] == '\0')
 		{
-			error_message("Error pair: cell->quote missing\n");
 			cell->quote->error = 1;
 			return (len);
 		}

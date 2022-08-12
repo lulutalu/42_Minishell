@@ -75,7 +75,7 @@ char	**get_args(t_main *main, int icmd)
 	i = 0;
 	while (cur != NULL && cur->pos == icmd)
 	{
-		if (cur->token != 999 && cur->token != 36)
+		if (is_token(cur) == 1)
 		{
 			cur = cur->next->next;
 			continue ;

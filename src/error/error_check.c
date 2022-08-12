@@ -55,3 +55,11 @@ int	check_for_error(int value)
 	g_exit_status = 0;
 	return (g_exit_status);
 }
+
+int	is_token(t_cell *cur)
+{
+	if (cur->token != 999 && cur->token != 36 && cur->token != 34
+		&& cur->token != 39)
+		return (1);
+	return (0);
+}

@@ -318,5 +318,6 @@ int			check_for_error(int value);
 void		alloc_check(void *ptr);
 int			fd_not_valid(char *filename);
 void		exit_error(int value);
+int			is_token(t_cell *cur);
 
 #endif

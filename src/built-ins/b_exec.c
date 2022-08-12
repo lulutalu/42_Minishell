@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 16:31:10 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/12 18:26:19 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/12 19:44:20 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	is_built_ins(t_main *main, t_cell *cur, int icmd)
 		}
 		else if (ft_strcmp_case(cur->data, "echo") == 0)
 			return (b_echo(main, cur, icmd));
+		else if (ft_strcmp_case(cur->data, "env") == 0)
+			return (b_env(main));
 	}
 	return (1);
 }

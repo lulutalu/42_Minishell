@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 21:22:44 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/12 17:11:05 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/12 19:57:17 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ void	main_operation(t_main *main)
 		g_exit_status = 258;
 		ft_putstr_fd("minishell: syntax error near unexpected token\n", 2);
 	}
-	else
+	else if (main->list.head_cell->data != NULL)
 		control_tower(main);
 }

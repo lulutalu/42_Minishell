@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 15:36:03 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/12 17:34:03 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/12 20:14:17 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int	is_forked_built_ins(t_main *main, int icmd)
 		return (b_cd(main, cur, icmd));
 	else if (ft_strcmp_case(cur->data, "echo") == 0)
 		return (b_echo(main, cur, icmd));
+	else if (ft_strcmp_case(cur->data, "env") == 0)
+		return (b_env(main));
 	return (1);
 }
 
@@ -67,6 +69,7 @@ void	parent_operation(t_main *main, int icmd)
 
 void	who_do_i_dup(t_main *main, int icmd)
 {
+	only_pipe(main, icmd);
 	if (main->fd.infile > 0 && main->fd.outfile > 0)
 		dup_input_and_output(main);
 	else if (main->fd.infile > 0)
@@ -77,7 +80,6 @@ void	who_do_i_dup(t_main *main, int icmd)
 		dup_here_doc_and_output(main);
 	else if (main->fd.here_doc[PIPE_IN] > 0)
 		dup_here_doc(main, icmd);
-	only_pipe(main, icmd);
 }
 
 int	open_pipe(t_main *main, int icmd)

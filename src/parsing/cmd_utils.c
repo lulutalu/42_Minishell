@@ -33,6 +33,10 @@ size_t	find_separators(const char *input, size_t i)
 			return (i);
 		if (input[i] == PIPE)
 			return (i);
+		if (input[i] == D_QUOTE)
+			return (i);
+		if (input[i] == S_QUOTE)
+			return (i);
 		i++;
 	}
 	return (i);

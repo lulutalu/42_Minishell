@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:42:40 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/13 19:59:26 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/13 21:06:43 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,7 +201,7 @@ bool		echo_is_no_endl(t_main *main, t_cell *cur);
 
 int			b_cd(t_main *main, t_cell *cur, int icmd);
 
-void		b_pwd(void);
+int			b_pwd(t_main *main);
 
 int			b_export(t_main *main, t_cell *cur, int icmd);
 bool		export_is_syntax_ok(char *data);

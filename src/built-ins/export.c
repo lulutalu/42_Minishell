@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 11:52:44 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/13 21:00:03 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/13 21:04:46 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	b_export(t_main *main, t_cell *cur, int icmd)
 		export_wo_arg(main);
 	else
 	{
-		while (cur != NULL)
+		while (cur != NULL && cur->pos == icmd)
 		{
 			if (cur->token >= 994 && cur->token <= 997)
 			{

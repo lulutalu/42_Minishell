@@ -6,7 +6,7 @@
 /*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:21:14 by lzima             #+#    #+#             */
-/*   Updated: 2022/08/13 16:03:36 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/13 18:21:23 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,17 @@ void	check_last(t_main *m)
 			i++;
 		if (check[i] == '\0')
 		{
-			m->list.tail_cell = m->list.tail_cell->prev;
-			free_cell(m->list.tail_cell->next);
-			m->list.tail_cell->next = NULL;
+			if (m->list.tail_cell->prev != NULL)
+			{
+				m->list.tail_cell = m->list.tail_cell->prev;
+				free_cell(m->list.tail_cell->next);
+				m->list.tail_cell->next = NULL;
+			}
+			else
+			{
+				free_cell(m->list.tail_cell);
+				m->list.head_cell = NULL;
+			}
 		}
 	}
 }

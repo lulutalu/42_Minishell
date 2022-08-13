@@ -6,33 +6,52 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 17:22:08 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/13 18:23:36 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/13 21:27:48 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	b_unset(t_main *main)
+static int	unset_error(t_cell *cur)
 {
-	char	*input;
-	char	**split;
-	int		i;
-	t_node	*cur;
+	ft_putstr_fd("minishell: unset: `", 2);
+	ft_putstr_fd(cur->data, 2);
+	ft_putendl_fd("': not a valid identifier", 2);
+	return (1);
+}
 
-	input = cmd_input(main);
-	if (ft_strncmp(input, "", 1) != 0)
+static int	unset_var(t_main *main, t_cell *cur)
+{
+	int		i;
+	t_node	*n_cur;
+
+	if (ft_isdigit(cur->data[0]) == 1)
+		return (unset_error(cur));
+	i = -1;
+	while (cur->data[++i])
+		if (ft_isalnum(cur->data[i]) == -1 && cur->data[i] != '_')
+			return (unset_error(cur));
+	n_cur = find_var(main, cur->data);
+	if (n_cur)
+		lst_del(main, n_cur);
+	return (0);
+}
+
+int	b_unset(t_main *main, t_cell *cur, int icmd)
+{
+	if (cur->next != NULL)
+		cur = avoid_redir(cur, icmd);
+	else if (cur->next == NULL)
+		return (g_exit_status = 0);
+	while (cur != NULL && cur->pos == icmd)
 	{
-		split = ft_split(input, ' ');
-		i = 0;
-		while (split[i])
+		if (cur->token >= 994 && cur->token <= 997)
 		{
-			cur = find_var(main, split[i]);
-			if (cur != NULL)
-				lst_del(main, cur);
-			i++;
+			cur = cur->next->next;
+			continue ;
 		}
-		ft_tab_free((void **)split);
+		g_exit_status = unset_var(main, cur);
+		cur = cur->next;
 	}
-	g_exit_status = 0;
-	free(input);
+	return (0);
 }

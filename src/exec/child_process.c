@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 15:36:03 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/13 21:09:03 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/13 21:23:53 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ int	is_forked_built_ins(t_main *main, int icmd)
 		return (b_export(main, cur, icmd));
 	else if (ft_strcmp_case(cur->data, "pwd") == 0)
 		return (b_pwd(main));
+	else if (ft_strncmp(cur->data, "unset", ft_strlen("unset")) == 0)
+		return (b_unset(main, cur, icmd));
 	return (1);
 }
 

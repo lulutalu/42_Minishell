@@ -6,25 +6,11 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 17:12:00 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/13 21:05:37 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/13 21:28:34 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-char	*cmd_input(t_main *main)
-{
-	char	*input;
-
-	if (main->input)
-	{
-		input = ft_strchr(main->input, ' ');
-		input = ft_strdup(input + 1);
-	}
-	else
-		input = ft_strdup("");
-	return (input);
-}
 
 bool	export_is_syntax_ok(char *data)
 {
@@ -34,8 +20,11 @@ bool	export_is_syntax_ok(char *data)
 		return (FALSE);
 	i = 0;
 	while (data[i] && data[i] != '=')
-		if (ft_isalnum(data[i++]) == -1)
+	{
+		if (ft_isalnum(data[i]) == -1 && data[i] != '_')
 			return (FALSE);
+		i++;
+	}
 	return (TRUE);
 }
 

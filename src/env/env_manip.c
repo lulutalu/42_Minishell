@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 18:41:39 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/13 19:33:19 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/13 22:00:30 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@ void	lst_del(t_main *main, t_node *cur)
 	{
 		cur->prev->next = cur->next;
 		cur->next->prev = cur->prev;
+	}
+	else if (cur == main->tail_env && cur == main->head_env)
+	{
+		main->head_env = NULL;
+		main->tail_env = NULL;
 	}
 	free(cur->var);
 	free(cur->value);

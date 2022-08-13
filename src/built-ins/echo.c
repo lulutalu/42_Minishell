@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 23:20:31 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/13 17:10:23 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/13 17:52:03 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@ static bool	echo_check_arg(t_main *main, t_cell *cur)
 	check = FALSE;
 	if (cur->token == 39 || cur->token == 34)
 	{
-		if (main->input[cur->end] == ' ')
+		if (main->input[cur->end] == ' ' || main->input[cur->end] == '\t')
 			check = TRUE;
 	}
 	else if (!(main->input[cur->end] == '\"' || main->input[cur->end] == '\'' \
-				|| main->input[cur->end] == '$'))
+			|| main->input[cur->end] == '$') || \
+			main->input[cur->end - 1] == '\t')
 		check = TRUE;
 	return (check);
 }
@@ -48,12 +49,12 @@ static void	print_echo(t_main *main, t_cell *cur, int n, int i)
 		if (echo_check_arg(main, cur) == TRUE && i < n)
 			ft_putchar_fd(' ', fd);
 	}
-	else if (i < n)
+	else if (i < n && cur->data[0] != '\0')
 	{
 		ft_putstr_fd(cur->data, fd);
 		ft_putchar_fd(' ', fd);
 	}
-	else
+	else if (cur->data[0] != '\0')
 		ft_putstr_fd(cur->data, fd);
 }
 

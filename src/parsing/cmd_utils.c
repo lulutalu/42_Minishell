@@ -6,7 +6,7 @@
 /*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:16:24 by lzima             #+#    #+#             */
-/*   Updated: 2022/08/13 17:13:40 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/13 17:53:03 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ size_t	find_separators(const char *input, size_t i)
 		if (input[i] == D_QUOTE)
 			return (i);
 		if (input[i] == S_QUOTE)
+			return (i);
+		if (input[i] == '\t')
 			return (i);
 		i++;
 	}

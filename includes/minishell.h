@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:42:40 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/12 23:50:18 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/13 15:30:52 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ typedef struct s_quote
 	int					error;
 	char				*data_quote;
 	char				*tmp;
+	char				*dollar_var;
 }				t_quote;
 
 typedef struct s_cell

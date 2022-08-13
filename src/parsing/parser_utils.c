@@ -6,13 +6,13 @@
 /*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:21:14 by lzima             #+#    #+#             */
-/*   Updated: 2022/08/12 23:39:24 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/13 16:03:36 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../../includes/minishell.h"
 
-void check_last(t_main *m)
+void	check_last(t_main *m)
 {
 	char	*check;
 	int		i;

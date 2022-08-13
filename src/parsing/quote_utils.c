@@ -6,7 +6,7 @@
 /*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 11:54:47 by lzima             #+#    #+#             */
-/*   Updated: 2022/08/12 23:48:22 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/13 15:30:51 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ size_t	quote_saving(char *input, t_cell *cell, t_main *main, size_t i)
 	cell->end = check_by_type(input, cell, main, cell->type);
 	cell->error = cell->quote->error;
 	cell->data = ft_strdup(cell->quote->data_quote);
+	if (cell->quote->dollar_var)
+		cell->dollar_var = ft_strdup(cell->quote->dollar_var);
 	free_quote(cell->quote);
 	return (cell->end);
 }

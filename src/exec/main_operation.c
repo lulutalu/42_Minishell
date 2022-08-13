@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:38:55 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/12 23:26:00 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/13 17:17:21 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int	check_redirection(t_main *main, t_cell *cur, int icmd)
 {
 	int		ret;
 
+	ret = 0;
 	while (cur->pos == icmd && cur->next != NULL)
 	{
 		if (cur->token == RE_INPUT)
@@ -100,5 +101,5 @@ int	check_redirection(t_main *main, t_cell *cur, int icmd)
 			return (1);
 		cur = cur->next;
 	}
-	return (0);
+	return (ret);
 }

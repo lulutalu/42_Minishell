@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 23:20:31 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/12 23:49:33 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/13 17:10:23 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,15 @@
 static bool	echo_check_arg(t_main *main, t_cell *cur)
 {
 	bool	check;
-	char	*arg;
 
 	check = FALSE;
-	if (cur->token == DOLLAR)
+	if (cur->token == 39 || cur->token == 34)
 	{
-		arg = ft_strnstr(main->input, cur->dollar_var, 1000000);
-		arg += ft_strlen(cur->dollar_var);
+		if (main->input[cur->end] == ' ')
+			check = TRUE;
 	}
-	else
-	{
-		arg = ft_strnstr(main->input, cur->data, 1000000);
-		arg += ft_strlen(cur->data);
-	}
-	if (arg[0] == ' ' || arg[1] == ' ')
+	else if (!(main->input[cur->end] == '\"' || main->input[cur->end] == '\'' \
+				|| main->input[cur->end] == '$'))
 		check = TRUE;
 	return (check);
 }
@@ -46,7 +41,8 @@ static void	print_echo(t_main *main, t_cell *cur, int n, int i)
 		if (echo_check_arg(main, cur) == TRUE && i < n)
 			ft_putchar_fd(' ', fd);
 	}
-	else if (cur->next && (cur->next->token == 39 || cur->next->token == 34))
+	else if (cur->next && (cur->next->token == 39 || cur->next->token == 34 \
+				|| cur->next->token == 36))
 	{
 		ft_putstr_fd(cur->data, fd);
 		if (echo_check_arg(main, cur) == TRUE && i < n)
@@ -104,16 +100,16 @@ int	b_echo(t_main *main, t_cell *cur, int icmd)
 	int		i;
 	int		n;
 
-	i = 2;
 	cur = avoid_redir(cur->next, icmd);
 	if (echo_protection(cur) == 0)
 		return (0);
 	arg = FALSE;
 	if (ft_strncmp(cur->data, "-n", 2) == 0)
 	{
-		while (cur->data[i] && cur->data[i] == 'n')
+		i = cur->start + 2;
+		while (main->input[i] && main->input[i] == 'n')
 			i++;
-		if (cur->data[i] == '\0')
+		if (main->input[i] == ' ')
 		{
 			arg = TRUE;
 			cur = cur->next;

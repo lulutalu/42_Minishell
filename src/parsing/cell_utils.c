@@ -6,7 +6,7 @@
 /*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 11:47:00 by lzima             #+#    #+#             */
-/*   Updated: 2022/08/12 23:34:29 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/13 15:30:21 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_quote	*init_quote(void)
 	if (!quote)
 		return (NULL);
 	quote->tmp = NULL;
+	quote->dollar_var = NULL;
 	return (quote);
 }
 

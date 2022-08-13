@@ -6,7 +6,7 @@
 /*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:16:24 by lzima             #+#    #+#             */
-/*   Updated: 2022/08/12 23:34:52 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/13 17:13:40 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,11 @@ void	dollar_data(t_cell *cell, t_main *main)
 	while (cell->dollar_material[i] != NULL)
 	{
 		cur = find_var(main, cell->dollar_material[i]);
-		cell->dollar_var = ft_strdup(cur->var);
 		if (cur != NULL)
+		{
 			cell->dollar_material[i] = ft_strdup(cur->value);
+			cell->dollar_var = ft_strdup(cur->value);
+		}
 		else
 			cell->dollar_material[i] = ft_strdup("");
 		i++;
@@ -70,19 +72,28 @@ void	dollar_data(t_cell *cell, t_main *main)
 size_t	cmd_saving(const char *input, t_cell *cell, size_t i, t_main *main)
 {
 	size_t	y;
+	int		hidden_dollar;
 
 	y = find_separators(input, i);
 	cell->start = i;
 	cell->data = ft_substr(input, i, (y - i));
 	cell->dollar_material = NULL;
-	if (*cell->data == DOLLAR)
+	cell->token = T_CMD;
+	if (cell->data[0] == DOLLAR)
 	{
 		cell->dollar_material = ft_split(cell->data, '$');
 		dollar_data(cell, main);
 		cell->token = T_DOLLAR;
 	}
-	if (cell->token != T_DOLLAR)
-		cell->token = T_CMD;
+	else if (!(cell->prev == NULL || cell->prev->token == PIPE))
+	{
+		hidden_dollar = ft_strchr_int(cell->data, '$');
+		if (hidden_dollar > 0 && hidden_dollar != (int)cell->start)
+		{
+			cell->data = ft_substr(cell->data, 0, hidden_dollar);
+			y = cell->start + hidden_dollar;
+		}
+	}
 	cell->end = y;
 	return (cell->end);
 }

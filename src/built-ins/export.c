@@ -6,33 +6,27 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 11:52:44 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/12 23:11:15 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/13 21:00:03 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	export_variable(t_main *main, char **cmd_split)
+static int	export_variable(t_main *main, t_cell *cur)
 {
-	int	icmd;
+	int	status;
 
-	icmd = 0;
-	while (cmd_split[icmd])
+	status = -1;
+	if (export_is_syntax_ok(cur->data) == TRUE)
+		lst_replace(main, cur->data);
+	else
 	{
-		if (cmd_split[icmd][0] == '=')
-		{
-			ft_putstr_fd("minishell: export: `", 2);
-			ft_putstr_fd(cmd_split[icmd], 2);
-			ft_putendl_fd("': not a valid identifier", 2);
-			g_exit_status = 1;
-			break ;
-		}
-		else
-			lst_replace(main, cmd_split[icmd]);
-		icmd++;
-		g_exit_status = 0;
+		ft_putstr_fd("minishell: export: `", 2);
+		ft_putstr_fd(cur->data, 2);
+		ft_putendl_fd("': not a valid identifier", 2);
+		status = 0;
 	}
-	ft_tab_free((void **)cmd_split);
+	return (status + 1);
 }
 
 static void	export_print_value(t_node *cur, int fd, int i)
@@ -40,12 +34,23 @@ static void	export_print_value(t_node *cur, int fd, int i)
 	if (i % 2 == 1)
 		ft_putstr_fd("\e[38;5;14m", fd);
 	else
-		ft_putstr_fd("\e[35;5;27m", fd);
+		ft_putstr_fd("\e[35;5;34m", fd);
 	ft_putstr_fd("declare -x ", fd);
 	ft_putstr_fd(cur->var, fd);
 	ft_putstr_fd("=\"", fd);
 	ft_putstr_fd(cur->value, fd);
 	ft_putendl_fd("\"\e[0m", fd);
+}
+
+static void	export_print_no_value(t_node *cur, int fd, int i)
+{
+	if (i % 2 == 1)
+		ft_putstr_fd("\e[38;5;14m", fd);
+	else
+		ft_putstr_fd("\e[35;5;34m", fd);
+	ft_putstr_fd("declare -x ", fd);
+	ft_putstr_fd(cur->var, fd);
+	ft_putendl_fd("\e[0m", fd);
 }
 
 static void	export_wo_arg(t_main *main)
@@ -67,7 +72,7 @@ static void	export_wo_arg(t_main *main)
 		if (cur != NULL && cur->value)
 			export_print_value(cur, fd, i);
 		else if (cur != NULL && !cur->value)
-			printf("declare -x %s\n", cur->var);
+			export_print_no_value(cur, fd, i);
 		i++;
 	}
 	g_exit_status = 0;
@@ -75,12 +80,27 @@ static void	export_wo_arg(t_main *main)
 
 int	b_export(t_main *main, t_cell *cur, int icmd)
 {
-	cur = avoid_redir(cur->next, icmd);
+	if (cur->next != NULL)
+		cur = avoid_redir(cur->next, icmd);
+	else if (cur->next == NULL)
+	{
+		export_wo_arg(main);
+		return (0);
+	}
 	if (cur == NULL)
 		export_wo_arg(main);
 	else
 	{
-		export_variable(main, &cur->data);
+		while (cur != NULL)
+		{
+			if (cur->token >= 994 && cur->token <= 997)
+			{
+				cur = cur->next->next;
+				continue ;
+			}
+			g_exit_status = export_variable(main, cur);
+			cur = cur->next;
+		}
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:42:40 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/13 18:16:11 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/13 19:59:26 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,14 +196,15 @@ void		main_operation(t_main *main);
 char		*cmd_input(t_main *main);
 
 int			b_echo(t_main *main, t_cell *cur, int icmd);
-int			echo_protection(t_cell *cur);
 void		echo_end_print(t_main *main);
+bool		echo_is_no_endl(t_main *main, t_cell *cur);
 
 int			b_cd(t_main *main, t_cell *cur, int icmd);
 
 void		b_pwd(void);
 
 int			b_export(t_main *main, t_cell *cur, int icmd);
+bool		export_is_syntax_ok(char *data);
 
 int			b_env(t_main *main);
 

@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 17:26:47 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/12 18:35:28 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/13 19:10:20 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,21 +115,26 @@ int	b_cd(t_main *main, t_cell *cur, int icmd)
 	int		status;
 	char	actual_pwd[4096];
 
-	if (ft_strncmp(cur->data, "cd", 3) == 0)
-	{
+	if (!(ft_strncmp(cur->data, "cd", 3) == 0))
+		return (0);
+	getcwd(actual_pwd, 4096);
+	if (cur->next != NULL)
 		cur = avoid_redir(cur->next, icmd);
-		getcwd(actual_pwd, 4096);
-		if (cur == NULL)
-			tilde_cd(main, actual_pwd, NULL);
-		else if (cur->data[0] == '~')
-			tilde_cd(main, actual_pwd, cur->data);
-		else if (ft_strncmp(cur->data, "-", 2) == 0)
-			dash_cd(main, actual_pwd);
-		else
-		{
-			status = chdir(cur->data);
-			check_exec_cd(main, cur->data, status, actual_pwd);
-		}
+	else if (cur->next == NULL)
+	{
+		tilde_cd(main, actual_pwd, NULL);
+		return (0);
+	}
+	if (cur == NULL)
+		return (0);
+	if (cur->data[0] == '~')
+		tilde_cd(main, actual_pwd, cur->data);
+	else if (ft_strncmp(cur->data, "-", 2) == 0)
+		dash_cd(main, actual_pwd);
+	else
+	{
+		status = chdir(cur->data);
+		check_exec_cd(main, cur->data, status, actual_pwd);
 	}
 	return (0);
 }

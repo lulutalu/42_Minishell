@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 23:20:31 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/13 18:17:04 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/13 19:02:04 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,23 +98,23 @@ static int	echo_n_args(t_cell *cur, int icmd)
 int	b_echo(t_main *main, t_cell *cur, int icmd)
 {
 	bool	arg;
-	int		i;
 	int		n;
 
-	cur = avoid_redir(cur->next, icmd);
-	if (echo_protection(cur) == 0)
-		return (0);
 	arg = FALSE;
+	if (cur->next != NULL)
+		cur = avoid_redir(cur->next, icmd);
+	else if (cur->next == NULL)
+	{
+		echo_end_print(main);
+		return (0);
+	}
 	if (ft_strncmp(cur->data, "-n", 2) == 0)
 	{
-		i = cur->start + 2;
-		while (main->input[i] && main->input[i] == 'n')
-			i++;
-		if (main->input[i] == ' ')
-		{
-			arg = TRUE;
+		arg = echo_is_no_endl(main, cur);
+		if (cur->next == NULL && arg == TRUE)
+			return (0);
+		else if (arg == TRUE)
 			cur = cur->next;
-		}
 	}
 	n = echo_n_args(cur, icmd);
 	print_loop(main, cur, n, icmd);

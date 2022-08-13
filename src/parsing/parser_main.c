@@ -6,7 +6,7 @@
 /*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 11:50:58 by lzima             #+#    #+#             */
-/*   Updated: 2022/08/12 23:35:15 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/12 23:50:18 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	parser_main_quote(char *ret, t_main *main)
 	}
 	check_last(main);
 	cmd_listing(main);
+	print_list(&main->list);
 	return (check_input(main));
 }
 
@@ -81,6 +82,8 @@ void	print_list(t_network *list)
 		printf("| cell->data : %s               	\n", tmp->data);
 		printf("| cell->token : %d                 	\n", tmp->token);
 		printf("| cell->pos : %d                    \n", tmp->pos);
+		if (tmp->dollar_var)
+			printf("| cell->dollar_var : %s               \n", tmp->dollar_var);
 		printf("-----------------------------------	\n");
 		tmp = tmp->next;
 	}

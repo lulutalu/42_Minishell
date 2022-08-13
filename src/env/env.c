@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 12:37:05 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/04 15:18:46 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/13 22:19:43 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,25 @@ void	env_dup(t_main *main, char **envp)
 		lst_add(&main->head_env, &main->tail_env, envp[i++]);
 	main->env = NULL;
 	tab_format_env(main);
+}
+
+void	lst_destroy(t_main *main)
+{
+	t_node	*cur;
+
+	cur = main->head_env;
+	if (cur->next != NULL)
+		cur = cur->next;
+	else if (cur != NULL)
+	{
+		lst_del(main, cur);
+		cur = NULL;
+	}
+	while (cur != NULL)
+	{
+		lst_del(main, cur->prev);
+		cur = cur->next;
+	}
 }
 
 void	tab_format_env(t_main *main)

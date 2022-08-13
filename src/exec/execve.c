@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 15:20:38 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/13 16:38:29 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/13 22:14:43 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ char	**get_path(t_main *main)
 	else
 	{
 		g_exit_status = 127;
+		ft_putstr_fd("minishell: PATH variable not set\n", 2);
 		exit(127);
 	}
 }

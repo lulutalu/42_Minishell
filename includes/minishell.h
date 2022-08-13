@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:42:40 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/13 21:23:54 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/13 22:23:48 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,8 +169,6 @@ typedef struct s_main
 	char				*prompt;
 	char				*restore_prompt;
 	char				*input;
-	char				**input_split;
-	char				*res;
 	char				**env;
 	t_proc				proc;
 	t_fd				fd;
@@ -317,6 +315,7 @@ void		dup_here_doc_and_output(t_main *main);
 // Duplication of envp variable to have a env that can be modified
 void		env_dup(t_main *main, char **envp);
 void		lst_add(t_node **head_env, t_node **tail, char *str);
+void		lst_destroy(t_main *main);
 void		lst_del(t_main *main, t_node *cur);
 void		lst_replace(t_main *main, char *var);
 t_node		*find_var(t_main *main, char *var);

@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:42:40 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/13 22:23:48 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/14 15:39:05 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,6 +260,8 @@ void		quote_data(char *input, t_quote *quote, t_main *main, size_t end);
 char		*replace_dollar(char *input, char *var_value);
 int			s_dollar_end(char *s, int i);
 char		*is_dollar_in_d_quote(t_quote *quote, t_main *main);
+char		*d_is_in_quote(t_quote *quote, t_main *main, int founded, int len);
+void		replace_dollar_data(t_cell *cell, t_main *main, int i);
 
 /* --- cmd_utils.c --- */
 

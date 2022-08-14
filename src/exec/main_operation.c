@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:38:55 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/13 18:28:35 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/14 15:01:07 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,10 @@ void	clear_fd(t_main *main)
 		close(main->fd.here_doc[PIPE_IN]);
 	if (main->fd.here_doc[PIPE_OUT] > 2)
 		close(main->fd.here_doc[PIPE_OUT]);
-	struct_init(main);
+	main->fd.infile = -1;
+	main->fd.outfile = -1;
+	main->fd.here_doc[PIPE_IN] = -1;
+	main->fd.here_doc[PIPE_OUT] = -1;
 }
 
 int	check_redirection(t_main *main, t_cell *cur, int icmd)

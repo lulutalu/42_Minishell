@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 18:49:55 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/12 19:44:49 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/14 15:00:10 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,8 @@ void	struct_init(t_main *main)
 	main->fd.here_doc[PIPE_OUT] = -1;
 	main->fd.new_io[PIPE_IN] = -1;
 	main->fd.new_io[PIPE_OUT] = -1;
+	main->input = NULL;
+	main->prompt = NULL;
+	main->restore_prompt = NULL;
+	main->proc.pid = NULL;
 }

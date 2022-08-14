@@ -6,7 +6,7 @@
 /*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:16:24 by lzima             #+#    #+#             */
-/*   Updated: 2022/08/13 17:53:03 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/14 15:39:03 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,21 +49,10 @@ void	dollar_data(t_cell *cell, t_main *main)
 	int		i;
 	int		y;
 	char	*tmp;
-	t_node	*cur;
 
 	i = 0;
 	while (cell->dollar_material[i] != NULL)
-	{
-		cur = find_var(main, cell->dollar_material[i]);
-		if (cur != NULL)
-		{
-			cell->dollar_material[i] = ft_strdup(cur->value);
-			cell->dollar_var = ft_strdup(cur->value);
-		}
-		else
-			cell->dollar_material[i] = ft_strdup("");
-		i++;
-	}
+		replace_dollar_data(cell, main, i++);
 	y = 0;
 	tmp = ft_strdup("");
 	while (y < i)

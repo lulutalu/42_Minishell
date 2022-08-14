@@ -6,7 +6,7 @@
 /*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 11:54:47 by lzima             #+#    #+#             */
-/*   Updated: 2022/08/13 15:29:34 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/14 15:41:29 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ char	*replace_dollar(char *input, char *var_value)
 	output = ft_strjoin(tmp, var_value);
 	free_str(tmp);
 	if (i++ < len_input)
-		while (input[i] == ft_isalnum(input[i]))
+		while (input && (input[i] == ft_isalnum(input[i]) || input[i] == '?' \
+					|| input[i] == '_'))
 				i++;
 	tmp = ft_substr(input, i, len_input - i);
 	output = ft_dyn_strjoin(output, tmp);
@@ -40,7 +41,8 @@ int	s_dollar_end(char *s, int i)
 {
 	while (s[++i] != '\0')
 	{
-		if (s[i] != ft_isalnum(s[i]) || s[i] == '_' || s[i] == '\0')
+		if (s[i] != ft_isalnum(s[i]) && s[i] != '?' \
+				&& s[i] != '_' && s[i] == '\0')
 			return (i - 1);
 	}
 	return (-1);
@@ -48,29 +50,56 @@ int	s_dollar_end(char *s, int i)
 
 char	*is_dollar_in_d_quote(t_quote *quote, t_main *main)
 {
-	char	*str;
 	int		founded;
 	int		len;
-	t_node	*cur;
 
 	founded = ft_strchr_int(quote->data_quote, '$');
 	if (founded < 0)
 		return (NULL);
-	str = NULL;
 	len = s_dollar_end(quote->data_quote, founded);
 	if (founded >= 0)
-	{
 		if (len != 0)
-		{
-			str = ft_substr(quote->data_quote, founded + 1, len - founded);
-			cur = find_var(main, str);
-			quote->dollar_var = ft_strdup(str);
-			free_str(str);
-			if (cur != NULL)
-				return (replace_dollar(quote->data_quote, cur->value));
-			else
-				return (replace_dollar(quote->data_quote, ""));
-		}
-	}
+			return (d_is_in_quote(quote, main, founded, len));
 	return (NULL);
+}
+
+void	replace_dollar_data(t_cell *cell, t_main *main, int i)
+{
+	t_node	*cur;
+
+	cur = find_var(main, cell->dollar_material[i]);
+	if (cur != NULL)
+	{
+		free(cell->dollar_material[i]);
+		cell->dollar_material[i] = ft_strdup(cur->value);
+		cell->dollar_var = ft_strdup(cur->value);
+	}
+	else if (ft_strncmp(cell->dollar_material[i], "?", \
+				ft_strlen(cell->dollar_material[i])) == 0)
+	{
+		free(cell->dollar_material[i]);
+		cell->dollar_material[i] = ft_itoa(g_exit_status);
+	}
+	else
+	{
+		free(cell->dollar_material[i]);
+		cell->dollar_material[i] = ft_strdup("");
+	}
+}
+
+char	*d_is_in_quote(t_quote *quote, t_main *main, int founded, int len)
+{
+	char	*str;
+	t_node	*cur;
+
+	str = NULL;
+	str = ft_substr(quote->data_quote, founded + 1, len - founded);
+	cur = find_var(main, str);
+	quote->dollar_var = ft_strdup(str);
+	if (cur != NULL)
+		return (replace_dollar(quote->data_quote, cur->value));
+	else if (ft_strncmp(str, "?", ft_strlen(str)) == 0)
+		return (replace_dollar(quote->data_quote, ft_itoa(g_exit_status)));
+	else
+		return (replace_dollar(quote->data_quote, ""));
 }

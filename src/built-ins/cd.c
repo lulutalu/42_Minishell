@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 17:26:47 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/14 18:40:27 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/14 19:01:24 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,16 @@ for other functions of this file*/
 static void	change_env_cd(t_main *main, char *old_pwd)
 {
 	char	new_pwd[4096];
+	char	*var_new_pwd;
+	char	*var_old_pwd;
 
 	getcwd(new_pwd, 4096);
-	lst_replace(main, ft_strjoin("PWD=", new_pwd));
-	lst_replace(main, ft_strjoin("OLDPWD=", old_pwd));
+	var_new_pwd = ft_strjoin("PWD=", new_pwd);
+	var_old_pwd = ft_strjoin("OLDPWD=", old_pwd);
+	lst_replace(main, var_new_pwd);
+	lst_replace(main, var_old_pwd);
+	free(var_new_pwd);
+	free(var_old_pwd);
 }
 
 /*Function that checks if chdir call was successful or not*/

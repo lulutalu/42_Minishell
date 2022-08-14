@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 19:21:57 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/14 18:44:59 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/14 19:20:07 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ static void	not_numeric(t_main *main, t_cell *cur)
 	{
 		if (ft_isdigit(cur->data[i++]) != 1)
 		{
-			exit_free(main);
 			ft_putstr_fd("minishell: exit: ", 2);
 			ft_putstr_fd(cur->data, 2);
 			ft_putendl_fd(": numeric argument required", 2);
+			exit_free(main);
 			exit(255);
 		}
 	}

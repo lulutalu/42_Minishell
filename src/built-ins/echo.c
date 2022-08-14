@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 23:20:31 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/13 19:02:04 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/14 19:32:15 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,20 +101,17 @@ int	b_echo(t_main *main, t_cell *cur, int icmd)
 	int		n;
 
 	arg = FALSE;
-	if (cur->next != NULL)
-		cur = avoid_redir(cur->next, icmd);
-	else if (cur->next == NULL)
-	{
-		echo_end_print(main);
+	cur = echo_start_check(main, cur, icmd);
+	if (cur == NULL)
 		return (0);
-	}
 	if (ft_strncmp(cur->data, "-n", 2) == 0)
 	{
 		arg = echo_is_no_endl(main, cur);
-		if (cur->next == NULL && arg == TRUE)
-			return (0);
-		else if (arg == TRUE)
-			cur = cur->next;
+		if (arg == TRUE)
+		{
+			while (cur != NULL && echo_is_no_endl(main, cur) == TRUE)
+				cur = cur->next;
+		}
 	}
 	n = echo_n_args(cur, icmd);
 	print_loop(main, cur, n, icmd);

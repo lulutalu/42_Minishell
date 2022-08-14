@@ -12,6 +12,15 @@
 
 #include "./../../includes/minishell.h"
 
+void free_str(char *s)
+{
+	if (!s)
+	{
+		free(s);
+		s = NULL;
+	}
+}
+
 void	check_last(t_main *m)
 {
 	char	*check;
@@ -40,33 +49,21 @@ void	check_last(t_main *m)
 	}
 }
 
-int	error_message(char *message)
-{
-	write(2, message, ft_strlen(message));
-	return (0);
-}
-
 void	free_quote(t_quote *quote)
 {
-	if (quote->data_quote != NULL)
-	{
-		free(quote->data_quote);
-		quote->data_quote = NULL;
-	}
+
+	free_str(quote->data_quote);
+	free_str(quote->dollar_var);
 	free(quote);
 	quote = NULL;
 }
 
 void	free_cell(t_cell *cell)
 {
-	int	i;
 
-	if (cell->data != NULL)
-		free(cell->data);
-	i = 0;
-	if (cell->dollar_material)
-		while (cell->dollar_material[i])
-			free(cell->dollar_material[i++]);
+	free_str(cell->data);
+	free_str(cell->dollar_var);
+	ft_tab_free((void *)cell->dollar_material);
 }
 
 int	ft_strchr_int(const char *s, int c)

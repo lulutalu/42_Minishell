@@ -17,9 +17,7 @@ t_quote	*init_quote(void)
 	t_quote	*quote;
 
 	quote = ft_calloc(1, sizeof(t_quote));
-	if (!quote)
-		return (NULL);
-	quote->tmp = NULL;
+	alloc_check(quote);
 	quote->dollar_var = NULL;
 	return (quote);
 }
@@ -29,8 +27,7 @@ t_cell	*init_cell(void)
 	t_cell	*cell;
 
 	cell = ft_calloc(1, sizeof(t_cell));
-	if (!cell)
-		return (NULL);
+	alloc_check(cell);
 	cell->next = NULL;
 	cell->prev = NULL;
 	cell->quote = NULL;

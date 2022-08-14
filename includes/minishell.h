@@ -111,7 +111,6 @@ typedef struct s_quote
 	int					type;
 	int					error;
 	char				*data_quote;
-	char				*tmp;
 	char				*dollar_var;
 }				t_quote;
 
@@ -243,11 +242,11 @@ t_cell		*add_node(t_network *list);
 
 /* --- parser_utils.c --- */
 
-int			error_message(char *message);
 void		free_quote(t_quote *quote);
 int			ft_strchr_int(const char *s, int c);
 void		free_cell(t_cell *cell);
 void		check_last(t_main *m);
+void 		free_str(char *s);
 //void	free_network(t_network *list);
 
 /* --- quote_utils.c --- */

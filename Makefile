@@ -6,7 +6,7 @@
 #    By: lduboulo && lzima				            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/27 18:29:51 by lduboulo          #+#    #+#              #
-#    Updated: 2022/08/13 22:24:05 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/08/14 15:04:19 by lzima            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,7 +72,7 @@ CC				= gcc
 AR				= ar rcs
 MKDIR			= mkdir -p
 RM				= rm -rf
-CFLAGS			= -Wall -Wextra -Werror -g3 -fsanitize=address 
+CFLAGS			= -Wall -Wextra -Werror -g3 #-fsanitize=address 
 
 TSEP			= ${SEP}=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=${RESET}
 
@@ -116,5 +116,12 @@ norm :
 				@printf "${DUCK} 🐥 Checking Norm for ${NAME}${RESET}\n"
 				@norminette ${SRCS_DIR}
 				@norminette ${HEADS_DIR}
+
+docker:
+				docker build -t arch .
+				docker run -it arch
+
+docker_prune:
+				docker system prune -a --volumes
 
 .PHONY : all clean fclean re norm

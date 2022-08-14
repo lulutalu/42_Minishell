@@ -17,6 +17,8 @@ static void	restore_prompt(t_main *main, char **split)
 	char	*len;
 
 	len = ft_itoa(ft_strlen(main->prompt) - 17);
+	if (!main->restore_prompt)
+		free(main->restore_prompt);
 	main->restore_prompt = ft_strdup("\e[A\e[");
 	main->restore_prompt = ft_dyn_strjoin(main->restore_prompt, len);
 	main->restore_prompt = ft_dyn_strjoin(main->restore_prompt, "C");
@@ -35,8 +37,11 @@ void	prompt_creation(t_main *main)
 	getcwd(pwd, 4096);
 	split = ft_split(pwd, '/');
 	i = 0;
+	main->prompt = NULL;
 	while (split[i])
 		i++;
+	if (main->prompt != NULL)
+		free(main->prompt);
 	main->prompt = ft_strdup("\e[1m");
 	main->prompt = ft_dyn_strjoin(main->prompt, user);
 	main->prompt = ft_dyn_strjoin(main->prompt, " % ");

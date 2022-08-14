@@ -1,0 +1,127 @@
+Echo
+
+HEAP SUMMARY:
+==7883==     in use at exit: 303,020 bytes in 519 blocks
+==7883==   total heap usage: 888 allocs, 369 frees, 325,514 bytes allocated
+==7883==
+
+==7883==
+==7883== 8 bytes in 1 blocks are still reachable in loss record 2 of 107
+==7883==    at 0x10012B545: malloc (in /Users/lzima/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==7883==    by 0x100006770: ft_calloc (ft_calloc.c:19)
+==7883==    by 0x100004EE2: control_tower (main_operation.c:19)
+==7883==    by 0x100001805: main_operation (read.c:32)
+==7883==    by 0x100001269: main (minishell.c:30)
+==7883==
+
+==7883==
+==7883== 9 bytes in 1 blocks are still reachable in loss record 4 of 107
+==7883==    at 0x10012B545: malloc (in /Users/lzima/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==7883==    by 0x100006770: ft_calloc (ft_calloc.c:19)
+==7883==    by 0x1000076DA: ft_dyn_strjoin (ft_dyn_strjoin.c:25)
+==7883==    by 0x100001569: restore_prompt (prompt.c:24)
+==7883==    by 0x1000014B5: prompt_creation (prompt.c:58)
+==7883==    by 0x10000175D: main_operation (read.c:18)
+==7883==    by 0x100001269: main (minishell.c:30)
+==7883==
+
+==7883==
+==7883== 9 bytes in 1 blocks are definitely lost in loss record 6 of 107
+==7883==    at 0x10012B545: malloc (in /Users/lzima/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==7883==    by 0x100006770: ft_calloc (ft_calloc.c:19)
+==7883==    by 0x1000076DA: ft_dyn_strjoin (ft_dyn_strjoin.c:25)
+==7883==    by 0x100001569: restore_prompt (prompt.c:24)
+==7883==    by 0x1000014B5: prompt_creation (prompt.c:58)
+==7883==    by 0x10000175D: main_operation (read.c:18)
+==7883==    by 0x100001269: main (minishell.c:30)
+==7883==
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+==7883== 10 bytes in 2 blocks are still reachable in loss record 8 of 107
+==7883==    at 0x10012B545: malloc (in /Users/lzima/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==7883==    by 0x100007546: ft_substr (ft_substr.c:30)
+==7883==    by 0x10000341E: cmd_saving (cmd_utils.c:79)
+==7883==    by 0x10000378D: reader (parser_main.c:41)
+==7883==    by 0x100003877: parser_main_quote (parser_main.c:58)
+==7883==    by 0x1000017C1: main_operation (read.c:26)
+==7883==    by 0x100001269: main (minishell.c:30)
+==7883==
+
+==7883==
+==7883== 47 bytes in 1 blocks are still reachable in loss record 30 of 107
+==7883==    at 0x10012B545: malloc (in /Users/lzima/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==7883==    by 0x100006770: ft_calloc (ft_calloc.c:19)
+==7883==    by 0x1000076DA: ft_dyn_strjoin (ft_dyn_strjoin.c:25)
+==7883==    by 0x100001498: prompt_creation (prompt.c:57)
+==7883==    by 0x10000175D: main_operation (read.c:18)
+==7883==    by 0x100001269: main (minishell.c:30)
+
+==7883== 47 bytes in 1 blocks are definitely lost in loss record 33 of 107
+==7883==    at 0x10012B545: malloc (in /Users/lzima/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==7883==    by 0x100006770: ft_calloc (ft_calloc.c:19)
+==7883==    by 0x1000076DA: ft_dyn_strjoin (ft_dyn_strjoin.c:25)
+==7883==    by 0x100001498: prompt_creation (prompt.c:57)
+==7883==    by 0x10000175D: main_operation (read.c:18)
+==7883==    by 0x100001269: main (minishell.c:30)
+==7883==
+
+==7883==
+==7883== 176 bytes in 2 blocks are still reachable in loss record 49 of 107
+==7883==    at 0x10012B545: malloc (in /Users/lzima/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==7883==    by 0x100006770: ft_calloc (ft_calloc.c:19)
+==7883==    by 0x100002FD6: init_cell (cell_utils.c:29)
+==7883==    by 0x1000030B0: add_node (cell_utils.c:61)
+==7883==    by 0x10000384D: parser_main_quote (parser_main.c:57)
+==7883==    by 0x1000017C1: main_operation (read.c:26)
+==7883==    by 0x100001269: main (minishell.c:30)
+
+
+==7883== 272 bytes in 1 blocks are still reachable in loss record 54 of 107
+==7883==    at 0x10012B545: malloc (in /Users/lzima/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==7883==    by 0x100006770: ft_calloc (ft_calloc.c:19)
+==7883==    by 0x1000047A6: tab_format_env (env.c:40)
+==7883==    by 0x1000046A1: env_dup (env.c:28)
+==7883==    by 0x100001251: main (minishell.c:27)
+==7883==
+
+==7883==
+==7883== 373 bytes in 33 blocks are still reachable in loss record 59 of 107
+==7883==    at 0x10012B545: malloc (in /Users/lzima/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==7883==    by 0x1000070FC: ft_strdup (ft_strdup.c:25)
+==7883==    by 0x10000489D: value_assignation (env.c:61)
+==7883==    by 0x1000046EF: lst_add (env.c:83)
+==7883==    by 0x100004687: env_dup (env.c:26)
+==7883==    by 0x100001251: main (minishell.c:27)
+==7883==
+
+==7883==
+==7883== 644 bytes in 33 blocks are still reachable in loss record 61 of 107
+==7883==    at 0x10012B545: malloc (in /Users/lzima/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==7883==    by 0x1000070FC: ft_strdup (ft_strdup.c:25)
+==7883==    by 0x1000048D3: value_assignation (env.c:64)
+==7883==    by 0x1000046EF: lst_add (env.c:83)
+==7883==    by 0x100004687: env_dup (env.c:26)
+==7883==    by 0x100001251: main (minishell.c:27)
+
+==7883== 1,017 bytes in 33 blocks are still reachable in loss record 63 of 107
+==7883==    at 0x10012B545: malloc (in /Users/lzima/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==7883==    by 0x1000070FC: ft_strdup (ft_strdup.c:25)
+==7883==    by 0x100004811: tab_format_env (env.c:48)
+==7883==    by 0x1000046A1: env_dup (env.c:28)
+==7883==    by 0x100001251: main (minishell.c:27)
+==7883==
+==7883==
+==7883== 1,320 bytes in 33 blocks are still reachable in loss record 72 of 107
+==7883==    at 0x10012B545: malloc (in /Users/lzima/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==7883==    by 0x100006770: ft_calloc (ft_calloc.c:19)
+==7883==    by 0x1000046D2: lst_add (env.c:81)
+==7883==    by 0x100004687: env_dup (env.c:26)
+==7883==    by 0x100001251: main (minishell.c:27)
+==7883==
+==7883== LEAK SUMMARY:
+==7883==    definitely lost: 66 bytes in 3 blocks
+==7883==    indirectly lost: 0 bytes in 0 blocks
+==7883==      possibly lost: 0 bytes in 0 blocks
+==7883==    still reachable: 289,089 bytes in 355 blocks
+==7883==         suppressed: 13,865 bytes in 161 blocks
+==7883==

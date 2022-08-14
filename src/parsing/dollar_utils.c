@@ -26,11 +26,13 @@ char	*replace_dollar(char *input, char *var_value)
 		return ((char *)input);
 	tmp = ft_substr(input, 0, i);
 	output = ft_strjoin(tmp, var_value);
+	free_str(tmp);
 	if (i++ < len_input)
 		while (input[i] == ft_isalnum(input[i]))
 				i++;
 	tmp = ft_substr(input, i, len_input - i);
-	output = ft_strjoin(output, tmp);
+	output = ft_dyn_strjoin(output, tmp);
+	free_str(tmp);
 	return (output);
 }
 
@@ -63,6 +65,7 @@ char	*is_dollar_in_d_quote(t_quote *quote, t_main *main)
 			str = ft_substr(quote->data_quote, founded + 1, len - founded);
 			cur = find_var(main, str);
 			quote->dollar_var = ft_strdup(str);
+			free_str(str);
 			if (cur != NULL)
 				return (replace_dollar(quote->data_quote, cur->value));
 			else

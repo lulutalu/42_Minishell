@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 12:37:05 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/13 22:19:43 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/14 18:04:24 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,14 @@ void	lst_destroy(t_main *main)
 	t_node	*cur;
 
 	cur = main->head_env;
-	if (cur->next != NULL)
-		cur = cur->next;
-	else if (cur != NULL)
+	if (cur)
 	{
+		while (cur->next != NULL)
+		{
+			cur = cur->next;
+			lst_del(main, cur->prev);
+		}
 		lst_del(main, cur);
-		cur = NULL;
-	}
-	while (cur != NULL)
-	{
-		lst_del(main, cur->prev);
-		cur = cur->next;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 18:49:55 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/14 15:00:10 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/14 18:13:36 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,6 @@ void	struct_init(t_main *main)
 	main->prompt = NULL;
 	main->restore_prompt = NULL;
 	main->proc.pid = NULL;
+	main->list.head_cell = NULL;
+	main->list.tail_cell = NULL;
 }

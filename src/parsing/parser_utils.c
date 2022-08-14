@@ -6,20 +6,11 @@
 /*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:21:14 by lzima             #+#    #+#             */
-/*   Updated: 2022/08/13 18:21:23 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/14 18:50:31 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../../includes/minishell.h"
-
-void free_str(char *s)
-{
-	if (!s)
-	{
-		free(s);
-		s = NULL;
-	}
-}
 
 void	check_last(t_main *m)
 {
@@ -33,37 +24,23 @@ void	check_last(t_main *m)
 		while ((check[i] == SPACE || check[i] == '\t') && check[i] != '\0')
 			i++;
 		if (check[i] == '\0')
-		{
-			if (m->list.tail_cell->prev != NULL)
-			{
-				m->list.tail_cell = m->list.tail_cell->prev;
-				free_cell(m->list.tail_cell->next);
-				m->list.tail_cell->next = NULL;
-			}
-			else
-			{
-				free_cell(m->list.tail_cell);
-				m->list.head_cell = NULL;
-			}
-		}
+			cell_del(m, m->list.tail_cell);
 	}
 }
 
 void	free_quote(t_quote *quote)
 {
-
-	free_str(quote->data_quote);
-	free_str(quote->dollar_var);
+	to_be_free((void *)&quote->data_quote);
+	to_be_free((void *)&quote->dollar_var);
 	free(quote);
 	quote = NULL;
 }
 
 void	free_cell(t_cell *cell)
 {
-
-	free_str(cell->data);
-	free_str(cell->dollar_var);
-	ft_tab_free((void *)cell->dollar_material);
+	to_be_free((void *)&cell->data);
+	to_be_free((void *)&cell->dollar_var);
+	ft_tab_free((void **)cell->dollar_material);
 }
 
 int	ft_strchr_int(const char *s, int c)

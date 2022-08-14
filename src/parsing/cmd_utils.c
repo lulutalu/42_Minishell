@@ -6,7 +6,7 @@
 /*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:16:24 by lzima             #+#    #+#             */
-/*   Updated: 2022/08/14 15:39:03 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/14 18:50:18 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ void	dollar_data(t_cell *cell, t_main *main)
 	y = 0;
 	tmp = ft_strdup("");
 	while (y < i)
-		tmp = ft_strjoin(tmp, cell->dollar_material[y++]);
+		tmp = ft_dyn_strjoin(tmp, cell->dollar_material[y++]);
+	to_be_free((void *)cell->data);
 	cell->data = tmp;
 }
 
@@ -81,7 +82,7 @@ size_t	cmd_saving(const char *input, t_cell *cell, size_t i, t_main *main)
 		hidden_dollar = ft_strchr_int(cell->data, '$');
 		if (hidden_dollar > 0 && hidden_dollar != (int)cell->start)
 		{
-			cell->data = ft_substr(cell->data, 0, hidden_dollar);
+			cell->data = ft_dyn_substr(&cell->data, 0, hidden_dollar);
 			y = cell->start + hidden_dollar;
 		}
 	}

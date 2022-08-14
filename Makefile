@@ -6,7 +6,7 @@
 #    By: lduboulo && lzima				            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/27 18:29:51 by lduboulo          #+#    #+#              #
-#    Updated: 2022/08/14 15:40:25 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/08/14 18:51:28 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ ERR_FOLDER		= error
 
 ##############################   FILES  ########################################
 MAIN_FILES		= minishell.c
-SHELL_FILES		= prompt.c signal.c init.c read.c
+SHELL_FILES		= prompt.c signal.c init.c read.c reset_cmd.c
 BUILTS_FILES	= echo.c cd.c pwd.c export.c env.c unset.c exit.c b_exec.c \
 				  exit_free.c utils.c
 PARSING_FILES	= cell_utils.c cmd_utils.c parser_main.c parser_utils.c \
@@ -72,7 +72,7 @@ CC				= gcc
 AR				= ar rcs
 MKDIR			= mkdir -p
 RM				= rm -rf
-CFLAGS			= -Wall -Wextra -Werror -g3 #-fsanitize=address 
+CFLAGS			= -Wall -Wextra -Werror -g3 -fsanitize=address 
 
 TSEP			= ${SEP}=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=${RESET}
 

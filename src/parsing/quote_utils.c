@@ -6,7 +6,7 @@
 /*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 11:54:47 by lzima             #+#    #+#             */
-/*   Updated: 2022/08/13 15:30:51 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/14 17:42:11 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,14 @@ void	quote_data(char *input, t_quote *quote, t_main *main, size_t end)
 	char	*ret;
 
 	len = end - (quote->start + 1);
-	if (len <= 0)
-		quote->data_quote = ft_strdup("");
 	quote->data_quote = ft_substr(input, (quote->start + 1), len);
 	if (quote->type == D_QUOTE)
 	{
 		ret = is_dollar_in_d_quote(quote, main);
 		while (ret != NULL)
 		{
-			quote->data_quote = ret;
+			quote->data_quote = ft_strdup(ret);
+			free(ret);
 			ret = is_dollar_in_d_quote(quote, main);
 		}
 	}

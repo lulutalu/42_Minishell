@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:42:40 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/14 15:39:05 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/14 18:44:04 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,11 +242,8 @@ t_cell		*add_node(t_network *list);
 
 /* --- parser_utils.c --- */
 
-void		free_quote(t_quote *quote);
 int			ft_strchr_int(const char *s, int c);
-void		free_cell(t_cell *cell);
 void		check_last(t_main *m);
-void 		free_str(char *s);
 //void	free_network(t_network *list);
 
 /* --- quote_utils.c --- */
@@ -323,6 +320,17 @@ t_node		*find_var(t_main *main, char *var);
 void		env_sort(t_main *main);
 int			lst_size(t_main *main);
 void		tab_format_env(t_main *main);
+
+/*
+ * I want to break free
+*/
+
+void		reset_cmd(t_main *main);
+void		free_cell(t_cell *cell);
+void		to_be_free(void **s);
+void		free_quote(t_quote *quote);
+void		cell_del(t_main *main, t_cell *cur);
+void		free_cell_list(t_main *main);
 
 /*
  * Error and Memory Failure verification

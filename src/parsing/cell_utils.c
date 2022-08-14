@@ -6,7 +6,7 @@
 /*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 11:47:00 by lzima             #+#    #+#             */
-/*   Updated: 2022/08/13 15:30:21 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/14 18:48:43 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_cell	*init_cell(void)
 	cell->next = NULL;
 	cell->prev = NULL;
 	cell->quote = NULL;
+	cell->dollar_var = NULL;
 	return (cell);
 }
 

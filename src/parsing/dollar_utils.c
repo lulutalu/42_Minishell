@@ -6,7 +6,7 @@
 /*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 11:54:47 by lzima             #+#    #+#             */
-/*   Updated: 2022/08/14 15:41:29 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/14 18:29:45 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,15 @@ char	*replace_dollar(char *input, char *var_value)
 		return ((char *)input);
 	tmp = ft_substr(input, 0, i);
 	output = ft_strjoin(tmp, var_value);
-	free_str(tmp);
+	to_be_free((void *)&tmp);
 	if (i++ < len_input)
-		while (input && (input[i] == ft_isalnum(input[i]) || input[i] == '?' \
-					|| input[i] == '_'))
+		while (input && input[i] != '$' && (input[i] == ft_isalnum(input[i]) \
+					|| input[i] == '?' || input[i] == '_'))
 				i++;
 	tmp = ft_substr(input, i, len_input - i);
 	output = ft_dyn_strjoin(output, tmp);
-	free_str(tmp);
+	to_be_free((void *)&tmp);
+	to_be_free((void *)&input);
 	return (output);
 }
 
@@ -41,8 +42,7 @@ int	s_dollar_end(char *s, int i)
 {
 	while (s[++i] != '\0')
 	{
-		if (s[i] != ft_isalnum(s[i]) && s[i] != '?' \
-				&& s[i] != '_' && s[i] == '\0')
+		if (ft_isalnum(s[i]) == -1 && s[i] != '_' && s[i] != '?')
 			return (i - 1);
 	}
 	return (-1);
@@ -95,11 +95,21 @@ char	*d_is_in_quote(t_quote *quote, t_main *main, int founded, int len)
 	str = NULL;
 	str = ft_substr(quote->data_quote, founded + 1, len - founded);
 	cur = find_var(main, str);
+	to_be_free((void *)&quote->dollar_var);
 	quote->dollar_var = ft_strdup(str);
 	if (cur != NULL)
+	{
+		free(str);
 		return (replace_dollar(quote->data_quote, cur->value));
+	}
 	else if (ft_strncmp(str, "?", ft_strlen(str)) == 0)
+	{
+		free(str);
 		return (replace_dollar(quote->data_quote, ft_itoa(g_exit_status)));
+	}
 	else
+	{
+		free(str);
 		return (replace_dollar(quote->data_quote, ""));
+	}
 }

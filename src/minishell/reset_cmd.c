@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 15:46:21 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/14 18:49:59 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/14 18:57:38 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	free_cell_list(t_main *main)
 {
 	t_cell	*cur;
 
-	printf("%lu\n", sizeof(t_cell));
 	cur = main->list.head_cell;
 	if (cur)
 	{

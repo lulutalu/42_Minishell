@@ -6,7 +6,7 @@
 /*   By: lduboulo && lzima				            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 21:39:39 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/15 13:21:57 by marvin           ###   ########.fr       */
+/*   Updated: 2022/08/15 14:30:37 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	prompt_creation(t_main *main)
 	i = 0;
 	while (split[i])
 		i++;
-	main->prompt = ft_strdup("\e[1m");
+	main->prompt = ft_strdup("\e[0m\e[1m");
 	if (user != NULL)
 		main->prompt = ft_dyn_strjoin(main->prompt, user);
 	main->prompt = ft_dyn_strjoin(main->prompt, " % ");

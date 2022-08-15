@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 17:32:52 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/11 15:27:38 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/15 13:25:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	here_doc(t_main *main, t_cell *cur)
 	while (1)
 	{
 		buf = readline("\e[1mHere_doc > \e[0m");
-		if (!buf || ft_strncmp(buf, limiter, ft_strlen(limiter)) == 0)
+		if (!buf || ft_strncmp(buf, limiter, ft_strlen(limiter) + 1) == 0)
 			break ;
 		buf = ft_dyn_strjoin(buf, "\n");
 		here_doc = ft_dyn_strjoin(here_doc, buf);

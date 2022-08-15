@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 16:41:45 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/14 18:43:26 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/15 12:52:12 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ void	exit_free(t_main *main)
 	to_be_free((void *)&main->proc.pid);
 	if (main->list.head_cell != NULL)
 		free_cell_list(main);
-	clear_history();
+	rl_clear_history();
 	ft_putstr_fd("exit\n", 1);
 }

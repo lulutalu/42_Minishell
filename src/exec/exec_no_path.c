@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fd_duplication_bis.c                               :+:      :+:    :+:   */
+/*   exec_no_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/03 20:59:49 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/15 13:30:16 by marvin           ###   ########.fr       */
+/*   Created: 2022/08/15 13:32:35 by marvin            #+#    #+#             */
+/*   Updated: 2022/08/15 13:43:36 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	dup_here_doc_and_output(t_main *main)
+void	exec_no_path(t_main *main, char **args)
 {
-	check_for_error_fork(dup2(main->fd.outfile, STDOUT));
-	check_for_error_fork(dup2(main->fd.here_doc[PIPE_OUT], STDIN));
-	ft_putnbr_fd(main->fd.here_doc[PIPE_IN], 2);
-	close(main->fd.here_doc[PIPE_IN]);
+	if (execve(args[0], args, main->env) < 0)
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(args[0], 2);
+		ft_putendl_fd(": No such file or directory", 2);
+		exit(127);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 18:41:39 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/14 18:59:52 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/15 13:30:07 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	lst_del(t_main *main, t_node *cur)
 	free(cur->var);
 	free(cur->value);
 	free(cur);
+	tab_format_env(main);
 }
 
 /*This function will replace the value of an existing env variables*/
@@ -77,6 +78,7 @@ void	lst_replace(t_main *main, char *var)
 			cur->value = ft_strdup(ft_strchr(var, '=') + 1);
 		}
 	}
+	tab_format_env(main);
 	ft_tab_free((void **)split);
 }
 

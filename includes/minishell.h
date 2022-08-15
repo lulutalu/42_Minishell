@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:42:40 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/14 19:20:48 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/15 13:46:42 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@
 # include <readline/readline.h>
 
 void		rl_replace_line(const char *text, int clear_undo);
+void		rl_clear_history(void);
 
 /*
  * Defined (messages, token, ...)
@@ -286,7 +287,8 @@ void		clear_fd(t_main *main);
 int			check_redirection(t_main *main, t_cell *cur, int icmd);
 
 void		exec(t_main *main, int icmd);
-char		**get_path(t_main *main);
+void		exec_no_path(t_main *main, char **args);
+char		**get_path(t_main *main, char **args);
 char		**get_args(t_main *main, int icmd);
 int			n_args(t_cell *cur, int icmd);
 void		command_not_found(char *command);

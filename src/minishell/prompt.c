@@ -6,7 +6,7 @@
 /*   By: lduboulo && lzima				            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 21:39:39 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/14 15:54:27 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/15 13:21:57 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,26 @@ static void	restore_prompt(t_main *main, char **split)
 	free(len);
 }
 
+static char	*find_user_if_unset(t_main *main)
+{
+	t_node	*cur;
+
+	cur = find_var(main, "USER");
+	if (cur != NULL)
+		return (cur->value);
+	else
+		return (NULL);
+}
+
+static void	too_long(t_main *main)
+{
+	if (g_exit_status == 0)
+		main->prompt = ft_dyn_strjoin(main->prompt, "\e[1;92m");
+	else
+		main->prompt = ft_dyn_strjoin(main->prompt, "\e[1;91m");
+	main->prompt = ft_dyn_strjoin(main->prompt, " ➜ \e[0m");
+}
+
 void	prompt_creation(t_main *main)
 {
 	char	*user;
@@ -32,23 +52,22 @@ void	prompt_creation(t_main *main)
 	int		i;
 
 	user = getenv("USER");
+	if (user == NULL)
+		user = find_user_if_unset(main);
 	getcwd(pwd, 4096);
 	split = ft_split(pwd, '/');
 	i = 0;
 	while (split[i])
 		i++;
 	main->prompt = ft_strdup("\e[1m");
-	main->prompt = ft_dyn_strjoin(main->prompt, user);
+	if (user != NULL)
+		main->prompt = ft_dyn_strjoin(main->prompt, user);
 	main->prompt = ft_dyn_strjoin(main->prompt, " % ");
 	if (i >= 2)
 		main->prompt = ft_dyn_strjoin(main->prompt, split[i - 2]);
 	main->prompt = ft_dyn_strjoin(main->prompt, "/");
 	if (i >= 1)
 		main->prompt = ft_dyn_strjoin(main->prompt, split[i - 1]);
-	if (g_exit_status == 0)
-		main->prompt = ft_dyn_strjoin(main->prompt, "\e[1;92m");
-	else
-		main->prompt = ft_dyn_strjoin(main->prompt, "\e[1;91m");
-	main->prompt = ft_dyn_strjoin(main->prompt, " ➜ \e[0m");
+	too_long(main);
 	restore_prompt(main, split);
 }

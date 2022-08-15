@@ -6,7 +6,7 @@
 #    By: lduboulo && lzima				            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/27 18:29:51 by lduboulo          #+#    #+#              #
-#    Updated: 2022/08/14 18:51:28 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/08/15 13:45:18 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ PARSING_FILES	= cell_utils.c cmd_utils.c parser_main.c parser_utils.c \
 ENV_FILES		= env.c env_manip.c env_alpha_sort.c
 EXEC_FILES		= main_operation.c redirection.c child_process.c \
 				  fd_duplication.c fd_duplication_bis.c execve.c \
-				  here_doc_redirection.c
+				  here_doc_redirection.c exec_no_path.c
 ERR_FILES		= error_check.c
 ################################################################################
 
@@ -72,7 +72,7 @@ CC				= gcc
 AR				= ar rcs
 MKDIR			= mkdir -p
 RM				= rm -rf
-CFLAGS			= -Wall -Wextra -Werror -g3 -fsanitize=address 
+CFLAGS			= -Wall -Wextra -Werror -g3 #-fsanitize=address 
 
 TSEP			= ${SEP}=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=${RESET}
 

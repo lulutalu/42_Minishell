@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 15:20:38 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/08/13 22:14:43 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/08/15 13:46:20 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	exec(t_main *main, int icmd)
 	char	*directory;
 	int		i;
 
-	path = get_path(main);
 	args = get_args(main, icmd);
+	path = get_path(main, args);
 	i = 0;
 	while (path[i])
 	{
@@ -102,7 +102,7 @@ int	n_args(t_cell *cur, int icmd)
 	return (i);
 }
 
-char	**get_path(t_main *main)
+char	**get_path(t_main *main, char **args)
 {
 	t_node	*cur;
 	char	**path;
@@ -115,9 +115,6 @@ char	**get_path(t_main *main)
 		return (path);
 	}
 	else
-	{
-		g_exit_status = 127;
-		ft_putstr_fd("minishell: PATH variable not set\n", 2);
-		exit(127);
-	}
+		exec_no_path(main, args);
+	return (NULL);
 }
